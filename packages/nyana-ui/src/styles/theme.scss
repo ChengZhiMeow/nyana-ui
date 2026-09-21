@@ -1,0 +1,277 @@
+@use './variables.scss' as *;
+@use './palette.scss' as *;
+
+@mixin ny-tokens-light {
+  --ny-primary: #{$ny-blue};
+  --ny-primary-light: #c6edfb;
+  --ny-primary-bg: rgba(91, 207, 250, 0.16);
+  --ny-primary-deep: #1a82a8;
+  --ny-primary-text: #12a6dd;
+  --ny-primary-bright: var(--ny-primary-text);
+  --ny-primary-strong: #1a82a8;
+  --ny-primary-soft: var(--ny-primary-bg);
+  --ny-on-primary: #ffffff;
+  --ny-primary-hover: #79d8fb;
+  --ny-primary-active: #3ec0e8;
+  --ny-primary-ring: rgba(91, 207, 250, 0.32);
+  --ny-primary-glow: rgba(91, 207, 250, 0.28);
+
+  --ny-secondary: #{$ny-pink};
+  --ny-secondary-light: #f7cad3;
+  --ny-secondary-bg: rgba(245, 169, 184, 0.16);
+  --ny-secondary-deep: #9d253d;
+  --ny-secondary-text: #cd2244;
+  --ny-secondary-bright: var(--ny-secondary-text);
+  --ny-secondary-strong: #9d253d;
+  --ny-secondary-soft: var(--ny-secondary-bg);
+  --ny-on-secondary: #681d2b;
+  --ny-secondary-hover: #f8bcc8;
+
+  --ny-accent: #{$ny-purple};
+  --ny-accent-light: #cec8f9;
+  --ny-accent-bg: rgba(124, 107, 245, 0.16);
+  --ny-accent-deep: #2f1fa3;
+  --ny-accent-text: #311ad6;
+  --ny-accent-bright: var(--ny-accent-text);
+  --ny-accent-strong: #2f1fa3;
+  --ny-accent-soft: var(--ny-accent-bg);
+  --ny-on-accent: #ffffff;
+
+  --ny-info: var(--ny-sky);
+  --ny-info-light: var(--ny-sky-light);
+  --ny-info-bg: var(--ny-sky-bg);
+  --ny-info-deep: var(--ny-sky-deep);
+  --ny-info-text: var(--ny-sky-text);
+  --ny-info-bright: var(--ny-sky-text);
+  --ny-info-strong: var(--ny-sky-deep);
+  --ny-info-soft: var(--ny-sky-bg);
+  --ny-on-info: var(--ny-on-sky);
+  --ny-success: var(--ny-grass);
+  --ny-success-light: var(--ny-grass-light);
+  --ny-success-bg: var(--ny-grass-bg);
+  --ny-success-deep: var(--ny-grass-deep);
+  --ny-success-text: var(--ny-grass-text);
+  --ny-success-bright: var(--ny-grass-text);
+  --ny-success-strong: var(--ny-grass-deep);
+  --ny-success-soft: var(--ny-grass-bg);
+  --ny-on-success: var(--ny-on-grass);
+  --ny-warning: var(--ny-amber);
+  --ny-warning-light: var(--ny-amber-light);
+  --ny-warning-bg: var(--ny-amber-bg);
+  --ny-warning-deep: var(--ny-amber-deep);
+  --ny-warning-text: var(--ny-amber-text);
+  --ny-warning-bright: var(--ny-amber-text);
+  --ny-warning-strong: var(--ny-amber-deep);
+  --ny-warning-soft: var(--ny-amber-bg);
+  --ny-on-warning: var(--ny-on-amber);
+  --ny-danger: var(--ny-red);
+  --ny-danger-light: var(--ny-red-light);
+  --ny-danger-bg: var(--ny-red-bg);
+  --ny-danger-deep: var(--ny-red-deep);
+  --ny-danger-text: var(--ny-red-text);
+  --ny-danger-bright: var(--ny-red-text);
+  --ny-danger-strong: var(--ny-red-deep);
+  --ny-danger-soft: var(--ny-red-bg);
+  --ny-on-danger: var(--ny-on-red);
+  --ny-danger-hover: var(--ny-red-deep);
+
+  --ny-bg: #f4f7fb;
+  --ny-bg-accent: #e9f2fb;
+  --ny-surface: #ffffff;
+  --ny-surface-2: #f7f9fc;
+  --ny-surface-3: #eef2f8;
+  --ny-surface-hover: #edf3f9;
+  --ny-surface-active: #e4ecf6;
+
+  --ny-border: #e2e8f1;
+  --ny-border-strong: #cbd6e4;
+  --ny-border-soft: #eef2f8;
+
+  --ny-text: #1b2432;
+  --ny-text-strong: #0f1720;
+  --ny-text-sub: #55617a;
+  --ny-text-muted: #8a95a8;
+  --ny-text-invert: #ffffff;
+
+  --ny-shadow-xs: 0 1px 2px rgba(20, 35, 60, 0.05);
+  --ny-shadow-sm: 0 1px 3px rgba(20, 35, 60, 0.07), 0 1px 2px rgba(20, 35, 60, 0.04);
+  --ny-shadow-md: 0 6px 20px rgba(20, 35, 60, 0.1);
+  --ny-shadow-lg: 0 20px 48px rgba(20, 35, 60, 0.16);
+  --ny-shadow-focus: 0 0 0 3px var(--ny-primary-ring);
+  --ny-mask: rgba(15, 22, 33, 0.45);
+  --ny-track: rgba(20, 35, 60, 0.08);
+
+  color-scheme: light;
+}
+
+@mixin ny-tokens-dark {
+  --ny-primary: #{$ny-blue};
+  --ny-primary-light: #2a4651;
+  --ny-primary-bg: rgba(91, 207, 250, 0.2);
+  --ny-primary-deep: #76b8d0;
+  --ny-primary-text: #99d4ea;
+  --ny-primary-bright: var(--ny-primary-text);
+  --ny-primary-strong: #76b8d0;
+  --ny-primary-soft: var(--ny-primary-bg);
+  --ny-on-primary: #ffffff;
+  --ny-primary-hover: #7ad8fb;
+  --ny-primary-active: #45c3ea;
+  --ny-primary-ring: rgba(91, 207, 250, 0.3);
+  --ny-primary-glow: rgba(91, 207, 250, 0.26);
+
+  --ny-secondary: #{$ny-pink};
+  --ny-secondary-light: #4e2d33;
+  --ny-secondary-bg: rgba(245, 169, 184, 0.2);
+  --ny-secondary-deep: #c97d8c;
+  --ny-secondary-text: #e4a0ad;
+  --ny-secondary-bright: var(--ny-secondary-text);
+  --ny-secondary-strong: #c97d8c;
+  --ny-secondary-soft: var(--ny-secondary-bg);
+  --ny-on-secondary: #681d2b;
+  --ny-secondary-hover: #f9c2cd;
+
+  --ny-accent: #9b8dfa;
+  --ny-accent-light: #302b4f;
+  --ny-accent-bg: rgba(124, 107, 245, 0.2);
+  --ny-accent-deep: #847acd;
+  --ny-accent-text: #a69ce7;
+  --ny-accent-bright: var(--ny-accent-text);
+  --ny-accent-strong: #847acd;
+  --ny-accent-soft: var(--ny-accent-bg);
+  --ny-on-accent: #ffffff;
+
+  --ny-info: var(--ny-sky);
+  --ny-info-light: var(--ny-sky-light);
+  --ny-info-bg: var(--ny-sky-bg);
+  --ny-info-deep: var(--ny-sky-deep);
+  --ny-info-text: var(--ny-sky-text);
+  --ny-info-bright: var(--ny-sky-text);
+  --ny-info-strong: var(--ny-sky-deep);
+  --ny-info-soft: var(--ny-sky-bg);
+  --ny-on-info: var(--ny-on-sky);
+  --ny-success: var(--ny-grass);
+  --ny-success-light: var(--ny-grass-light);
+  --ny-success-bg: var(--ny-grass-bg);
+  --ny-success-deep: var(--ny-grass-deep);
+  --ny-success-text: var(--ny-grass-text);
+  --ny-success-bright: var(--ny-grass-text);
+  --ny-success-strong: var(--ny-grass-deep);
+  --ny-success-soft: var(--ny-grass-bg);
+  --ny-on-success: var(--ny-on-grass);
+  --ny-warning: var(--ny-amber);
+  --ny-warning-light: var(--ny-amber-light);
+  --ny-warning-bg: var(--ny-amber-bg);
+  --ny-warning-deep: var(--ny-amber-deep);
+  --ny-warning-text: var(--ny-amber-text);
+  --ny-warning-bright: var(--ny-amber-text);
+  --ny-warning-strong: var(--ny-amber-deep);
+  --ny-warning-soft: var(--ny-amber-bg);
+  --ny-on-warning: var(--ny-on-amber);
+  --ny-danger: var(--ny-red);
+  --ny-danger-light: var(--ny-red-light);
+  --ny-danger-bg: var(--ny-red-bg);
+  --ny-danger-deep: var(--ny-red-deep);
+  --ny-danger-text: var(--ny-red-text);
+  --ny-danger-bright: var(--ny-red-text);
+  --ny-danger-strong: var(--ny-red-deep);
+  --ny-danger-soft: var(--ny-red-bg);
+  --ny-on-danger: var(--ny-on-red);
+  --ny-danger-hover: var(--ny-red-deep);
+
+  --ny-bg: #0f1216;
+  --ny-bg-accent: #141821;
+  --ny-surface: #171b22;
+  --ny-surface-2: #1c2129;
+  --ny-surface-3: #232933;
+  --ny-surface-hover: #1f242d;
+  --ny-surface-active: #262d38;
+
+  --ny-border: #262c36;
+  --ny-border-strong: #39424f;
+  --ny-border-soft: #1f242c;
+
+  --ny-text: #e8edf5;
+  --ny-text-strong: #ffffff;
+  --ny-text-sub: #aeb8c8;
+  --ny-text-muted: #7b8698;
+  --ny-text-invert: #0f1216;
+
+  --ny-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.36);
+  --ny-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.32);
+  --ny-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --ny-shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.6);
+  --ny-shadow-focus: 0 0 0 3px var(--ny-primary-ring);
+  --ny-mask: rgba(4, 6, 10, 0.62);
+  --ny-track: rgba(255, 255, 255, 0.1);
+
+  color-scheme: dark;
+}
+
+@mixin ny-tokens-static {
+  --ny-radius-xs: #{$radius-xs};
+  --ny-radius-sm: #{$radius-sm};
+  --ny-radius-md: #{$radius-md};
+  --ny-radius-lg: #{$radius-lg};
+  --ny-radius-xl: #{$radius-xl};
+  --ny-radius-pill: #{$radius-pill};
+
+  --ny-space-1: #{$space-1};
+  --ny-space-2: #{$space-2};
+  --ny-space-3: #{$space-3};
+  --ny-space-4: #{$space-4};
+  --ny-space-5: #{$space-5};
+  --ny-space-6: #{$space-6};
+  --ny-space-7: #{$space-7};
+  --ny-space-8: #{$space-8};
+
+  --ny-font-size-xs: #{$font-size-xs};
+  --ny-font-size-sm: #{$font-size-sm};
+  --ny-font-size-md: #{$font-size-md};
+  --ny-font-size-lg: #{$font-size-lg};
+  --ny-font-size-xl: #{$font-size-xl};
+  --ny-font-size-2xl: #{$font-size-2xl};
+
+  --ny-control-height-sm: #{$control-height-sm};
+  --ny-control-height-md: #{$control-height-md};
+  --ny-control-height-lg: #{$control-height-lg};
+
+  --ny-sidebar-width: #{$sidebar-width};
+  --ny-sidebar-collapsed-width: #{$sidebar-collapsed-width};
+  --ny-header-height: #{$header-height};
+
+  --ny-transition-fast: #{$transition-fast};
+  --ny-transition-base: #{$transition-base};
+  --ny-ease: #{$ease-base};
+
+  --ny-z-affix: #{$z-affix};
+  --ny-z-header: #{$z-header};
+  --ny-z-sidebar: #{$z-sidebar};
+  --ny-z-dropdown: #{$z-dropdown};
+  --ny-z-popup: #{$z-popup};
+  --ny-z-mask: #{$z-mask};
+  --ny-z-modal: #{$z-modal};
+  --ny-z-drawer: #{$z-drawer};
+  --ny-z-message: #{$z-message};
+
+  --ny-font-family: #{$font-family-base};
+  --ny-font-family-mono: #{$font-family-mono};
+}
+
+:root {
+  @include ny-tokens-static;
+  @include ny-tokens-light;
+  @include ny-palette-light;
+}
+
+[data-theme='dark'] {
+  @include ny-tokens-static;
+  @include ny-tokens-dark;
+  @include ny-palette-dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include ny-tokens-dark;
+    @include ny-palette-dark;
+  }
+}

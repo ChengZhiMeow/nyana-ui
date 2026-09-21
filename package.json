@@ -1,0 +1,22 @@
+{
+  "name": "nyana-ui-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "example"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace nyana-ui-example",
+    "build": "npm run build --workspace @chengzhimeow/nyana-ui && npm run build --workspace nyana-ui-example",
+    "build:lib": "npm run build --workspace @chengzhimeow/nyana-ui",
+    "build:example": "npm run build --workspace nyana-ui-example",
+    "preview": "npm run preview --workspace nyana-ui-example",
+    "typecheck": "npm run typecheck --workspace @chengzhimeow/nyana-ui && npm run typecheck --workspace nyana-ui-example"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.tsbuildinfo
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.local
+
+# 本地开发文档, 不入库(example/src/docs 是文档站源码, 不受影响)
+/docs/

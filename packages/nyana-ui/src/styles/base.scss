@@ -1,0 +1,72 @@
+@use './variables.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea,
+[class^='ny-'],
+[class*=' ny-'] {
+  font-family: var(--ny-font-family);
+  font-size: inherit;
+  line-height: inherit;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--ny-font-family-mono);
+}
+
+[class^='ny-'],
+[class*=' ny-'] {
+  color: inherit;
+}
+
+.ny-icon {
+  display: inline-block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: inherit;
+}
+
+.ny-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.ny-focusable:focus-visible,
+[class^='ny-'][tabindex]:focus-visible,
+[class*=' ny-'][tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--ny-shadow-focus);
+}
+
+.ny-pop {
+  border: 1px solid var(--ny-border);
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-surface);
+  box-shadow: var(--ny-shadow-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class^='ny-'],
+  [class*=' ny-'] {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

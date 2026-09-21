@@ -1,0 +1,135 @@
+
+.ny-muted {
+  color: var(--ny-text-muted);
+}
+
+.ny-sub {
+  color: var(--ny-text-sub);
+}
+
+.ny-strong {
+  color: var(--ny-text-strong);
+  font-weight: 600;
+}
+
+.ny-mono {
+  font-family: var(--ny-font-family-mono);
+  font-size: 13px;
+}
+
+.ny-text-12 {
+  font-size: 12px;
+}
+
+.ny-text-13 {
+  font-size: 13px;
+}
+
+.ny-text-14 {
+  font-size: 14px;
+}
+
+.ny-text-16 {
+  font-size: 16px;
+}
+
+.ny-text-center {
+  font-size: inherit;
+  text-align: center;
+}
+
+.ny-text-right {
+  text-align: right;
+}
+
+.ny-flex-1 {
+  flex: 1;
+}
+
+.ny-spacer {
+  flex: 1;
+}
+
+.ny-min-0 {
+  min-width: 0;
+}
+
+.ny-shrink-0 {
+  flex-shrink: 0;
+}
+
+.ny-truncate {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.ny-scroll {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ny-border-strong) transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: var(--ny-radius-pill);
+    background-clip: content-box;
+    background-color: var(--ny-border-strong);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--ny-text-muted);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+.ny-fade-enter-active,
+.ny-fade-leave-active {
+  transition: opacity var(--ny-transition-base);
+}
+
+.ny-fade-enter-from,
+.ny-fade-leave-to {
+  opacity: 0;
+}
+
+.ny-fade-up-enter-active,
+.ny-fade-up-leave-active {
+  transition:
+    opacity var(--ny-transition-base),
+    transform var(--ny-transition-base);
+}
+
+.ny-fade-up-enter-from,
+.ny-fade-up-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.ny-zoom-enter-active,
+.ny-zoom-leave-active {
+  transition:
+    opacity var(--ny-transition-fast),
+    transform var(--ny-transition-base);
+}
+
+.ny-zoom-enter-from,
+.ny-zoom-leave-to {
+  opacity: 0;
+  transform: scale(0.96);
+}

@@ -1,0 +1,77 @@
+
+$ny-blue: #5bcffa;
+$ny-pink: #f5a9b8;
+$ny-white: #ffffff;
+
+$ny-deep: #2ea6cf;
+$ny-sky: #8fdcfb;
+$ny-purple: #7c6bf5;
+$ny-rose: #ef7f97;
+$ny-ink: #3b4252;
+
+$ny-success: #2eb88a;
+$ny-warning: #e59b3d;
+$ny-danger: #e15a6f;
+
+$radius-xs: 2px;
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-xl: 11px;
+$radius-pill: 999px;
+
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 32px;
+$space-8: 40px;
+
+$font-size-xs: 12px;
+$font-size-sm: 13px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 20px;
+$font-size-2xl: 26px;
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1440px;
+
+$z-affix: 10;
+$z-header: 20;
+$z-sidebar: 30;
+$z-dialog: 100;
+$z-toast: 200;
+$z-dropdown: 1000;
+$z-popup: 1010;
+$z-mask: 1090;
+$z-modal: 1100;
+$z-drawer: 1110;
+$z-message: 1200;
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$ease-base: cubic-bezier(0.4, 0, 0.2, 1);
+
+$font-family-base:
+  -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'HarmonyOS Sans SC', 'PingFang SC',
+  'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei',
+  sans-serif;
+$font-family-mono:
+  'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+
+$sidebar-width: 248px;
+$sidebar-collapsed-width: 64px;
+$header-height: 62px;
+
+$control-height-sm: 30px;
+$control-height-md: 38px;
+$control-height-lg: 46px;
+
+$layout-modes: side, top, mix, blank;
+
+$sizes: sm, md, lg;
