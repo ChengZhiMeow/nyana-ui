@@ -5,23 +5,24 @@ import { components, NyText } from '@chengzhimeow/nyana-ui'
 
 import ComponentWall, { type WallCard, type WallGroup } from '@/components/ComponentWall.vue'
 import DocPage from '@/components/DocPage.vue'
-import { componentNameOf, docEntries, docGroups, entryByComponent, entryPath, groupByComponent } from '@/docs/registry'
+import {
+  componentNameOf,
+  docEntries,
+  docGroups,
+  entryByComponent,
+  entryPath,
+  groupByComponent,
+  subComponents,
+} from '@/docs/registry'
 
 const names = Object.keys(components).sort()
 
 const WIDE_COMPONENTS = new Set(['NyCalendar'])
 
-const extraInfo: Record<string, { icon: string; page?: string }> = {
-  NyCollapseItem: { icon: 'chevron-down', page: 'collapse' },
-  NyCheckboxGroup: { icon: 'check-circle', page: 'checkbox' },
-  NyRadioGroup: { icon: 'check', page: 'radio' },
-  NyAvatarGroup: { icon: 'users', page: 'avatar' },
-  NyGridItem: { icon: 'grid', page: 'grid' },
-  NyFormItem: { icon: 'file-text', page: 'form' },
-  NyInputShell: { icon: 'sidebar', page: 'input' },
-  NyText: { icon: 'file', page: 'typography' },
-  NyTitle: { icon: 'heading', page: 'typography' },
-  NyParagraph: { icon: 'align-left', page: 'typography' },
+function splitTitle(title: string) {
+  const [en, ...rest] = title.split(' ')
+
+  return { title: en ?? title, label: rest.join(' ') }
 }
 
 const groups = computed<WallGroup[]>(() => {
@@ -29,15 +30,12 @@ const groups = computed<WallGroup[]>(() => {
 
   for (const name of names) {
     const entry = entryByComponent.get(name)
-    const extra = extraInfo[name]
+    const sub = subComponents[name]
 
     if (entry) {
-      const [en, ...rest] = entry.title.split(' ')
-
       cards.set(name, {
         name,
-        title: en ?? entry.title,
-        label: rest.join(' '),
+        ...splitTitle(entry.title),
         desc: entry.desc,
         icon: entry.icon,
         to: entryPath(entry),
@@ -47,13 +45,15 @@ const groups = computed<WallGroup[]>(() => {
       continue
     }
 
-    const page = extra?.page ? docEntries.find((item) => item.key === extra.page) : undefined
+    const named = splitTitle(sub?.title ?? name)
+    const page = sub ? docEntries.find((item) => item.key === sub.page) : undefined
 
     cards.set(name, {
       name,
-      title: name,
-      desc: '',
-      icon: extra?.icon ?? 'layers',
+      title: named.title,
+      label: named.label,
+      desc: sub?.desc ?? '',
+      icon: sub?.icon ?? 'layers',
       to: page ? entryPath(page) : undefined,
       wide: WIDE_COMPONENTS.has(name),
     })
@@ -66,12 +66,16 @@ const groups = computed<WallGroup[]>(() => {
       .filter((card): card is WallCard => !!card),
   }))
 
-  const rest = names.filter((name) => !groupByComponent.has(name)).map((name) => cards.get(name))
+  for (const name of names.filter((item) => !groupByComponent.has(item))) {
+    const card = cards.get(name)
+    const target =
+      result.find((group) => group.title === subComponents[name]?.group) ??
+      result.find((group) => group.title === '其他')
 
-  result.push({
-    title: '子组件与内部件',
-    cards: rest.filter((card): card is WallCard => !!card),
-  })
+    if (card && target) {
+      target.cards.push(card)
+    }
+  }
 
   return result.filter((group) => group.cards.length > 0)
 })

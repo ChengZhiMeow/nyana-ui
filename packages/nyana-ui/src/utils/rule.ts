@@ -119,3 +119,42 @@ export async function runRules(
 
   return null
 }
+
+export function describeRules(rules: NyFormRule | NyFormRule[] | undefined): string {
+  if (!rules) {
+    return ''
+  }
+
+  const list = Array.isArray(rules) ? rules : [rules]
+  const parts: string[] = []
+
+  if (list.some((rule) => rule.required)) {
+    parts.push('必填')
+  }
+
+  const ranged = list.find((rule) => typeof rule.min === 'number' || typeof rule.max === 'number')
+
+  if (ranged) {
+    const { min, max } = ranged
+
+    if (typeof min === 'number' && typeof max === 'number') {
+      parts.push(`${min}-${max} 个字`)
+    } else if (typeof min === 'number') {
+      parts.push(`不少于 ${min} 个字`)
+    } else if (typeof max === 'number') {
+      parts.push(`不超过 ${max} 个字`)
+    }
+  }
+
+  const exact = list.find((rule) => typeof rule.len === 'number')
+
+  if (exact && typeof exact.len === 'number') {
+    parts.push(`${exact.len} 个字`)
+  }
+
+  if (list.some((rule) => rule.pattern)) {
+    parts.push('格式有要求')
+  }
+
+  return parts.join(', ')
+}

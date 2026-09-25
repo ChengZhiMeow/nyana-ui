@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { NyButton, NyColorPicker, nyPalette, nyPaletteColor } from '@chengzhimeow/nyana-ui'
+import { NyButton, NyColorPanel, NyColorPicker, nyPalette, nyPaletteColor } from '@chengzhimeow/nyana-ui'
 
 import ApiTable from '@/components/ApiTable.vue'
 import DemoBlock from '@/components/DemoBlock.vue'
@@ -21,6 +21,7 @@ const readonlyValue = ref(nyPaletteColor('violet'))
 const events = ref(nyPaletteColor('bamboo'))
 const lastEvent = ref('—')
 const methodValue = ref(nyPaletteColor('red'))
+const panelValue = ref(nyPaletteColor('sky'))
 
 const methodRef = ref<InstanceType<typeof NyColorPicker> | null>(null)
 
@@ -35,7 +36,7 @@ const codePresets = `<NyColorPicker v-model="custom" :presets="brandPresets" emp
 
 const codePanel = `<NyColorPicker v-model="compact" :show-input="false" placement="top-start" />
 
-<!-- 面板里的 hex 输入框, 合法才写入, 非法只描红 -->
+<!-- 点面板里的色块可以弹出调色盘 -->
 <NyColorPicker v-model="compact" />`
 
 const codeState = `<NyColorPicker v-model="sized" size="sm" />
@@ -48,6 +49,10 @@ const codeState = `<NyColorPicker v-model="sized" size="sm" />
 
 const codeEvents = `<NyColorPicker v-model="events" @change="onChange" @clear="lastEvent = 'clear'" />`
 
+const codePalette = `<NyColorPanel v-model="panelValue" />
+
+<NyColorPicker v-model="basic" />`
+
 const codeMethods = `<NyColorPicker ref="methodRef" v-model="methodValue" />
 
 <NyButton size="sm" @click="methodRef?.focus()">focus()</NyButton>
@@ -57,7 +62,7 @@ const codeMethods = `<NyColorPicker ref="methodRef" v-model="methodValue" />
 
 const apiProps = [
   { name: 'v-model', desc: '当前颜色, hex 字符串, 未选是空串', type: 'string', default: "''" },
-  { name: 'presets', desc: '预设色板, 面板里按 6 列排布', type: 'string[]', default: '12 个内置色' },
+  { name: 'presets', desc: '预设色板, 面板里按 6 列排布', type: 'string[]', default: '16 个内置色' },
   { name: 'size', desc: '尺寸档', type: "'sm' | 'md' | 'lg'", default: "'md'" },
   { name: 'variant', desc: '外观', type: "'outline' | 'soft' | 'ghost'", default: "'outline'" },
   { name: 'disabled', desc: '禁用', type: 'boolean', default: 'false' },
@@ -70,8 +75,15 @@ const apiProps = [
   { name: 'emptyText', desc: '未选颜色时触发器与面板上的文案', type: 'string', default: "'未选择'" },
 ]
 
+const apiPanelProps = [
+  { name: 'v-model', desc: '当前颜色, hex 字符串', type: 'string', default: "''" },
+  { name: 'height', desc: '饱和度与明度区域的高度', type: 'number', default: '132' },
+  { name: 'disabled', desc: '禁用', type: 'boolean', default: 'false' },
+  { name: 'readonly', desc: '只读, 不能拖动', type: 'boolean', default: 'false' },
+]
+
 const apiEvents = [
-  { name: 'change', desc: '色值变化(预设, 取色器, hex 输入, 复制前的写入都算)', type: 'string' },
+  { name: 'change', desc: '色值变化(预设, 调色盘拖动, hex 输入都算)', type: 'string' },
   { name: 'clear', desc: '点击清空按钮', type: '—' },
 ]
 
@@ -84,11 +96,11 @@ const apiMethods = [
 </script>
 
 <template>
-  <DocPage title="ColorPicker 颜色选择器" desc="预设色板, 原生取色器与 hex 输入">
+  <DocPage title="ColorPicker 颜色选择器" desc="预设色板, 自绘调色盘与 hex 输入">
 
     <DemoBlock
       title="基础用法"
-      desc="触发器左侧是当前颜色的色块, 点开后可以选预设, 取色或输入 hex; 非法的 hex 只描红, 不会写进 v-model。"
+      desc="触发器左侧是当前颜色的色块, 点开后可以选预设, 点面板里的色块弹出调色盘, 或直接输入 hex; 非法的 hex 只描红, 不会写进 v-model。"
       :code="codeBasic"
       :value="`当前色值: ${basic || '空'}`"
     >
@@ -116,7 +128,7 @@ const apiMethods = [
 
     <DemoBlock
       title="面板内容与位置"
-      desc="showInput 关掉后只剩预设与原生取色器; placement 可以把面板翻到上方。"
+      desc="showInput 关掉后只剩预设与色块, 调色盘照样从色块点开; placement 可以把面板翻到上方。"
       :code="codePanel"
       :value="`当前色值: ${compact || '空'}`"
     >
@@ -140,6 +152,22 @@ const apiMethods = [
         <NyColorPicker v-model="rejected" invalid />
         <NyColorPicker v-model="disabledValue" disabled />
         <NyColorPicker v-model="readonlyValue" readonly />
+      </div>
+    </DemoBlock>
+
+    <DemoBlock
+      title="调色盘单独用"
+      desc="调色盘是独立组件 NyColorPanel, 只负责选色; 颜色选择器面板里的色块按钮点开的就是它。"
+      :code="codePalette"
+      :value="`当前色值: ${panelValue || '空'}`"
+    >
+      <div class="ex-grid ex-grid--2">
+        <NyColorPanel v-model="panelValue" />
+
+        <div class="ex-stack ex-stack--tight">
+          <NyColorPicker v-model="panelValue" />
+          <div class="ex-swatch" :style="{ background: panelValue || 'transparent' }" />
+        </div>
       </div>
     </DemoBlock>
 
@@ -174,6 +202,7 @@ const apiMethods = [
 
     <template #api>
       <ApiTable title="NyColorPicker Props" :rows="apiProps" />
+      <ApiTable title="NyColorPanel Props" :rows="apiPanelProps" />
       <ApiTable title="NyColorPicker 事件" kind="events" :rows="apiEvents" />
       <ApiTable title="NyColorPicker 方法 (ref)" kind="methods" :rows="apiMethods" />
     </template>

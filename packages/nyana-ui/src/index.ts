@@ -60,6 +60,7 @@ import NyAutoComplete from './components/form/NyAutoComplete.vue'
 import NyCascader from './components/form/NyCascader.vue'
 import NyCheckbox from './components/form/NyCheckbox.vue'
 import NyCheckboxGroup from './components/form/NyCheckboxGroup.vue'
+import NyColorPanel from './components/form/NyColorPanel.vue'
 import NyColorPicker from './components/form/NyColorPicker.vue'
 import NyDatePicker from './components/form/NyDatePicker.vue'
 import NyField from './components/form/NyField.vue'
@@ -146,6 +147,7 @@ export const components: Record<string, Component> = {
   NyAutoComplete,  NyCascader,
   NyCheckbox,
   NyCheckboxGroup,
+  NyColorPanel,
   NyColorPicker,
   NyDatePicker,
   NyField,
@@ -204,6 +206,7 @@ export {
   NyCheckboxGroup,
   NyCollapse,
   NyCollapseItem,
+  NyColorPanel,
   NyColorPicker,
   NyContainer,
   NyDatePicker,
@@ -302,6 +305,19 @@ export { nyPalette, nyPaletteColor, nyPaletteText } from './palette'
 export type { NyPaletteColor } from './palette'
 
 export {
+  colorBrightness,
+  hexToHsv,
+  hexToRgb,
+  hsvToHex,
+  hsvToRgb,
+  isHexColor,
+  normalizeHex,
+  rgbToHex,
+  rgbToHsv,
+} from './utils/color'
+export type { NyHsv, NyRgb } from './utils/color'
+
+export {
   clampNumber,
   decimalPlaces,
   formatNumberText,
@@ -322,7 +338,7 @@ export {
 } from './utils/pattern'
 export type { NyMatchMode, NyPatternPreset, NyPatternPresetName } from './utils/pattern'
 
-export { nyRuleMessages, runRules } from './utils/rule'
+export { describeRules, nyRuleMessages, runRules } from './utils/rule'
 export type { NyRuleContext } from './utils/rule'
 
 export {

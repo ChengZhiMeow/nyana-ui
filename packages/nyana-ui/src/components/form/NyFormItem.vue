@@ -5,7 +5,7 @@ import NyIcon from '../basic/NyIcon.vue'
 
 import { nyFormKey } from './formContext'
 import { useValidation } from '../../composables/useValidation'
-import { runRules } from '../../utils/rule'
+import { describeRules, runRules } from '../../utils/rule'
 
 import type { NyFormField } from './formContext'
 import type { CSSProperties } from 'vue'
@@ -18,6 +18,7 @@ const props = withDefaults(
     rules?: NyFormRule | NyFormRule[]
     required?: boolean
     hint?: string
+    note?: string
     labelWidth?: string | number
     labelAlign?: 'start' | 'end'
     validateOn?: NyValidateTrigger
@@ -30,6 +31,7 @@ const props = withDefaults(
     rules: undefined,
     required: undefined,
     hint: '',
+    note: '',
     labelWidth: undefined,
     labelAlign: undefined,
     validateOn: undefined,
@@ -83,6 +85,8 @@ const rules = computed<NyFormRule[]>(() => {
 })
 
 const required = computed(() => props.required ?? rules.value.some((rule) => rule.required))
+
+const noteText = computed(() => props.note || describeRules(rules.value))
 
 const hasLabel = computed(() => !!props.label || !!slots.label)
 
@@ -279,6 +283,7 @@ defineExpose({ validate, reset, clear })
     <label v-if="hasLabel" class="ny-form-item__label" :style="labelStyle" :for="controlId">
       <slot name="label">{{ label }}</slot>
       <span v-if="required" class="ny-form-item__star" aria-hidden="true">*</span>
+      <span v-if="noteText" class="ny-form-item__note">({{ noteText }})</span>
       <NyIcon v-if="validating" class="ny-form-item__spin" name="refresh" :size="12" spin />
     </label>
 
@@ -356,6 +361,7 @@ defineExpose({ validate, reset, clear })
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  padding-left: 2px;
   font-size: var(--ny-font-size-sm);
   color: var(--ny-text-sub);
   transition: color var(--ny-transition-fast);
@@ -364,6 +370,10 @@ defineExpose({ validate, reset, clear })
 .ny-form-item__star {
   color: var(--ny-danger);
   font-weight: 700;
+}
+
+.ny-form-item__note {
+  color: var(--ny-text-muted);
 }
 
 .ny-form-item__spin {
@@ -380,6 +390,7 @@ defineExpose({ validate, reset, clear })
   color: var(--ny-text-muted);
   line-height: 1.5;
   word-break: break-word;
+  text-align: left;
 
   &[role='alert'] {
     color: var(--ny-danger-text);

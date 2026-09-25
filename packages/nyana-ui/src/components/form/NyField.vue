@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import type { NySize } from '../../types'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     label?: string
     hint?: string
+    note?: string
     error?: string | null
     required?: boolean
     size?: NySize
@@ -15,6 +18,7 @@ withDefaults(
   {
     label: '',
     hint: '',
+    note: '',
     error: null,
     required: false,
     size: 'md',
@@ -23,6 +27,8 @@ withDefaults(
     messageId: undefined,
   },
 )
+
+const noteText = computed(() => props.note || (props.required ? '必填' : ''))
 </script>
 
 <template>
@@ -33,6 +39,7 @@ withDefaults(
     <label v-if="label || $slots.label" class="ny-field__label" :for="controlId">
       <slot name="label">{{ label }}</slot>
       <span v-if="required" class="ny-field__star" aria-hidden="true">*</span>
+      <span v-if="noteText" class="ny-field__note">({{ noteText }})</span>
     </label>
 
     <slot />
@@ -63,6 +70,7 @@ withDefaults(
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  padding: 0 2px;
   font-size: 13px;
   color: var(--ny-text-sub);
   transition: color var(--ny-transition-fast);
@@ -73,12 +81,17 @@ withDefaults(
   font-weight: 700;
 }
 
+.ny-field__note {
+  color: var(--ny-text-muted);
+}
+
 .ny-field__msg {
   margin: 0;
   font-size: 12px;
   color: var(--ny-text-muted);
   line-height: 1.5;
   word-break: break-word;
+  text-align: left;
 }
 
 .ny-field__msg--error {

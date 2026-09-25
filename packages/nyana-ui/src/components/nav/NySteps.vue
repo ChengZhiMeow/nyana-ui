@@ -93,7 +93,7 @@ function onSelect(index: number) {
             :name="item.icon"
             :size="progressDot ? 9 : 15"
           />
-          <template v-else-if="!progressDot">{{ index + 1 }}</template>
+          <span v-else-if="!progressDot" class="ny-steps__index">{{ index + 1 }}</span>
         </button>
       </div>
 
@@ -168,6 +168,13 @@ function onSelect(index: number) {
     outline: none;
     box-shadow: var(--ny-shadow-focus);
   }
+}
+
+.ny-steps__index {
+  display: inline-block;
+  line-height: 1;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .ny-steps.is-clickable .ny-steps__node,

@@ -100,11 +100,12 @@ function toCssSize(value: number | string) {
 .ny-desc__grid {
   display: grid;
   grid-template-columns: repeat(var(--ny-desc-column, 3), minmax(0, 1fr));
+  column-gap: var(--ny-space-6);
+  row-gap: var(--ny-space-4);
 }
 
 .ny-desc__cell {
   min-width: 0;
-  padding: 0 var(--ny-space-4) var(--ny-space-4) 0;
 }
 
 @for $i from 1 through 12 {
@@ -128,7 +129,7 @@ function toCssSize(value: number | string) {
   .ny-desc__cell {
     display: flex;
     align-items: baseline;
-    gap: var(--ny-space-3);
+    gap: var(--ny-space-2);
   }
 
   .ny-desc__label {

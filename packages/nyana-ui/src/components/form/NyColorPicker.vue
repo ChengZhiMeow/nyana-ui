@@ -2,13 +2,13 @@
 import { computed, onBeforeUnmount, ref, useId, watch } from 'vue'
 
 import NyIcon from '../basic/NyIcon.vue'
+import NyColorPanel from './NyColorPanel.vue'
 import NyInputShell from './NyInputShell.vue'
 
 import { usePopup } from '../../composables/usePopup'
 import { nyPalette } from '../../palette'
+import { colorBrightness, isHexColor, normalizeHex } from '../../utils/color'
 import type { NyPlacement, NySize, NyVariant } from '../../types'
-
-const HEX_PATTERN = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i
 
 const props = withDefaults(
   defineProps<{
@@ -50,6 +50,7 @@ const visible = ref(false)
 const focused = ref(false)
 const draft = ref('')
 const copied = ref(false)
+const paletteOpen = ref(false)
 
 const triggerRef = ref<HTMLElement | null>(null)
 const panelRef = ref<HTMLElement | null>(null)
@@ -59,23 +60,15 @@ const panelId = useId()
 
 const ringVisible = computed(() => focused.value || visible.value)
 
+const locked = computed(() => props.disabled || props.readonly)
+
 const hexInvalid = computed(() => {
   const text = draft.value.trim()
 
-  return text.length > 0 && !HEX_PATTERN.test(text)
+  return text.length > 0 && !isHexColor(text)
 })
 
-const nativeValue = computed(() => {
-  const text = model.value.trim()
-
-  if (!HEX_PATTERN.test(text)) {
-    return '#000000'
-  }
-
-  const hex = text.replace('#', '').toLowerCase()
-
-  return `#${hex.length === 3 ? hex.split('').map((char) => char + char).join('') : hex}`
-})
+const swatchStyle = computed(() => ({ background: model.value || 'transparent' }))
 
 const { style } = usePopup({
   open: visible,
@@ -90,11 +83,13 @@ const { style } = usePopup({
 
 watch(visible, (opened) => {
   if (!opened) {
+    paletteOpen.value = false
     return
   }
 
   draft.value = model.value
   copied.value = false
+  paletteOpen.value = false
 })
 
 function isCurrent(color: string) {
@@ -102,19 +97,11 @@ function isCurrent(color: string) {
 }
 
 function checkColor(color: string) {
-  const hex = color.replace('#', '')
-  const full = hex.length === 3 ? hex.split('').map((char) => char + char).join('') : hex
-
-  if (full.length !== 6) {
+  if (!isHexColor(color)) {
     return 'var(--ny-text-invert)'
   }
 
-  const red = Number.parseInt(full.slice(0, 2), 16)
-  const green = Number.parseInt(full.slice(2, 4), 16)
-  const blue = Number.parseInt(full.slice(4, 6), 16)
-  const brightness = (red * 299 + green * 587 + blue * 114) / 1000
-
-  return brightness > 150 ? 'var(--ny-text-strong)' : 'var(--ny-text-invert)'
+  return colorBrightness(color) > 150 ? 'var(--ny-text-strong)' : 'var(--ny-text-invert)'
 }
 
 function focus() {
@@ -122,7 +109,7 @@ function focus() {
 }
 
 function open() {
-  if (props.disabled || props.readonly || visible.value) {
+  if (locked.value || visible.value) {
     return
   }
 
@@ -135,6 +122,7 @@ function close(refocus = false) {
   }
 
   visible.value = false
+  paletteOpen.value = false
 
   if (refocus) {
     focus()
@@ -153,6 +141,14 @@ function applyColor(next: string) {
   emit('change', value)
 }
 
+function togglePalette() {
+  if (locked.value) {
+    return
+  }
+
+  paletteOpen.value = !paletteOpen.value
+}
+
 function pickPreset(color: string) {
   applyColor(color)
   close(true)
@@ -163,17 +159,9 @@ function onHexInput(event: Event) {
 
   draft.value = target.value
 
-  const value = target.value.trim()
-
-  if (HEX_PATTERN.test(value)) {
-    applyColor(`#${value.replace('#', '')}`)
+  if (isHexColor(target.value)) {
+    applyColor(normalizeHex(target.value) ?? target.value)
   }
-}
-
-function onNativeChange(event: Event) {
-  const target = event.target as HTMLInputElement
-
-  applyColor(target.value)
 }
 
 async function copyColor() {
@@ -222,7 +210,7 @@ function onTriggerClick(event: MouseEvent) {
 }
 
 function onTriggerKeydown(event: KeyboardEvent) {
-  if (props.disabled || props.readonly) {
+  if (locked.value) {
     return
   }
 
@@ -320,28 +308,49 @@ defineExpose({ focus, open, close, clear })
         </div>
 
         <div class="ny-color-picker__row">
-          <input
-            class="ny-color-picker__native"
-            type="color"
-            :value="nativeValue"
+          <NyInputShell
+            :size="size"
+            :variant="variant"
             :disabled="disabled"
-            aria-label="取色器"
-            @input="onNativeChange"
-          />
+            :readonly="readonly"
+            :invalid="hexInvalid"
+            :focused="paletteOpen"
+          >
+            <template #prefix>
+              <button
+                class="ny-color-picker__swatch-button"
+                type="button"
+                :style="swatchStyle"
+                :disabled="locked"
+                aria-haspopup="dialog"
+                aria-label="打开调色盘"
+                :aria-expanded="paletteOpen"
+                @click="togglePalette"
+              />
+            </template>
 
-          <input
-            v-if="showInput"
-            class="ny-color-picker__hex"
-            :class="{ 'is-invalid': hexInvalid }"
-            type="text"
-            spellcheck="false"
-            autocomplete="off"
-            placeholder="#5bcffa"
-            :value="draft"
-            aria-label="hex 色值"
-            :aria-invalid="hexInvalid || undefined"
-            @input="onHexInput"
-          />
+            <input
+              v-if="showInput"
+              class="ny-shell__control"
+              type="text"
+              spellcheck="false"
+              autocomplete="off"
+              placeholder="#5bcffa"
+              :value="draft"
+              aria-label="hex 色值"
+              :aria-invalid="hexInvalid || undefined"
+              @input="onHexInput"
+            />
+          </NyInputShell>
+
+          <div v-if="paletteOpen" class="ny-pop ny-color-picker__palette">
+            <NyColorPanel
+              :model-value="model"
+              :disabled="disabled"
+              :readonly="readonly"
+              @change="applyColor"
+            />
+          </div>
         </div>
 
         <div class="ny-color-picker__foot">
@@ -415,7 +424,7 @@ defineExpose({ focus, open, close, clear })
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 236px;
+  width: 248px;
   padding: 12px;
 }
 
@@ -446,47 +455,40 @@ defineExpose({ focus, open, close, clear })
 }
 
 .ny-color-picker__row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  position: relative;
 }
 
-.ny-color-picker__native {
+.ny-color-picker__swatch-button {
+  display: inline-block;
   flex: none;
-  width: 34px;
-  height: 28px;
-  padding: 2px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
   border: 1px solid var(--ny-border-strong);
   border-radius: var(--ny-radius-xs);
-  background: var(--ny-surface);
   cursor: pointer;
+  transition: transform var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    transform: scale(1.12);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
-.ny-color-picker__hex {
-  flex: 1;
-  min-width: 0;
-  height: 28px;
-  padding: 0 8px;
-  border: 1px solid var(--ny-border-strong);
-  border-radius: var(--ny-radius-xs);
-  background: var(--ny-surface);
-  color: var(--ny-text);
+.ny-color-picker__palette {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 10px;
+}
+
+.ny-color-picker__row :deep(.ny-shell__control) {
   font-family: var(--ny-font-family-mono);
-  font-size: var(--ny-font-size-sm);
-  outline: none;
-  transition: border-color var(--ny-transition-fast);
-
-  &::placeholder {
-    color: var(--ny-text-muted);
-  }
-
-  &:focus {
-    border-color: var(--ny-primary);
-  }
-
-  &.is-invalid {
-    border-color: var(--ny-danger);
-  }
 }
 
 .ny-color-picker__foot {

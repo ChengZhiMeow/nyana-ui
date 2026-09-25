@@ -219,9 +219,10 @@ function onCancel() {
 
 .ny-popconfirm__actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: var(--ny-space-2);
   margin-top: var(--ny-space-3);
+  padding-left: 24px;
 }
 
 .ny-popconfirm:focus {

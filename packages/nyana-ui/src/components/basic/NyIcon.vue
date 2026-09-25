@@ -54,6 +54,7 @@ if (import.meta.env.DEV && !(props.name in nyIcons)) {
 <style scoped lang="scss">
 .ny-icon {
   color: inherit;
+  vertical-align: middle;
 }
 
 .ny-icon--spin {

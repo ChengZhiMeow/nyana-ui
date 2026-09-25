@@ -101,7 +101,7 @@ export const docGroups: DocGroup[] = [
       { key: 'transfer', title: 'Transfer 穿梭框', label: '穿梭框', desc: '两栏之间来回搬运待选项', file: 'TransferDoc.vue', icon: 'transfer' },
       { key: 'autocomplete', title: 'AutoComplete 自动完成', label: '自动完成', desc: '输入时给出候选, 可自由输入', file: 'AutoCompleteDoc.vue', icon: 'search' },
       { key: 'mentions', title: 'Mentions 提及', label: '提及', desc: '输入 @ 唤出人员候选', file: 'MentionsDoc.vue', icon: 'hash' },
-      { key: 'color-picker', title: 'ColorPicker 颜色选择器', label: '颜色选择', desc: '预设色板与原生取色器', file: 'ColorPickerDoc.vue', icon: 'droplet' },
+      { key: 'color-picker', title: 'ColorPicker 颜色选择器', label: '颜色选择', desc: '预设色板与自绘调色盘', file: 'ColorPickerDoc.vue', icon: 'droplet' },
       { key: 'time-picker', title: 'TimePicker 时间选择', label: '时间选择', desc: '时分秒选择, 支持区间与禁用时刻', file: 'TimePickerDoc.vue', icon: 'clock' },
       { key: 'tag-input', title: 'TagInput 标签输入', label: '标签输入', desc: '回车成胶囊的标签编辑框, 支持候选联想', file: 'TagInputDoc.vue', icon: 'tag' },
     ],
@@ -130,6 +130,29 @@ export const docGroups: DocGroup[] = [
 ]
 
 export const docEntries: DocEntry[] = docGroups.flatMap((group) => group.items)
+
+export interface SubComponentInfo {
+  group: string
+  title: string
+  label: string
+  desc: string
+  page: string
+  icon: string
+}
+
+export const subComponents: Record<string, SubComponentInfo> = {
+  NyAvatarGroup: { group: '数据展示', title: 'AvatarGroup 头像组', label: '头像组', desc: '多个头像叠放, 超出用 +N 收起', page: 'avatar', icon: 'users' },
+  NyCheckboxGroup: { group: '数据录入', title: 'CheckboxGroup 多选框组', label: '多选框组', desc: '一组多选框, 共享一个选中值数组', page: 'checkbox', icon: 'check-circle' },
+  NyCollapseItem: { group: '数据展示', title: 'CollapseItem 折叠项', label: '折叠项', desc: '折叠面板里的单个可展开项', page: 'collapse', icon: 'chevron-down' },
+  NyColorPanel: { group: '数据录入', title: 'ColorPanel 调色盘', label: '调色盘', desc: '饱和度与明度面板加色相条, 只负责选色', page: 'color-picker', icon: 'palette' },
+  NyFormItem: { group: '数据录入', title: 'FormItem 表单项', label: '表单项', desc: '标签, 控件与校验提示组成的一行', page: 'form', icon: 'file-text' },
+  NyGridItem: { group: '布局', title: 'GridItem 栅格项', label: '栅格项', desc: '栅格里的单个格子, 可跨列与跨行', page: 'grid', icon: 'grid' },
+  NyInputShell: { group: '数据录入', title: 'InputShell 输入外壳', label: '输入外壳', desc: '输入类控件共用的描边外壳', page: 'input', icon: 'sidebar' },
+  NyParagraph: { group: '通用', title: 'Paragraph 段落', label: '段落', desc: '带行距与最大宽度的正文段落', page: 'typography', icon: 'align-left' },
+  NyRadioGroup: { group: '数据录入', title: 'RadioGroup 单选框组', label: '单选框组', desc: '一组单选框, 共享一个选中值', page: 'radio', icon: 'check' },
+  NyText: { group: '通用', title: 'Text 文本', label: '文本', desc: '语义色与字号统一的正文文本', page: 'typography', icon: 'file' },
+  NyTitle: { group: '通用', title: 'Title 标题', label: '标题', desc: '五档标题层级, 支持竖线标记与省略', page: 'typography', icon: 'hash' },
+}
 
 const componentAlias: Record<string, string> = {
   autocomplete: 'NyAutoComplete',

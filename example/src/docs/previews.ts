@@ -23,6 +23,7 @@ import {
   NyCheckboxGroup,
   NyCollapse,
   NyCollapseItem,
+  NyColorPanel,
   NyColorPicker,
   NyContainer,
   NyDatePicker,
@@ -221,7 +222,7 @@ export const componentPreviews: Record<string, Component> = {
     ]),
   ),
   NyBadge: stage(() =>
-    h('div', { style: { display: 'flex', alignItems: 'center', gap: '18px' } }, [
+    h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } }, [
       h(NyBadge, { count: 8 }),
       h(NyBadge, { status: 'success', text: '在线' }),
     ]),
@@ -325,6 +326,7 @@ export const componentPreviews: Record<string, Component> = {
   NyDatePicker: stage(() => h(NyDatePicker, { modelValue: null, placeholder: '选择日期', size: 'sm' })),
   NyTimePicker: stage(() => h(NyTimePicker, { modelValue: '09:30', size: 'sm' })),
   NyColorPicker: stage(() => h(NyColorPicker, { modelValue: nyPaletteColor('sky'), size: 'sm' })),
+  NyColorPanel: stage(() => h(NyColorPanel, { modelValue: nyPaletteColor('sky'), height: 96 })),
   NyCascader: stage(() =>
     h(NyCascader, {
       options: [
@@ -387,8 +389,8 @@ export const componentPreviews: Record<string, Component> = {
   ),
   NyText: stage(() => h(NyText, { type: 'secondary' }, '正文与语义色文本')),
   NyTitle: stage(() =>
-    h(NyStack, { gap: 2 }, [
-      h(NyTitle, { level: 4 }, '标题 Title'),
+    h(NyStack, { gap: 4 }, [
+      h(NyTitle, { level: 2 }, '标题 Title'),
       h(NyTitle, { level: 5 }, '次级标题'),
     ]),
   ),
@@ -459,9 +461,11 @@ export const componentPreviews: Record<string, Component> = {
   ),
 
   NyField: stage(() =>
-    h(NyField, { label: '昵称', hint: '2-12 个字' }, () =>
-      h(NyInput, { modelValue: '', size: 'sm', placeholder: '输入昵称' }),
-    ),
+    h('div', { style: { width: '200px' } }, [
+      h(NyField, { label: '邮箱', note: '2-12 个字' }, () =>
+        h(NyInput, { modelValue: '', size: 'sm', placeholder: 'you@nyana.dev' }),
+      ),
+    ]),
   ),
   NyForm: stage(() =>
     h(NyForm, { model: { name: '' }, layout: 'vertical', gap: 8 }, () => [
@@ -472,7 +476,7 @@ export const componentPreviews: Record<string, Component> = {
   ),
   NyFormItem: stage(() =>
     h(NyForm, { model: { mail: '' }, layout: 'vertical' }, () => [
-      h(NyFormItem, { name: 'mail', label: '邮箱', hint: '用来收通知' }, () =>
+      h(NyFormItem, { name: 'mail', label: '邮箱', rules: [{ required: true, min: 2, max: 12 }] }, () =>
         h(NyInput, { modelValue: '', size: 'sm', placeholder: 'you@nyana.dev' }),
       ),
     ]),

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { NyButton, NyGrid, NyIcon, NyStack, NyText, nyBrandIcons, nyIcons, nyMessage } from '@chengzhimeow/nyana-ui'
+import { NyButton, NyGrid, NyIcon, NySpace, NyStack, NyText, nyBrandIcons, nyIcons, nyMessage } from '@chengzhimeow/nyana-ui'
 
 import ApiTable from '@/components/ApiTable.vue'
 import DemoBlock from '@/components/DemoBlock.vue'
@@ -11,8 +11,6 @@ const iconNames = Object.keys(nyIcons)
 
 const brandNames = Object.keys(nyBrandIcons)
 const lineNames = iconNames.filter((name) => !(name in nyBrandIcons))
-
-const brandRow = ['github', 'qq', 'wechat', 'bilibili', 'zhihu', 'taobao', 'alipay', 'vscode', 'figma', 'docker']
 
 const sizeOptions = [14, 18, 24, 32]
 const iconSize = ref(24)
@@ -68,15 +66,7 @@ const codeSize = `<div class="ex-group">
   <NyIcon name="star" :size="48" />
 </div>`
 
-const codeBrand = `<!-- 品牌图标是实心图形, 不能用 strokeWidth 调粗细 -->
-<div class="ex-group">
-  <NyIcon name="github" :size="30" />
-  <NyIcon name="qq" :size="30" />
-  <NyIcon name="wechat" :size="30" />
-  <NyIcon name="bilibili" :size="30" />
-</div>
-
-<!-- 颜色跟文字一样, 想换色就套一层令牌或色卡 -->
+const codeBrand = `<!-- 品牌图标是实心图形, 不能用 strokeWidth 调粗细, 颜色跟文字一样 -->
 <span style="color: var(--ny-success)"><NyIcon name="spotify" :size="24" /> Spotify</span>`
 
 const codeStroke = `<div class="ex-group">
@@ -100,7 +90,7 @@ const codeColor = `<div class="ex-group">
   <NyText type="muted"><NyIcon name="info" /> 弱化</NyText>
 </div>
 
-<span class="ex-tile"><NyIcon name="sparkles" :size="20" /> 跟随容器颜色</span>`
+<NySpace class="ex-tile" size="sm"><NyIcon name="sparkles" :size="20" /><span>跟随容器颜色</span></NySpace>`
 
 const apiProps = [
   { name: 'name', desc: '图标名, 取 src/icons.ts 里的键, 未命中时退回 info', type: 'string', default: '—' },
@@ -154,10 +144,6 @@ const apiExport = [
       :code="codeBrand"
       :value="`共 ${brandNames.length} 个`"
     >
-      <div class="ex-group">
-        <NyIcon v-for="name in brandRow" :key="name" :name="name" :size="30" :title="name" />
-      </div>
-
       <NyGrid :columns="3" :responsive="{ sm: 4, md: 6, lg: 8 }" :gap="10">
         <div
           v-for="name in brandNames"
@@ -232,7 +218,7 @@ const apiExport = [
         </div>
 
         <div class="ex-group">
-          <span class="ex-tile"><NyIcon name="sparkles" :size="20" /> 跟随容器颜色</span>
+          <NySpace class="ex-tile" size="sm"><NyIcon name="sparkles" :size="20" /><span>跟随容器颜色</span></NySpace>
         </div>
       </NyStack>
     </DemoBlock>

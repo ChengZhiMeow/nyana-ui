@@ -33,6 +33,13 @@ figure {
   flex-wrap: wrap;
 }
 
+.ex-group .ny-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+}
+
 .ex-group--center {
   justify-content: center;
 }

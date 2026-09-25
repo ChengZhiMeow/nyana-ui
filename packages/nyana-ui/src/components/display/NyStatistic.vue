@@ -88,6 +88,7 @@ const trendIcon = computed(() => (props.trend === 'up' ? 'arrow-up' : 'arrow-dow
   flex-direction: column;
   gap: var(--ny-space-1);
   min-width: 0;
+  text-align: left;
 }
 
 .ny-stat__title {

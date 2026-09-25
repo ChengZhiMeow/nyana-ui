@@ -90,7 +90,6 @@ withDefaults(
 .ny-card.is-hoverable:hover {
   border-color: var(--ny-primary);
   box-shadow: var(--ny-shadow-md);
-  transform: translateY(-1px);
 }
 
 .ny-card--pad-md {

@@ -71,10 +71,6 @@ function pickMode(mode: NyLayoutMode) {
       />
     </template>
 
-    <template #side-footer>
-      <span class="app-count">{{ docEntries.length }} 个组件</span>
-    </template>
-
     <RouterView v-slot="{ Component }">
       <component :is="Component" />
     </RouterView>
@@ -125,11 +121,6 @@ function pickMode(mode: NyLayoutMode) {
   align-items: center;
   gap: 4px;
   flex-wrap: wrap;
-}
-
-.app-count {
-  font-size: var(--ny-font-size-xs);
-  color: var(--ny-text-muted);
 }
 
 .app-dock {
