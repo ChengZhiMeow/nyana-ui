@@ -49,6 +49,7 @@ const panelRef = ref<HTMLElement | null>(null)
 const CLOSE_DELAY = 120
 
 let closeTimer: ReturnType<typeof setTimeout> | null = null
+let returningFocus = false
 
 const { style } = usePopup({
   open,
@@ -121,7 +122,17 @@ function toggle() {
 }
 
 function focusTrigger() {
+  returningFocus = true
   triggerRef.value?.focus()
+  returningFocus = false
+}
+
+function onTriggerFocus() {
+  if (returningFocus) {
+    return
+  }
+
+  onTriggerClick()
 }
 
 function onTriggerClick() {
@@ -148,7 +159,8 @@ function onTriggerKeydown(event: KeyboardEvent) {
   if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
     event.preventDefault()
     openMenu()
-    focusItem(event.key === 'ArrowDown' ? 0 : -1)
+    const index = event.key === 'ArrowDown' ? 0 : -1
+    void nextTick(() => focusItem(index))
   }
 }
 
@@ -253,7 +265,7 @@ onBeforeUnmount(clearCloseTimer)
     :aria-disabled="disabled || undefined"
     @click="onTriggerClick"
     @keydown="onTriggerKeydown"
-    @focus="onTriggerClick"
+    @focus="onTriggerFocus"
     @focusout="onFocusOut"
     @mouseenter="trigger === 'hover' && !disabled && openMenu()"
     @mouseleave="trigger === 'hover' && scheduleClose()"

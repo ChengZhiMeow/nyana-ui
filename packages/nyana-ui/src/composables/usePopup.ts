@@ -136,13 +136,18 @@ export function usePopup(options: NyPopupOptions): NyPopupInstance {
 
   watch(
     options.open,
-    async (open) => {
+    async (open, _previous, onCleanup) => {
       if (!open) {
         unbind()
         return
       }
 
+      let active = true
+      onCleanup(() => { active = false })
       await nextTick()
+      if (!active) {
+        return
+      }
       resolvePosition()
       bind()
     },
