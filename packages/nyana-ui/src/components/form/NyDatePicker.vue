@@ -21,6 +21,7 @@ const props = withDefaults(
     max?: string
     disabledDate?: (date: string) => boolean
     weekStart?: 0 | 1
+    inline?: boolean
   }>(),
   {
     size: 'md',
@@ -35,6 +36,7 @@ const props = withDefaults(
     max: undefined,
     disabledDate: undefined,
     weekStart: 1,
+    inline: false,
   },
 )
 
@@ -360,6 +362,7 @@ defineExpose({ focus, open, close, clear })
 
 <template>
   <div
+    v-if="!inline"
     ref="triggerRef"
     class="ny-datepicker"
     :class="[`ny-datepicker--${size}`, { 'is-open': visible, 'is-disabled': disabled, 'is-invalid': invalid }]"
@@ -396,9 +399,15 @@ defineExpose({ focus, open, close, clear })
     </NyInputShell>
   </div>
 
-  <Teleport to="body">
+  <Teleport to="body" :disabled="inline">
     <transition name="ny-zoom" :duration="160">
-      <div v-if="visible" ref="panelRef" class="ny-pop ny-datepicker__panel" :style="style">
+      <div
+        v-if="inline || visible"
+        ref="panelRef"
+        class="ny-pop ny-datepicker__panel"
+        :class="{ 'is-inline': inline }"
+        :style="inline ? undefined : style"
+      >
         <div class="ny-datepicker__head">
           <button class="ny-datepicker__nav" type="button" title="上个月" tabindex="-1" @click="shiftMonth(-1)">
             <NyIcon name="chevron-left" :size="16" />
@@ -490,6 +499,14 @@ defineExpose({ focus, open, close, clear })
 }
 
 .ny-datepicker__panel {
+  &.is-inline {
+    position: static;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
   position: fixed;
   z-index: var(--ny-z-popup);
   width: 268px;

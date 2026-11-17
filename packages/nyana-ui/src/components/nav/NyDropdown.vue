@@ -339,8 +339,9 @@ onBeforeUnmount(clearCloseTimer)
 .ny-dropdown__panel {
   position: fixed;
   z-index: var(--ny-z-popup);
+  // 固定宽度: 面板不跟着触发器或选项文字量变宽变窄
+  width: 160px;
   padding: var(--ny-space-1);
-  min-width: 160px;
 }
 
 .ny-dropdown__menu {

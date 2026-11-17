@@ -24,6 +24,7 @@ const props = withDefaults(
     placeholder?: string
     placement?: NyPlacement
     maxHeight?: number
+    inline?: boolean
   }>(),
   {
     format: 'HH:mm',
@@ -39,6 +40,7 @@ const props = withDefaults(
     placeholder: '请选择时间',
     placement: 'bottom-start',
     maxHeight: 220,
+    inline: false,
   },
 )
 
@@ -181,6 +183,20 @@ async function scrollAllIntoView() {
 watch(highlight, () => {
   scrollColumnIntoView(highlight.value.column, '.is-active')
 })
+
+// 内联模式没有 open 动作, 挂载时也要把列滚到已选值
+watch(
+  () => props.inline,
+  (inline) => {
+    if (!inline) {
+      return
+    }
+
+    parts.value = parseTime(model.value)
+    highlight.value = { column: 0, index: currentIndex(0) }
+  },
+  { immediate: true },
+)
 
 function focus() {
   triggerRef.value?.focus()
@@ -386,6 +402,7 @@ defineExpose({ focus, open, close, clear })
 
 <template>
   <div
+    v-if="!inline"
     ref="triggerRef"
     class="ny-time-picker"
     :class="[`ny-time-picker--${size}`, { 'is-open': visible, 'is-disabled': disabled, 'is-invalid': invalid }]"
@@ -427,14 +444,15 @@ defineExpose({ focus, open, close, clear })
     </NyInputShell>
   </div>
 
-  <Teleport to="body">
+  <Teleport to="body" :disabled="inline">
     <transition name="ny-zoom" :duration="160">
       <div
-        v-if="visible"
+        v-if="inline || visible"
         :id="panelId"
         ref="panelRef"
         class="ny-pop ny-time-picker__panel"
-        :style="style"
+        :class="{ 'is-inline': inline }"
+        :style="inline ? undefined : style"
         @mousedown.prevent
       >
         <div class="ny-time-picker__head">
@@ -515,6 +533,14 @@ defineExpose({ focus, open, close, clear })
 }
 
 .ny-time-picker__panel {
+  &.is-inline {
+    position: static;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
   position: fixed;
   z-index: var(--ny-z-popup);
   display: flex;

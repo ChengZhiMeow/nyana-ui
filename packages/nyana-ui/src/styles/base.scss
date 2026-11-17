@@ -63,6 +63,20 @@ samp {
   box-shadow: var(--ny-shadow-lg);
 }
 
+// 主题切换的过渡: 切换的瞬间给 <html> 挂上 .ny-theme-switching,
+// 让所有元素一起走颜色过渡, 而不是一部分组件平滑、一部分瞬间反色
+.ny-theme-switching,
+.ny-theme-switching *,
+.ny-theme-switching *::before,
+.ny-theme-switching *::after {
+  transition:
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
+    box-shadow 240ms ease,
+    fill 240ms ease,
+    stroke 240ms ease !important;
+}
 @media (prefers-reduced-motion: reduce) {
   [class^='ny-'],
   [class*=' ny-'] {

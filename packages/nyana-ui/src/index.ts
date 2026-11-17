@@ -63,6 +63,7 @@ import NyCheckboxGroup from './components/form/NyCheckboxGroup.vue'
 import NyColorPanel from './components/form/NyColorPanel.vue'
 import NyColorPicker from './components/form/NyColorPicker.vue'
 import NyDatePicker from './components/form/NyDatePicker.vue'
+import NyDateTimePicker from './components/form/NyDateTimePicker.vue'
 import NyField from './components/form/NyField.vue'
 import NyForm from './components/form/NyForm.vue'
 import NyFormItem from './components/form/NyFormItem.vue'
@@ -150,6 +151,7 @@ export const components: Record<string, Component> = {
   NyColorPanel,
   NyColorPicker,
   NyDatePicker,
+  NyDateTimePicker,
   NyField,
   NyForm,
   NyFormItem,
@@ -210,6 +212,7 @@ export {
   NyColorPicker,
   NyContainer,
   NyDatePicker,
+  NyDateTimePicker,
   NyDescriptions,
   NyDivider,
   NyDrawer,

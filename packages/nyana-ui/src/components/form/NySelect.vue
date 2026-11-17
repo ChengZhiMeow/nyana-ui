@@ -66,6 +66,8 @@ const panelRef = ref<HTMLElement | null>(null)
 const searchRef = ref<HTMLInputElement | null>(null)
 
 const panelId = useId()
+// placeholder 传空字符串时也给一句兜底文案, 免得选择框里只剩一条竖线。
+const displayPlaceholder = computed(() => props.placeholder || '请选择')
 
 function optionId(index: number) {
   return `${panelId}-option-${index}`
@@ -389,11 +391,11 @@ defineExpose({ focus, open, close, clear })
           <span v-if="hiddenTagCount" class="ny-select__tag ny-select__tag--more">+{{ hiddenTagCount }}</span>
         </template>
 
-        <span v-else class="ny-select__placeholder">{{ placeholder }}</span>
+        <span v-else class="ny-select__placeholder">{{ displayPlaceholder }}</span>
       </span>
 
       <span v-else class="ny-select__value" :class="{ 'is-placeholder': !selectedLabels.length }">
-        {{ selectedLabels.length ? selectedLabels[0] : placeholder }}
+        {{ selectedLabels.length ? selectedLabels[0] : displayPlaceholder }}
       </span>
 
       <template #suffix>
@@ -510,11 +512,13 @@ defineExpose({ focus, open, close, clear })
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .ny-select__placeholder,
 .ny-select__value.is-placeholder {
   color: var(--ny-text-muted);
+  line-height: 1.2;
 }
 
 .ny-select__arrow {
@@ -554,6 +558,7 @@ defineExpose({ focus, open, close, clear })
   flex: 1;
   min-width: 0;
   padding: 0;
+  caret-color: var(--ny-primary);
   border: none;
   background: transparent;
   color: var(--ny-text);
