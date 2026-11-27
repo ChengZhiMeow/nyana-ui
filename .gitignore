@@ -11,5 +11,5 @@ dist/
 /docs/
 
 # VitePress
-site/.vitepress/dist/
-site/.vitepress/cache/
+example/dist/
+example/.vitepress/cache/

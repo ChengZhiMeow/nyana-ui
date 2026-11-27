@@ -18,7 +18,6 @@ import {
   NyMetricCard,
   NyModal,
   NyPill,
-  NyPlayerHead,
   NySegmented,
   NySwitch,
   NyTable,
@@ -289,7 +288,7 @@ const nodeChoice = ref('zz')
             <template #title><span class="sc-card-title"><NyIcon name="users" />在线玩家 <span class="sc-muted">12 / 20</span></span></template>
             <div class="sc-players">
               <div v-for="[name, ping] in players" :key="name" class="sc-players__row">
-                <NyPlayerHead :name="name" />
+                <NyAvatar :text="name" :size="20" />
                 <span>{{ name }}</span>
                 <span class="sc-muted">{{ ping }} ms</span>
               </div>

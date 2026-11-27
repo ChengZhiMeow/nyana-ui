@@ -47,7 +47,6 @@ import { NyNumberInput } from './components/number-input'
 import { NyPageHeader } from './components/page-header'
 import { NyPagination } from './components/pagination'
 import { NyPill } from './components/pill'
-import { NyPlayerHead } from './components/player-head'
 import { NyPopconfirm } from './components/popconfirm'
 import { NyPopover } from './components/popover'
 import { NyProgress } from './components/progress'
@@ -180,7 +179,6 @@ export const components: Record<string, Component> = {
   NyCopyButton,
   NyCopyField,
   NyKeyValue,
-  NyPlayerHead,
   NyChoiceGroup,
   NyChoiceCard,
   NyTerminal,
@@ -288,7 +286,6 @@ export {
   NyCopyButton,
   NyCopyField,
   NyKeyValue,
-  NyPlayerHead,
   NyChoiceGroup,
   NyChoiceCard,
   NyTerminal,

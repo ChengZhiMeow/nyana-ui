@@ -6,24 +6,19 @@
   "type": "module",
   "workspaces": [
     "packages/*",
-    "site"
+    "example"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace nyana-ui-site",
-    "build": "npm run build:lib && npm run build --workspace nyana-ui-site",
+    "dev": "npm run dev --workspace nyana-ui-example",
+    "build": "npm run build:lib && npm run build --workspace nyana-ui-example",
     "build:lib": "npm run build --workspace @chengzhimeow/nyana-ui",
-    "preview": "npm run preview --workspace nyana-ui-site",
-    "typecheck": "npm run typecheck --workspace @chengzhimeow/nyana-ui && npm run typecheck --workspace nyana-ui-site",
+    "preview": "npm run preview --workspace nyana-ui-example",
+    "typecheck": "npm run typecheck --workspace @chengzhimeow/nyana-ui && npm run typecheck --workspace nyana-ui-example",
     "test": "npm run test --workspace @chengzhimeow/nyana-ui",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "npm run build:lib && changeset publish",
-    "build:site": "npm run build --workspace nyana-ui-site"
+    "release": "npm run build:lib && npm publish --workspace @chengzhimeow/nyana-ui",
+    "build:example": "npm run build --workspace nyana-ui-example"
   },
   "engines": {
     "node": ">=20"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.31.1"
   }
 }

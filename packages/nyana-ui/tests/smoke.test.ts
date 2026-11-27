@@ -31,7 +31,6 @@ const required: Record<string, Record<string, unknown>> = {
   NyCopyButton: { text: 'abc' },
   NyCopyField: { value: 'mc.na-mc.cn:25565' },
   NyKeyValue: { items: [{ label: '用户名', value: 'u' }] },
-  NyPlayerHead: { name: 'Steve' },
   NyChoiceCard: { value: 'a' },
   NyTaskSteps: { steps: [{ title: '下载', status: 'done' }] },
 }

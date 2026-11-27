@@ -127,7 +127,6 @@ export const docGroups: DocGroup[] = [
     items: [
       { key: 'metric-card', title: 'MetricCard 指标卡', label: '指标卡', desc: '图标标签、大数值、细进度条与说明; 附 Meter 资源条与 Pill 状态胶囊', file: 'MetricCardDoc.vue', icon: 'gauge' },
       { key: 'copy', title: 'Copy 复制与凭据', label: '复制与凭据', desc: 'CopyButton、CopyField 与 KeyValue 凭据列表', file: 'CopyDoc.vue', icon: 'copy' },
-      { key: 'player-head', title: 'PlayerHead 玩家头像', label: '玩家头像', desc: '正版皮肤的脸部头像, 没有时用像素占位', file: 'PlayerHeadDoc.vue', icon: 'user' },
       { key: 'choice', title: 'ChoiceCard 选择卡', label: '选择卡', desc: '带说明的单选 / 多选卡片, 用于套餐与支付方式', file: 'ChoiceDoc.vue', icon: 'check-circle' },
       { key: 'terminal', title: 'Terminal 终端', label: '终端', desc: '真终端 / 伪终端切换、按级别着色与命令历史', file: 'TerminalDoc.vue', icon: 'terminal' },
       { key: 'command', title: 'CommandBlock 命令块', label: '命令块', desc: '一键复制的命令行与后台任务步骤 TaskSteps', file: 'CommandDoc.vue', icon: 'code' },
