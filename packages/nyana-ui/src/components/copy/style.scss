@@ -1,0 +1,83 @@
+// NyCopyButton
+.ny-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: none;
+  height: 22px;
+  min-width: 22px;
+  padding: 0 3px;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: transparent;
+  color: var(--ny-text-muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-copy--labeled {
+  height: var(--ny-control-height-sm);
+  padding: 0 10px;
+  border-radius: var(--ny-radius-md);
+  font-weight: 500;
+}
+
+.ny-copy--default {
+  background: var(--ny-fill);
+  color: var(--ny-text);
+
+  &:hover {
+    background: var(--ny-fill-strong);
+  }
+}
+
+.ny-copy--primary {
+  background: var(--ny-primary);
+  color: var(--ny-on-primary);
+
+  &:hover {
+    background: var(--ny-primary-hover);
+    color: var(--ny-on-primary);
+  }
+}
+
+// NyCopyField
+.ny-copy-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 6px 6px 6px 14px;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+
+  code {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--ny-font-family-mono);
+    font-size: 13px;
+  }
+}
+
+.ny-copy-field--large code {
+  font-size: 15px;
+  font-weight: 500;
+}

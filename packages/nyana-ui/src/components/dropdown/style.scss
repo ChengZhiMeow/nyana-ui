@@ -1,0 +1,128 @@
+// NyDropdown
+.ny-dropdown {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--ny-radius-md);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+// 平面浮层: 白底 + line-strong 描边, 不用阴影
+.ny-dropdown__panel {
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  // 固定宽度: 面板不跟着触发器或选项文字量变宽变窄
+  width: 180px;
+  padding: 6px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+}
+
+.ny-dropdown__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ny-dropdown__item {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 10px;
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--ny-radius-sm);
+  background: transparent;
+  color: var(--ny-text);
+  font: inherit;
+  font-size: var(--ny-font-size-md);
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(:disabled),
+  &:focus-visible {
+    outline: none;
+    background: var(--ny-fill);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.is-selected {
+    color: var(--ny-primary-ink);
+    font-weight: 500;
+  }
+
+  &.is-danger {
+    color: var(--ny-danger-ink);
+  }
+}
+
+.ny-dropdown__icon {
+  flex: none;
+  color: var(--ny-text-sub);
+}
+
+.ny-dropdown__item.is-selected .ny-dropdown__icon,
+.ny-dropdown__item.is-danger .ny-dropdown__icon {
+  color: inherit;
+}
+
+.ny-dropdown__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-dropdown__shortcut {
+  flex: none;
+  margin-left: auto;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-dropdown__check {
+  flex: none;
+  margin-left: auto;
+  color: var(--ny-primary-ink);
+}
+
+.ny-dropdown__divider {
+  flex: none;
+  height: 1px;
+  margin: 5px -6px;
+  background: var(--ny-line);
+}
+
+.ny-dropdown__bottom {
+  margin: 5px -6px 0;
+  padding: 8px 16px 2px;
+  border-top: 1px solid var(--ny-line);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+}

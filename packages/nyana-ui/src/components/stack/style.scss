@@ -1,0 +1,23 @@
+// NyStack
+.ny-stack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ny-stack--start {
+  align-items: flex-start;
+}
+
+.ny-stack--center {
+  align-items: center;
+}
+
+.ny-stack--end {
+  align-items: flex-end;
+}
+
+.ny-stack--fill {
+  flex: 1;
+  min-height: 0;
+}

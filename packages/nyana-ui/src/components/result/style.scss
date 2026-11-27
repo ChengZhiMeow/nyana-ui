@@ -1,0 +1,123 @@
+// NyResult
+.ny-result {
+  --ny-result-bg: var(--ny-fill);
+  --ny-result-ink: var(--ny-text-sub);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.ny-result--success {
+  --ny-result-bg: var(--ny-success-soft);
+  --ny-result-ink: var(--ny-success-ink);
+}
+
+.ny-result--error,
+.ny-result--403 {
+  --ny-result-bg: var(--ny-danger-soft);
+  --ny-result-ink: var(--ny-danger-ink);
+}
+
+.ny-result--warning {
+  --ny-result-bg: var(--ny-warning-soft);
+  --ny-result-ink: var(--ny-warning-ink);
+}
+
+.ny-result--info {
+  --ny-result-bg: var(--ny-primary-soft);
+  --ny-result-ink: var(--ny-primary-ink);
+}
+
+.ny-result__art-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+// 软色圆底 + 同色线性图标
+.ny-result__icon {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ny-result-bg);
+  color: var(--ny-result-ink);
+}
+
+.ny-result__code {
+  font-family: var(--ny-font-family-display);
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.ny-result__title {
+  max-width: 100%;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-result__desc {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+.ny-result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ny-result--sm {
+  gap: 8px;
+  padding: 24px 16px;
+
+  .ny-result__title {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .ny-result__code {
+    font-size: 14px;
+  }
+}
+
+.ny-result--lg {
+  padding: 40px 24px;
+
+  .ny-result__title {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.015em;
+  }
+
+  .ny-result__desc {
+    font-size: var(--ny-font-size-md);
+    line-height: 22px;
+  }
+
+  .ny-result__code {
+    font-size: 19px;
+  }
+}

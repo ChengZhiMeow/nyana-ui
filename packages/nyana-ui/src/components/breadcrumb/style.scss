@@ -1,0 +1,92 @@
+// NyBreadcrumb
+.ny-breadcrumb {
+  min-width: 0;
+}
+
+.ny-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+}
+
+.ny-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+// 每一级单行, 放不下时省略
+.ny-breadcrumb__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 2px;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: transparent;
+  color: var(--ny-text-muted);
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--ny-transition-fast);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:hover:not(.is-plain) {
+    color: var(--ny-text);
+  }
+
+  &.is-plain,
+  &.is-current {
+    cursor: default;
+  }
+
+  &.is-current {
+    color: var(--ny-text);
+    font-weight: 500;
+  }
+
+  .ny-icon {
+    flex: none;
+  }
+}
+
+.ny-breadcrumb__label {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-breadcrumb__sep {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  color: var(--ny-text-muted);
+  user-select: none;
+}
+
+.ny-breadcrumb--sm .ny-breadcrumb__list {
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+}
+
+.ny-breadcrumb--lg .ny-breadcrumb__list {
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+}

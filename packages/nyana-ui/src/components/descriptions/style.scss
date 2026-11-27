@@ -1,0 +1,203 @@
+// NyDescriptions
+.ny-desc {
+  min-width: 0;
+}
+
+.ny-desc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ny-space-3);
+  min-width: 0;
+  margin-bottom: var(--ny-space-2);
+}
+
+.ny-desc__title {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-desc__extra {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  flex: none;
+}
+
+.ny-desc__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ny-desc-column, 3), minmax(0, 1fr));
+  column-gap: var(--ny-space-7);
+}
+
+// 每项上方一条细线
+.ny-desc__cell {
+  min-width: 0;
+  padding: 12px 0;
+  border-top: 1px solid var(--ny-line);
+}
+
+@for $i from 1 through 12 {
+  .ny-desc__cell--span-#{$i} {
+    grid-column: span #{$i};
+  }
+}
+
+.ny-desc__label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-desc__value {
+  min-width: 0;
+  color: var(--ny-text);
+  overflow-wrap: anywhere;
+}
+
+// 横排: 标签和值同一行
+.ny-desc--horizontal {
+  .ny-desc__cell {
+    display: flex;
+    align-items: baseline;
+    gap: var(--ny-space-4);
+  }
+
+  .ny-desc__label {
+    flex: none;
+    width: 96px;
+    font-size: var(--ny-font-size-sm);
+    line-height: 22px;
+  }
+
+  .ny-desc__value {
+    flex: 1;
+  }
+}
+
+.ny-desc--vertical {
+  .ny-desc__cell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ny-space-1);
+  }
+}
+
+// 带框: 外框 12px 圆角, 格子之间 1px 细线
+.ny-desc--bordered {
+  .ny-desc__grid {
+    column-gap: 0;
+    overflow: hidden;
+    border-top: 1px solid var(--ny-line);
+    border-left: 1px solid var(--ny-line);
+    border-radius: var(--ny-radius-lg);
+    background: var(--ny-bg);
+  }
+
+  .ny-desc__cell {
+    padding: 0;
+    border-top: 0;
+    border-right: 1px solid var(--ny-line);
+    border-bottom: 1px solid var(--ny-line);
+  }
+
+  .ny-desc__label {
+    padding: 10px var(--ny-space-4);
+    background: var(--ny-bg-soft);
+  }
+
+  .ny-desc__value {
+    padding: 10px var(--ny-space-4);
+  }
+}
+
+.ny-desc--bordered.ny-desc--horizontal {
+  .ny-desc__cell {
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .ny-desc__label {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--ny-line);
+  }
+
+  .ny-desc__value {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.ny-desc--bordered.ny-desc--vertical {
+  .ny-desc__cell {
+    gap: 0;
+  }
+
+  .ny-desc__label {
+    border-bottom: 1px solid var(--ny-line);
+  }
+
+  .ny-desc__value {
+    flex: 1;
+  }
+}
+
+.ny-desc--sm {
+  .ny-desc__cell {
+    padding: 8px 0;
+  }
+
+  .ny-desc__value {
+    font-size: var(--ny-font-size-sm);
+  }
+}
+
+.ny-desc--lg {
+  .ny-desc__cell {
+    padding: 16px 0;
+  }
+
+  .ny-desc__value {
+    font-size: var(--ny-font-size-lg);
+  }
+}
+
+.ny-desc--bordered.ny-desc--sm .ny-desc__cell,
+.ny-desc--bordered.ny-desc--lg .ny-desc__cell {
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .ny-desc__grid {
+    grid-template-columns: repeat(var(--ny-desc-column-md, 2), minmax(0, 1fr));
+  }
+
+  @for $i from 3 through 12 {
+    .ny-desc__cell--span-#{$i} {
+      grid-column: span 2;
+    }
+  }
+}
+
+// 手机上一列
+@media (max-width: 640px) {
+  .ny-desc__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ny-desc__cell {
+    grid-column: span 1;
+  }
+}

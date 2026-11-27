@@ -1,0 +1,81 @@
+// NyCommandBlock
+.ny-command {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ny-command__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ny-command__switch {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+
+  button {
+    height: 26px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ny-text-sub);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+
+    &.is-active {
+      background: var(--ny-surface);
+      color: var(--ny-text);
+      font-weight: 500;
+    }
+  }
+}
+
+.ny-command__line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 4px 4px 4px 14px;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-term-bg);
+  color: var(--ny-term-text);
+  font-family: var(--ny-font-family-mono);
+  font-size: 13px;
+
+  code {
+    flex: 1;
+    min-width: 0;
+    padding: 6px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+}
+
+.ny-command__prompt {
+  color: var(--ny-term-dim);
+  user-select: none;
+}
+
+.ny-command__copy {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--ny-term-text) !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+  }
+}
+
+.ny-command__hint {
+  color: var(--ny-text-muted);
+  font-size: 12px;
+}

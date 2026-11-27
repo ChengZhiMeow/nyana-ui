@@ -1,0 +1,157 @@
+// NyTimePicker
+.ny-time-picker {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ny-time-picker[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ny-time-picker.is-disabled {
+  cursor: not-allowed;
+}
+
+.ny-time-picker__value {
+  flex: 1;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.is-placeholder {
+    color: var(--ny-text-muted);
+  }
+}
+
+.ny-time-picker__arrow {
+  color: var(--ny-text-muted);
+  transition: transform var(--ny-transition-fast);
+}
+
+.ny-time-picker__arrow.is-open {
+  transform: rotate(180deg);
+}
+
+.ny-time-picker__panel {
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  display: flex;
+  flex-direction: column;
+  min-width: 168px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+  overflow: hidden;
+  user-select: none;
+
+  &.is-inline {
+    position: static;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
+.ny-time-picker__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 44px;
+  padding: 0 8px 0 12px;
+  border-bottom: 1px solid var(--ny-line);
+}
+
+.ny-time-picker__current {
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ny-time-picker__now {
+  flex: none;
+  height: 26px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--ny-radius-sm);
+  background: transparent;
+  color: var(--ny-primary-ink);
+  font: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-primary-soft);
+  }
+}
+
+// 时 / 分 / 秒三列, 列之间 1px 竖线
+.ny-time-picker__columns {
+  display: flex;
+  align-items: stretch;
+}
+
+.ny-time-picker__list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 56px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ny-time-picker__list + .ny-time-picker__list {
+  border-left: 1px solid var(--ny-line);
+}
+
+.ny-time-picker__item {
+  flex: none;
+  height: 30px;
+  border-radius: var(--ny-radius-sm);
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  font-variant-numeric: tabular-nums;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &.is-active {
+    background: var(--ny-fill);
+  }
+
+  &.is-selected {
+    background: var(--ny-primary-soft);
+    color: var(--ny-primary-ink);
+    font-weight: 600;
+  }
+
+  &.is-disabled {
+    background: transparent;
+    color: var(--ny-text-muted);
+    opacity: 0.35;
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
+}

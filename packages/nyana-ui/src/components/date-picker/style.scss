@@ -1,0 +1,240 @@
+// NyDatePicker
+.ny-datepicker {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ny-datepicker[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ny-datepicker.is-disabled {
+  cursor: not-allowed;
+}
+
+.ny-datepicker__value {
+  flex: 1;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-datepicker__value.is-placeholder {
+  color: var(--ny-text-muted);
+}
+
+.ny-datepicker__icon {
+  color: var(--ny-text-muted);
+}
+
+.ny-datepicker__panel {
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  width: 280px;
+  max-width: calc(100vw - 16px);
+  padding: 12px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+  user-select: none;
+
+  &.is-inline {
+    position: static;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
+.ny-datepicker__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 2px 2px 10px;
+}
+
+.ny-datepicker__title {
+  min-width: 0;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ny-datepicker__nav {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+}
+
+.ny-datepicker__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-radius: var(--ny-radius-md);
+  outline: none;
+}
+
+.ny-datepicker__row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.ny-datepicker__week {
+  height: 28px;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 28px;
+  text-align: center;
+}
+
+.ny-datepicker__day {
+  display: grid;
+  justify-self: center;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+  }
+
+  &.is-outside {
+    color: var(--ny-text-muted);
+    opacity: 0.55;
+  }
+
+  &.is-today {
+    color: var(--ny-primary-ink);
+    font-weight: 600;
+  }
+
+  &.is-cursor {
+    background: var(--ny-fill);
+    outline: 2px solid var(--ny-primary);
+    outline-offset: -2px;
+  }
+
+  &.is-selected {
+    background: var(--ny-primary);
+    color: var(--ny-on-primary);
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  &.is-disabled {
+    background: transparent;
+    color: var(--ny-text-muted);
+    opacity: 0.35;
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
+}
+
+// NyDateTimePicker
+.ny-datetime {
+  display: inline-flex;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ny-datetime[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ny-datetime.is-disabled {
+  cursor: not-allowed;
+}
+
+.ny-datetime__value {
+  flex: 1;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-datetime__value.is-placeholder {
+  color: var(--ny-text-muted);
+}
+
+.ny-datetime__icon {
+  color: var(--ny-text-muted);
+}
+
+// 日期面板与时间列并排放在同一个浮层里
+.ny-datetime__panel {
+  display: flex;
+  align-items: stretch;
+  max-width: calc(100vw - 16px);
+  padding: 0;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.ny-datetime__panel .ny-datepicker__panel.is-inline {
+  width: 280px;
+  padding: 12px;
+}
+
+.ny-datetime__panel .ny-time-picker__panel.is-inline {
+  min-width: 168px;
+  border-left: 1px solid var(--ny-line);
+}
+
+@media (max-width: 640px) {
+  .ny-datetime__panel {
+    flex-direction: column;
+    max-height: calc(100vh - 16px);
+    overflow-y: auto;
+  }
+
+  .ny-datetime__panel .ny-datepicker__panel.is-inline {
+    width: 100%;
+  }
+
+  .ny-datetime__panel .ny-time-picker__panel.is-inline {
+    border-top: 1px solid var(--ny-line);
+    border-left: 0;
+  }
+}

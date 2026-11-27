@@ -1,0 +1,233 @@
+// NyUpload
+.ny-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ny-upload__trigger {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  max-width: 100%;
+  height: var(--ny-control-height-md);
+  padding: 0 14px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text);
+  font: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    border-color var(--ny-transition-fast);
+
+  > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--ny-text-muted);
+    background: var(--ny-bg-soft);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// 米白底 + 1.5px 虚线框, 拖入时变浅蓝
+.ny-upload__drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px 20px;
+  border: 1.5px dashed var(--ny-border-strong);
+  border-radius: var(--ny-radius-xl);
+  background: var(--ny-bg-soft);
+  color: var(--ny-text-sub);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color var(--ny-transition-fast),
+    background-color var(--ny-transition-fast);
+
+  &:hover:not(.is-disabled),
+  &.is-dragging {
+    border-color: var(--ny-primary-ink);
+    background: var(--ny-primary-soft);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--ny-primary-ink);
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ny-upload__drop-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--ny-line);
+  border-radius: 50%;
+  background: var(--ny-bg);
+  color: var(--ny-primary-ink);
+}
+
+.ny-upload__drop-text {
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  font-weight: 500;
+}
+
+.ny-upload__drop-tip {
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+}
+
+.ny-upload__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ny-upload__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--ny-line);
+
+  &:first-child {
+    border-top: 0;
+  }
+}
+
+.ny-upload__icon,
+.ny-upload__thumb {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+  color: var(--ny-text-sub);
+  overflow: hidden;
+}
+
+.ny-upload__thumb {
+  width: 48px;
+  height: 48px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.ny-upload__item.is-error .ny-upload__icon {
+  background: var(--ny-danger-soft);
+  color: var(--ny-danger-ink);
+}
+
+.ny-upload__info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ny-upload__name {
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-upload__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+
+  > span:first-child {
+    flex: none;
+  }
+}
+
+.ny-upload__message {
+  min-width: 0;
+  color: var(--ny-danger-ink);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.ny-upload__state {
+  flex: none;
+  color: var(--ny-success);
+}
+
+.ny-upload__item.is-error .ny-upload__state {
+  color: var(--ny-danger);
+}
+
+.ny-upload__remove {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: var(--ny-radius-sm);
+  background: transparent;
+  color: var(--ny-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}

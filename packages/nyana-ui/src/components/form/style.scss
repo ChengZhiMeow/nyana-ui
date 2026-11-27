@@ -1,0 +1,173 @@
+// NyForm
+.ny-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ny-form-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.ny-form--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  .ny-form-item {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .ny-form__actions {
+    flex: none;
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+}
+
+// 按钮放在右下, 主按钮在最右
+.ny-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .ny-form--inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+// NyFormItem
+.ny-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  &.is-disabled .ny-form-item__label {
+    color: var(--ny-text-muted);
+  }
+}
+
+.ny-form-item__label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.ny-form-item__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-form-item__star {
+  flex: none;
+  color: var(--ny-danger-ink);
+}
+
+.ny-form-item__note {
+  flex: none;
+  color: var(--ny-text-muted);
+  font-weight: 400;
+}
+
+.ny-form-item__spin {
+  flex: none;
+  color: var(--ny-text-muted);
+}
+
+.ny-form-item__control {
+  min-width: 0;
+}
+
+.ny-form-item__msg {
+  margin: 0;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+  text-align: left;
+
+  &[role='alert'] {
+    color: var(--ny-danger-ink);
+  }
+}
+
+.ny-form-item__extra {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 0;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+}
+
+// 标签在左侧成一列, 按控件高度垂直居中到第一行
+.ny-form-item--horizontal.is-labeled {
+  display: grid;
+  grid-template-columns: var(--ny-label-width, auto) minmax(0, 1fr);
+  column-gap: 16px;
+  row-gap: 6px;
+  align-items: start;
+
+  .ny-form-item__label {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: var(--ny-label-width, 240px);
+  }
+
+  .ny-form-item__control,
+  .ny-form-item__msg,
+  .ny-form-item__extra {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 641px) {
+  .ny-form-item--horizontal.ny-form-item--sm.is-labeled .ny-form-item__label {
+    padding-top: 6px;
+  }
+
+  .ny-form-item--horizontal.ny-form-item--md.is-labeled .ny-form-item__label {
+    padding-top: 8px;
+  }
+
+  .ny-form-item--horizontal.ny-form-item--lg.is-labeled .ny-form-item__label {
+    padding-top: 12px;
+  }
+}
+
+// 手机上标签回到上方
+@media (max-width: 640px) {
+  .ny-form-item--horizontal.is-labeled {
+    grid-template-columns: minmax(0, 1fr);
+
+    .ny-form-item__label {
+      grid-column: 1;
+      max-width: none;
+      // 覆盖 labelAlign 写在行内的右对齐
+      justify-content: flex-start !important;
+    }
+
+    .ny-form-item__control,
+    .ny-form-item__msg,
+    .ny-form-item__extra {
+      grid-column: 1;
+    }
+  }
+}

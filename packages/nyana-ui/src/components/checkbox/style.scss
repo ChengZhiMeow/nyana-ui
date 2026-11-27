@@ -1,0 +1,115 @@
+// NyCheckbox
+.ny-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  min-width: 0;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover:not(.is-disabled):not(.is-checked):not(.is-mixed) .ny-checkbox__box {
+    border-color: var(--ny-text-muted);
+  }
+}
+
+.ny-checkbox__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.ny-checkbox__box {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--ny-border-strong);
+  border-radius: 5px;
+  background: var(--ny-bg);
+  color: transparent;
+  transition:
+    background-color var(--ny-transition-fast),
+    border-color var(--ny-transition-fast),
+    box-shadow var(--ny-transition-fast);
+}
+
+.ny-checkbox__input:focus-visible + .ny-checkbox__box {
+  box-shadow: var(--ny-shadow-focus);
+}
+
+.ny-checkbox__text {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-checkbox--sm {
+  gap: 6px;
+  font-size: var(--ny-font-size-sm);
+
+  .ny-checkbox__box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+}
+
+.ny-checkbox--lg {
+  gap: 10px;
+  font-size: var(--ny-font-size-lg);
+
+  .ny-checkbox__box {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+  }
+}
+
+.ny-checkbox.is-checked,
+.ny-checkbox.is-mixed {
+  .ny-checkbox__box {
+    border-color: var(--ny-primary-ink);
+    background: var(--ny-primary);
+    color: var(--ny-on-primary);
+  }
+}
+
+.ny-checkbox.is-invalid:not(.is-checked):not(.is-mixed) .ny-checkbox__box {
+  border-color: var(--ny-danger-ink);
+}
+
+.ny-checkbox.is-locked {
+  cursor: not-allowed;
+}
+
+.ny-checkbox.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+// NyCheckboxGroup
+// 少于 4 项可以横排, 纵向是默认的阅读顺序
+.ny-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  min-width: 0;
+}
+
+.ny-checkbox-group--vertical {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+}

@@ -1,0 +1,16 @@
+// NyIcon
+.ny-icon {
+  flex: none;
+  color: inherit;
+  vertical-align: middle;
+}
+
+.ny-icon--spin {
+  animation: ny-icon-spin 0.9s linear infinite;
+}
+
+@keyframes ny-icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

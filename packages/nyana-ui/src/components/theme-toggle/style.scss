@@ -1,0 +1,207 @@
+// NyThemeToggle
+.ny-theme-toggle {
+  --ny-theme-toggle-height: var(--ny-control-height-md);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  height: var(--ny-theme-toggle-height);
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text-sub);
+  font-family: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ny-theme-toggle--icon {
+  width: var(--ny-theme-toggle-height);
+  padding: 0;
+}
+
+.ny-theme-toggle--button {
+  padding: 0 12px;
+}
+
+.ny-theme-toggle--sm {
+  --ny-theme-toggle-height: var(--ny-control-height-sm);
+}
+
+.ny-theme-toggle--lg {
+  --ny-theme-toggle-height: var(--ny-control-height-lg);
+
+  font-size: var(--ny-font-size-md);
+}
+
+.ny-theme-toggle__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 开关: 和 Switch 一致, 灰色轨道 + 白色圆钮, 选中深色时轨道变喵蓝
+.ny-theme-toggle--switch {
+  gap: 10px;
+  padding: 0 2px;
+
+  &:hover:not(:disabled) {
+    background: transparent;
+  }
+}
+
+.ny-theme-toggle__track {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: 42px;
+  height: 26px;
+  padding: 3px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-fill-strong);
+  transition: background-color 200ms var(--ny-ease);
+}
+
+.ny-theme-toggle--sm .ny-theme-toggle__track {
+  width: 32px;
+  height: 20px;
+}
+
+.ny-theme-toggle--lg .ny-theme-toggle__track {
+  width: 50px;
+  height: 30px;
+}
+
+// 圆钮固定白色, 上面的图标也用固定墨色, 两种主题都清楚
+.ny-theme-toggle__knob {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #5d5c58;
+  transition: transform 200ms var(--ny-ease);
+}
+
+.ny-theme-toggle--sm .ny-theme-toggle__knob {
+  width: 14px;
+  height: 14px;
+}
+
+.ny-theme-toggle--lg .ny-theme-toggle__knob {
+  width: 24px;
+  height: 24px;
+}
+
+.ny-theme-toggle--switch.is-dark {
+  .ny-theme-toggle__track {
+    background: var(--ny-primary);
+  }
+
+  .ny-theme-toggle__knob {
+    transform: translateX(16px);
+  }
+}
+
+.ny-theme-toggle--sm.is-dark .ny-theme-toggle__knob {
+  transform: translateX(12px);
+}
+
+.ny-theme-toggle--lg.is-dark .ny-theme-toggle__knob {
+  transform: translateX(20px);
+}
+
+// 分段: 浅灰底, 选中项白底墨字
+.ny-theme-toggle--segment {
+  height: auto;
+  gap: 2px;
+  padding: 3px;
+  background: var(--ny-fill);
+  cursor: default;
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill);
+  }
+}
+
+.ny-theme-toggle__seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: calc(var(--ny-theme-toggle-height) - 6px);
+  min-width: calc(var(--ny-theme-toggle-height) - 6px);
+  justify-content: center;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ny-text-sub);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(:disabled):not(.is-active) {
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-active {
+    background: var(--ny-bg);
+    color: var(--ny-text);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.ny-theme-toggle--sm .ny-theme-toggle__seg {
+  padding: 0 10px;
+}
+
+[data-theme='dark'] .ny-theme-toggle__seg.is-active {
+  background: var(--ny-fill-strong);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .ny-theme-toggle__seg.is-active {
+    background: var(--ny-fill-strong);
+  }
+}

@@ -1,0 +1,269 @@
+// NyDrawer
+.ny-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ny-z-drawer);
+}
+
+.ny-drawer__mask {
+  position: absolute;
+  inset: 0;
+  background: var(--ny-mask);
+}
+
+// 平面: 白底 + 一侧细线, 不用阴影和圆角
+.ny-drawer__panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  outline: none;
+}
+
+.ny-drawer__panel--right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  border-left: 1px solid var(--ny-line);
+}
+
+.ny-drawer__panel--left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: 1px solid var(--ny-line);
+}
+
+.ny-drawer__panel--top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--ny-line);
+}
+
+.ny-drawer__panel--bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--ny-line);
+}
+
+.ny-drawer__head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--ny-line);
+}
+
+.ny-drawer__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-drawer__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: -2px -4px -2px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill-strong);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-drawer__body {
+  flex: 1;
+  min-height: 0;
+  padding: 24px;
+  overflow: auto;
+}
+
+.ny-drawer__body--flush {
+  padding: 0;
+}
+
+.ny-drawer__foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--ny-line);
+}
+
+// 底部按钮与 NyButton 的默认 / 主按钮一致
+.ny-drawer__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  height: var(--ny-control-height-md);
+  padding: 0 14px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+  color: var(--ny-text);
+  font-family: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    transform var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill-strong);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: progress;
+  }
+}
+
+.ny-drawer__btn--primary {
+  background: var(--ny-primary);
+  color: var(--ny-on-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-primary-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--ny-primary-active);
+  }
+
+  &.is-danger {
+    background: var(--ny-danger);
+    color: var(--ny-on-danger);
+
+    &:hover:not(:disabled) {
+      background: var(--ny-danger-hover);
+    }
+  }
+}
+
+// 手机上左右抽屉铺满宽度
+@media (max-width: 640px) {
+  .ny-drawer__panel--right,
+  .ny-drawer__panel--left {
+    width: 100% !important;
+    border: 0;
+  }
+
+  .ny-drawer__head {
+    padding: 14px 16px;
+  }
+
+  .ny-drawer__body {
+    padding: 20px 16px;
+  }
+
+  .ny-drawer__body--flush {
+    padding: 0;
+  }
+
+  .ny-drawer__foot {
+    padding: 12px 16px;
+  }
+}
+
+.ny-drawer-right-enter-active,
+.ny-drawer-right-leave-active,
+.ny-drawer-left-enter-active,
+.ny-drawer-left-leave-active,
+.ny-drawer-top-enter-active,
+.ny-drawer-top-leave-active,
+.ny-drawer-bottom-enter-active,
+.ny-drawer-bottom-leave-active {
+  transition: opacity 240ms var(--ny-ease);
+}
+
+.ny-drawer-right-enter-active .ny-drawer__panel,
+.ny-drawer-right-leave-active .ny-drawer__panel,
+.ny-drawer-left-enter-active .ny-drawer__panel,
+.ny-drawer-left-leave-active .ny-drawer__panel,
+.ny-drawer-top-enter-active .ny-drawer__panel,
+.ny-drawer-top-leave-active .ny-drawer__panel,
+.ny-drawer-bottom-enter-active .ny-drawer__panel,
+.ny-drawer-bottom-leave-active .ny-drawer__panel {
+  transition: transform 240ms var(--ny-ease);
+}
+
+.ny-drawer-right-enter-from,
+.ny-drawer-right-leave-to,
+.ny-drawer-left-enter-from,
+.ny-drawer-left-leave-to,
+.ny-drawer-top-enter-from,
+.ny-drawer-top-leave-to,
+.ny-drawer-bottom-enter-from,
+.ny-drawer-bottom-leave-to {
+  opacity: 0;
+}
+
+.ny-drawer-right-enter-from .ny-drawer__panel,
+.ny-drawer-right-leave-to .ny-drawer__panel {
+  transform: translateX(100%);
+}
+
+.ny-drawer-left-enter-from .ny-drawer__panel,
+.ny-drawer-left-leave-to .ny-drawer__panel {
+  transform: translateX(-100%);
+}
+
+.ny-drawer-top-enter-from .ny-drawer__panel,
+.ny-drawer-top-leave-to .ny-drawer__panel {
+  transform: translateY(-100%);
+}
+
+.ny-drawer-bottom-enter-from .ny-drawer__panel,
+.ny-drawer-bottom-leave-to .ny-drawer__panel {
+  transform: translateY(100%);
+}

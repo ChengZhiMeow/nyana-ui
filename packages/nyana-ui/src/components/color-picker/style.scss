@@ -1,0 +1,253 @@
+// NyColorPicker
+.ny-color-picker {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ny-color-picker[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ny-color-picker.is-disabled {
+  cursor: not-allowed;
+}
+
+.ny-color-picker__swatch,
+.ny-color-picker__swatch-button {
+  display: inline-block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--ny-text) 12%, transparent);
+  border-radius: 5px;
+}
+
+.ny-color-picker__value {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--ny-font-family-mono);
+  font-size: var(--ny-font-size-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.is-empty {
+    color: var(--ny-text-muted);
+    font-family: inherit;
+    font-size: inherit;
+  }
+}
+
+.ny-color-picker__arrow {
+  color: var(--ny-text-muted);
+  transition: transform var(--ny-transition-fast);
+}
+
+.ny-color-picker__arrow.is-open {
+  transform: rotate(180deg);
+}
+
+.ny-color-picker__panel {
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 248px;
+  max-width: calc(100vw - 16px);
+  padding: 12px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+}
+
+.ny-color-picker__presets {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.ny-color-picker__preset {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--ny-text) 12%, transparent);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform var(--ny-transition-fast);
+
+  &:hover {
+    transform: scale(1.06);
+  }
+
+  &.is-current {
+    outline: 2px solid var(--ny-primary);
+    outline-offset: 2px;
+  }
+}
+
+.ny-color-picker__row {
+  position: relative;
+}
+
+.ny-color-picker__swatch-button {
+  cursor: pointer;
+  transition: transform var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    transform: scale(1.08);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.ny-color-picker__palette {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+}
+
+.ny-color-picker__row .ny-shell__control {
+  font-family: var(--ny-font-family-mono);
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-color-picker__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 -12px -4px;
+  padding: 8px 12px 0;
+  border-top: 1px solid var(--ny-line);
+}
+
+.ny-color-picker__current {
+  min-width: 0;
+  color: var(--ny-text-sub);
+  font-family: var(--ny-font-family-mono);
+  font-size: var(--ny-font-size-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-color-picker__copy {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--ny-radius-sm);
+  background: transparent;
+  color: var(--ny-text-sub);
+  font: inherit;
+  font-size: var(--ny-font-size-xs);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// NyColorPanel
+.ny-color-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ny-color-panel__area {
+  position: relative;
+  border-radius: var(--ny-radius-md);
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+// 饱和度/明度方块与色相条是功能性渐变
+.ny-color-panel__area-sat,
+.ny-color-panel__area-val {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.ny-color-panel__area-sat {
+  background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
+}
+
+.ny-color-panel__area-val {
+  background: linear-gradient(to top, #000000, rgba(0, 0, 0, 0));
+}
+
+.ny-color-panel__thumb,
+.ny-color-panel__hue-thumb {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  outline: 1px solid rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ny-color-panel__hue {
+  position: relative;
+  height: 10px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-color-panel__hue-thumb {
+  top: 50%;
+}
+
+.ny-color-panel.is-locked .ny-color-panel__area,
+.ny-color-panel.is-locked .ny-color-panel__hue {
+  cursor: not-allowed;
+  opacity: 0.4;
+}

@@ -1,0 +1,68 @@
+// NyAvatar
+.ny-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--ny-fill);
+  color: var(--ny-text-sub);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.ny-avatar--square {
+  border-radius: 28%;
+}
+
+.ny-avatar__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ny-avatar__text {
+  padding: 0 2px;
+}
+
+// NyAvatarGroup
+.ny-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ny-avatar-group .ny-avatar:not(:first-child),
+.ny-avatar-group__more {
+  margin-left: calc(var(--ny-avatar-overlap) * -1);
+}
+
+// 叠放时用 2px 底色边隔开, 不用阴影
+.ny-avatar-group .ny-avatar,
+.ny-avatar-group__more {
+  box-sizing: content-box;
+  border: 2px solid var(--ny-bg);
+}
+
+.ny-avatar-group__more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ny-fill);
+  color: var(--ny-text-sub);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-avatar-group__more--square {
+  border-radius: 28%;
+}

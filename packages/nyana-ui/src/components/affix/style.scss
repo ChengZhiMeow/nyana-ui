@@ -1,0 +1,17 @@
+// NyAffix
+.ny-affix {
+  min-width: 0;
+}
+
+// 固定后白底 + 细线, 不加阴影
+.ny-affix__body.is-fixed {
+  z-index: var(--ny-z-affix);
+  margin: 0;
+  border-bottom: 1px solid var(--ny-line);
+  background: var(--ny-bg);
+}
+
+.ny-affix__body.is-fixed.is-bottom {
+  border-top: 1px solid var(--ny-line);
+  border-bottom: 0;
+}

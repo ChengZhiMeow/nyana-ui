@@ -1,0 +1,107 @@
+// NySwitch
+.ny-switch {
+  --ny-switch-w: 42px;
+  --ny-switch-h: 26px;
+  --ny-switch-knob: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+
+  &:focus-visible .ny-switch__track {
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-switch__track {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: var(--ny-switch-w);
+  height: var(--ny-switch-h);
+  padding: 3px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-fill-strong);
+  transition:
+    background-color 200ms var(--ny-ease),
+    box-shadow var(--ny-transition-fast);
+}
+
+// 圆钮在两种主题下都是白色
+.ny-switch__thumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ny-switch-knob);
+  height: var(--ny-switch-knob);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ny-primary);
+  transition: transform 200ms var(--ny-ease);
+}
+
+.ny-switch__text {
+  min-width: 0;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-switch--sm {
+  --ny-switch-w: 32px;
+  --ny-switch-h: 20px;
+  --ny-switch-knob: 14px;
+
+  gap: 8px;
+
+  .ny-switch__text {
+    font-size: var(--ny-font-size-sm);
+  }
+}
+
+.ny-switch--lg {
+  --ny-switch-w: 50px;
+  --ny-switch-h: 30px;
+  --ny-switch-knob: 24px;
+
+  .ny-switch__text {
+    font-size: var(--ny-font-size-lg);
+  }
+}
+
+.ny-switch.is-checked {
+  .ny-switch__track {
+    background: var(--ny-primary);
+  }
+
+  .ny-switch__thumb {
+    transform: translateX(calc(var(--ny-switch-w) - var(--ny-switch-knob) - 6px));
+  }
+}
+
+.ny-switch.is-disabled,
+.ny-switch.is-readonly {
+  cursor: not-allowed;
+}
+
+.ny-switch.is-disabled {
+  opacity: 0.4;
+}
+
+.ny-switch.is-loading {
+  cursor: wait;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-switch__track,
+  .ny-switch__thumb {
+    transition: none;
+  }
+}

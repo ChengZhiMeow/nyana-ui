@@ -1,0 +1,14 @@
+// NyFlex
+.ny-flex {
+  display: flex;
+  min-width: 0;
+}
+
+.ny-flex--inline {
+  display: inline-flex;
+}
+
+.ny-flex--fill {
+  flex: 1;
+  min-height: 0;
+}

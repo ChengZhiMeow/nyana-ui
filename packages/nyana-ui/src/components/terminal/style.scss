@@ -1,0 +1,222 @@
+// NyTerminal
+.ny-term {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-term-bg);
+  color: var(--ny-term-text);
+  font-family: var(--ny-font-family-mono);
+  font-size: 13px;
+  line-height: 20px;
+
+  &.is-full {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ny-z-modal);
+    border-radius: 0;
+  }
+}
+
+.ny-term__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--ny-font-family);
+  font-size: 13px;
+  color: var(--ny-term-dim);
+}
+
+.ny-term__title {
+  color: var(--ny-term-text);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ny-term__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ny-term-dim);
+  }
+
+  &.is-connected::before {
+    background: #3cc48d;
+  }
+
+  &.is-connecting::before {
+    background: #f0b34a;
+    animation: ny-term-pulse 1.4s ease infinite;
+  }
+
+  &.is-disconnected::before {
+    background: #ff6b80;
+  }
+}
+
+@keyframes ny-term-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.ny-term__spacer {
+  flex: 1;
+}
+
+.ny-term__modes {
+  display: inline-flex;
+  padding: 2px;
+  gap: 2px;
+  border-radius: var(--ny-radius-md);
+  background: rgba(255, 255, 255, 0.08);
+
+  button {
+    height: 24px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ny-term-dim);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--ny-term-text);
+    }
+
+    &.is-active {
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--ny-term-text);
+    }
+  }
+}
+
+.ny-term__tool {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-term-dim);
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--ny-term-text);
+  }
+}
+
+.ny-term__tool:focus-visible,
+.ny-term__modes button:focus-visible,
+.ny-term__send:focus-visible {
+  outline: 2px solid var(--ny-primary);
+  outline-offset: 1px;
+}
+
+.ny-term__out {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.ny-term__line {
+  display: flex;
+  gap: 10px;
+}
+
+.ny-term__time {
+  flex: none;
+  color: var(--ny-term-dim);
+}
+
+.ny-term__text {
+  min-width: 0;
+
+  &.is-info {
+    color: #7fd4f9;
+  }
+
+  &.is-warn {
+    color: #f0c36a;
+  }
+
+  &.is-error {
+    color: #ff8396;
+  }
+
+  &.is-success {
+    color: #6fd6a6;
+  }
+
+  &.is-prompt {
+    color: #f5a9b8;
+  }
+}
+
+.ny-term__in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--ny-term-text);
+    font: inherit;
+  }
+
+  input::placeholder {
+    color: var(--ny-term-dim);
+  }
+}
+
+.ny-term__prompt {
+  color: #7fd4f9;
+}
+
+.ny-term__send {
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--ny-term-text);
+  font-family: var(--ny-font-family);
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+@media (max-width: 640px) {
+  .ny-term__status {
+    display: none;
+  }
+}

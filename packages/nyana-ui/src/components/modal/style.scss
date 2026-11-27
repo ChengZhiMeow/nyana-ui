@@ -1,0 +1,173 @@
+// NyModal
+.ny-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ny-z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 20px 20px;
+  overflow: auto;
+}
+
+.ny-modal--centered {
+  align-items: center;
+  padding: 20px;
+}
+
+.ny-modal__mask {
+  position: fixed;
+  inset: 0;
+  background: var(--ny-mask);
+}
+
+// 平面: 无边框无阴影, 靠遮罩和页面分开
+.ny-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  border-radius: var(--ny-radius-xl);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  outline: none;
+}
+
+.ny-modal__head {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px 24px 0;
+}
+
+.ny-modal__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-modal__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: -2px -4px 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill-strong);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-modal__body {
+  flex: 1;
+  min-height: 0;
+  padding: 12px 24px 24px;
+  overflow: auto;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+.ny-modal__body--flush {
+  padding: 0;
+}
+
+.ny-modal__foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 24px 24px;
+}
+
+// 确认对话框里的危险操作用实心红色
+.ny-modal__ok.ny-btn--danger {
+  background: var(--ny-danger);
+  color: var(--ny-on-danger);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-danger-hover);
+    filter: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .ny-modal,
+  .ny-modal--centered {
+    padding: 16px;
+  }
+
+  .ny-modal:not(.ny-modal--centered) {
+    padding-top: 8vh;
+  }
+
+  .ny-modal__head {
+    padding: 20px 20px 0;
+  }
+
+  .ny-modal__body {
+    padding: 12px 20px 20px;
+  }
+
+  .ny-modal__body--flush {
+    padding: 0;
+  }
+
+  .ny-modal__foot {
+    padding: 0 20px 20px;
+  }
+}
+
+.ny-modal-enter-active,
+.ny-modal-leave-active {
+  transition: opacity 180ms var(--ny-ease);
+}
+
+.ny-modal-enter-active .ny-modal__panel,
+.ny-modal-leave-active .ny-modal__panel {
+  transition:
+    transform 220ms var(--ny-ease),
+    opacity 220ms var(--ny-ease);
+}
+
+.ny-modal-enter-from,
+.ny-modal-leave-to {
+  opacity: 0;
+}
+
+.ny-modal-enter-from .ny-modal__panel,
+.ny-modal-leave-to .ny-modal__panel {
+  opacity: 0;
+  transform: scale(0.97);
+}

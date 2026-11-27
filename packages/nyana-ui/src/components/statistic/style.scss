@@ -1,0 +1,112 @@
+// NyStatistic
+.ny-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  text-align: left;
+}
+
+.ny-stat__title {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-stat__value {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.ny-stat__affix {
+  flex: none;
+  color: var(--ny-text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+
+  &:first-child {
+    margin-right: 3px;
+  }
+
+  &:last-child {
+    margin-left: 3px;
+  }
+}
+
+.ny-stat__number {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-stat__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  font-size: var(--ny-font-size-xs);
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-stat__trend--up {
+  color: var(--ny-success-ink);
+}
+
+.ny-stat__trend--down {
+  color: var(--ny-danger-ink);
+}
+
+.ny-stat--sm .ny-stat__value {
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -0.015em;
+}
+
+.ny-stat--sm .ny-stat__affix {
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-stat--lg .ny-stat__value {
+  font-size: 40px;
+  line-height: 46px;
+  letter-spacing: -0.025em;
+}
+
+.ny-stat--lg .ny-stat__affix {
+  font-size: var(--ny-font-size-lg);
+}
+
+.ny-stat--primary .ny-stat__number,
+.ny-stat--info .ny-stat__number {
+  color: var(--ny-primary-ink);
+}
+
+.ny-stat--success .ny-stat__number {
+  color: var(--ny-success-ink);
+}
+
+.ny-stat--warning .ny-stat__number {
+  color: var(--ny-warning-ink);
+}
+
+.ny-stat--danger .ny-stat__number {
+  color: var(--ny-danger-ink);
+}

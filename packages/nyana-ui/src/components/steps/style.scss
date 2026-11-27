@@ -1,0 +1,255 @@
+// NySteps
+.ny-steps {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ny-steps__item {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+
+.ny-steps__bar,
+.ny-steps__label {
+  display: none;
+}
+
+.ny-steps__head {
+  position: relative;
+  flex: none;
+}
+
+// 序号圆点: 等待灰底, 完成浅蓝, 当前实心喵蓝
+.ny-steps__node {
+  display: grid;
+  place-items: center;
+  width: var(--ny-steps-node);
+  height: var(--ny-steps-node);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ny-fill);
+  color: var(--ny-text-muted);
+  font: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  cursor: default;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-steps__item.is-finish .ny-steps__node {
+  background: var(--ny-primary-soft);
+  color: var(--ny-primary-ink);
+}
+
+.ny-steps__item.is-process .ny-steps__node {
+  background: var(--ny-primary);
+  color: var(--ny-on-primary);
+}
+
+.ny-steps__item.is-error .ny-steps__node {
+  background: var(--ny-danger-soft);
+  color: var(--ny-danger-ink);
+}
+
+.ny-steps.is-clickable .ny-steps__node,
+.ny-steps.is-clickable .ny-steps__title {
+  cursor: pointer;
+}
+
+.ny-steps__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ny-steps__title {
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: transparent;
+  color: var(--ny-text-sub);
+  font: inherit;
+  font-size: var(--ny-font-size-md);
+  font-weight: 500;
+  line-height: 20px;
+  text-align: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-steps__item.is-process .ny-steps__title,
+.ny-steps__item.is-finish .ny-steps__title {
+  color: var(--ny-text);
+}
+
+.ny-steps__item.is-error .ny-steps__title {
+  color: var(--ny-danger-ink);
+}
+
+.ny-steps__desc {
+  margin: 4px 0 0;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+}
+
+// 默认横向: 顶部细进度条 + 第 N 步 + 标题
+.ny-steps.is-bar {
+  gap: 12px;
+
+  .ny-steps__item {
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ny-steps__head {
+    display: none;
+  }
+
+  .ny-steps__bar {
+    display: block;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--ny-fill-strong);
+    transition: background-color var(--ny-transition-fast);
+  }
+
+  .ny-steps__item.is-finish .ny-steps__bar,
+  .ny-steps__item.is-process .ny-steps__bar {
+    background: var(--ny-primary);
+  }
+
+  .ny-steps__item.is-error .ny-steps__bar {
+    background: var(--ny-danger);
+  }
+
+  .ny-steps__body {
+    gap: 10px;
+  }
+
+  .ny-steps__label {
+    display: block;
+    color: var(--ny-text-muted);
+    font-size: var(--ny-font-size-xs);
+    line-height: 16px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .ny-steps__desc {
+    margin-top: -6px;
+  }
+}
+
+// 横向圆点: 序号圆点居中, 中间 1px 连线
+.ny-steps--horizontal.is-dot {
+  align-items: flex-start;
+
+  .ny-steps__item {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(var(--ny-steps-node) / 2 - 1px);
+      left: calc(-50% + var(--ny-steps-node) / 2 + 4px);
+      right: calc(50% + var(--ny-steps-node) / 2 + 4px);
+      height: 1px;
+      background: var(--ny-border-strong);
+    }
+
+    &:first-child::before {
+      display: none;
+    }
+
+    &.is-finish::before,
+    &.is-process::before {
+      background: var(--ny-primary);
+    }
+  }
+
+  .ny-steps__body {
+    align-items: center;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+}
+
+// 纵向: 圆点在左, 连线向下
+.ny-steps--vertical {
+  flex-direction: column;
+
+  .ny-steps__item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--ny-space-3);
+
+    &:not(:last-child) {
+      padding-bottom: var(--ny-space-5);
+    }
+
+    &:not(:last-child) .ny-steps__head::after {
+      content: '';
+      position: absolute;
+      top: calc(var(--ny-steps-node) + 4px);
+      left: calc(50% - 0.5px);
+      bottom: calc(-1 * var(--ny-space-5) - 4px);
+      width: 1px;
+      background: var(--ny-border-strong);
+    }
+
+    &.is-finish .ny-steps__head::after {
+      background: var(--ny-primary);
+    }
+  }
+
+  .ny-steps__body {
+    flex: 1;
+    padding-top: calc((var(--ny-steps-node) - 20px) / 2);
+  }
+}
+
+.ny-steps--sm .ny-steps__title {
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-steps--sm .ny-steps__node {
+  font-size: var(--ny-font-size-xs);
+}
+
+.ny-steps--lg .ny-steps__title {
+  font-size: var(--ny-font-size-lg);
+  line-height: 22px;
+}
+
+@media (max-width: 640px) {
+  .ny-steps.is-bar .ny-steps__label {
+    display: none;
+  }
+}

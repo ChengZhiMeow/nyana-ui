@@ -1,0 +1,270 @@
+// NyTabs
+.ny-tabs {
+  min-width: 0;
+}
+
+.ny-tabs__head {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-4);
+  min-width: 0;
+  border-bottom: 1px solid var(--ny-line);
+}
+
+// 超出宽度时横向滚动, 不折行
+.ny-tabs__list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+  flex: 1;
+  margin-bottom: -1px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ny-tabs--align-center .ny-tabs__list {
+  justify-content: center;
+}
+
+.ny-tabs--align-end .ny-tabs__list {
+  justify-content: flex-end;
+}
+
+.ny-tabs__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: 6px;
+  max-width: 240px;
+  padding: 8px 2px 10px;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: none;
+  color: var(--ny-text-sub);
+  font: inherit;
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(:disabled, .is-active) {
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.is-active {
+    color: var(--ny-text);
+    font-weight: 600;
+  }
+
+  .ny-icon {
+    flex: none;
+  }
+}
+
+.ny-tabs__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-tabs__badge {
+  flex: none;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-tabs__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-left: 2px;
+  border-radius: var(--ny-radius-xs);
+  color: var(--ny-text-muted);
+  transition:
+    color var(--ny-transition-fast),
+    background-color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+}
+
+// 下划线用墨色, 不用强调色
+.ny-tabs__ink {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ny-text);
+  pointer-events: none;
+  transition:
+    transform var(--ny-transition-base),
+    width var(--ny-transition-base);
+}
+
+.ny-tabs__extra {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  flex: none;
+}
+
+.ny-tabs__panel {
+  padding-top: var(--ny-space-4);
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.ny-tabs--plain .ny-tabs__head,
+.ny-tabs--soft .ny-tabs__head,
+.ny-tabs--segment .ny-tabs__head,
+.ny-tabs--pill .ny-tabs__head {
+  border-bottom: 0;
+}
+
+.ny-tabs--plain .ny-tabs__list,
+.ny-tabs--soft .ny-tabs__list,
+.ny-tabs--segment .ny-tabs__list,
+.ny-tabs--pill .ny-tabs__list {
+  margin-bottom: 0;
+}
+
+// 胶囊 / 浅底: 墨色实心块表示选中
+.ny-tabs--pill .ny-tabs__list,
+.ny-tabs--soft .ny-tabs__list {
+  gap: 4px;
+}
+
+.ny-tabs--pill .ny-tabs__tab,
+.ny-tabs--soft .ny-tabs__tab,
+.ny-tabs--card .ny-tabs__tab {
+  padding: 5px 12px;
+  border-radius: var(--ny-radius-md);
+
+  &:hover:not(:disabled, .is-active) {
+    background: var(--ny-fill);
+  }
+}
+
+.ny-tabs--pill .ny-tabs__tab.is-active {
+  background: var(--ny-text);
+  color: var(--ny-bg);
+
+  .ny-tabs__badge {
+    color: inherit;
+    opacity: 0.7;
+  }
+}
+
+.ny-tabs--soft .ny-tabs__tab.is-active {
+  background: var(--ny-fill);
+}
+
+// 卡片式: 选中项白底 + 细线框, 盖住底线
+.ny-tabs--card .ny-tabs__head {
+  align-items: flex-end;
+  gap: var(--ny-space-3);
+}
+
+.ny-tabs--card .ny-tabs__list {
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.ny-tabs--card .ny-tabs__tab {
+  padding: 7px 14px 8px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: var(--ny-radius-md) var(--ny-radius-md) 0 0;
+
+  &.is-active {
+    border-color: var(--ny-line);
+    background: var(--ny-bg);
+  }
+}
+
+// 分段式: 浅灰轨道 + 白色块
+.ny-tabs--segment .ny-tabs__list {
+  flex: none;
+  max-width: 100%;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+}
+
+.ny-tabs--segment .ny-tabs__tab {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-weight: 500;
+
+  &.is-active {
+    background: var(--ny-bg);
+    color: var(--ny-text);
+  }
+}
+
+[data-theme='dark'] .ny-tabs--segment .ny-tabs__tab.is-active {
+  background: var(--ny-fill-strong);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .ny-tabs--segment .ny-tabs__tab.is-active {
+    background: var(--ny-fill-strong);
+  }
+}
+
+.ny-tabs--sm .ny-tabs__tab {
+  font-size: var(--ny-font-size-xs);
+}
+
+.ny-tabs--sm.ny-tabs--line .ny-tabs__tab,
+.ny-tabs--sm.ny-tabs--plain .ny-tabs__tab {
+  padding: 6px 2px 8px;
+}
+
+.ny-tabs--sm.ny-tabs--line .ny-tabs__list,
+.ny-tabs--sm.ny-tabs--plain .ny-tabs__list {
+  gap: 16px;
+}
+
+.ny-tabs--lg .ny-tabs__tab {
+  font-size: var(--ny-font-size-md);
+}
+
+.ny-tabs--lg.ny-tabs--line .ny-tabs__tab,
+.ny-tabs--lg.ny-tabs--plain .ny-tabs__tab {
+  padding: 10px 2px 12px;
+}

@@ -1,0 +1,158 @@
+// NyTag
+.ny-tag {
+  --ny-tag-bg: var(--ny-fill);
+  --ny-tag-fg: var(--ny-text-sub);
+  --ny-tag-line: var(--ny-border-strong);
+  --ny-tag-solid: var(--ny-text);
+  --ny-tag-on-solid: var(--ny-bg);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  border: 1px solid transparent;
+  border-radius: var(--ny-radius-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition:
+    background-color var(--ny-transition-fast),
+    border-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+}
+
+.ny-tag--primary,
+.ny-tag--info {
+  --ny-tag-bg: var(--ny-primary-soft);
+  --ny-tag-fg: var(--ny-primary-ink);
+  --ny-tag-line: var(--ny-primary-ink);
+  --ny-tag-solid: var(--ny-primary);
+  --ny-tag-on-solid: var(--ny-on-primary);
+}
+
+.ny-tag--success {
+  --ny-tag-bg: var(--ny-success-soft);
+  --ny-tag-fg: var(--ny-success-ink);
+  --ny-tag-line: var(--ny-success-ink);
+  --ny-tag-solid: var(--ny-success);
+  --ny-tag-on-solid: var(--ny-on-success);
+}
+
+.ny-tag--warning {
+  --ny-tag-bg: var(--ny-warning-soft);
+  --ny-tag-fg: var(--ny-warning-ink);
+  --ny-tag-line: var(--ny-warning-ink);
+  --ny-tag-solid: var(--ny-warning);
+  --ny-tag-on-solid: var(--ny-on-warning);
+}
+
+.ny-tag--danger {
+  --ny-tag-bg: var(--ny-danger-soft);
+  --ny-tag-fg: var(--ny-danger-ink);
+  --ny-tag-line: var(--ny-danger-ink);
+  --ny-tag-solid: var(--ny-danger);
+  --ny-tag-on-solid: var(--ny-on-danger);
+}
+
+.ny-tag--soft {
+  background: var(--ny-tag-bg);
+  color: var(--ny-tag-fg);
+}
+
+// 描边标签统一用 line-strong 细线, 文字保留状态色
+.ny-tag--outline {
+  border-color: var(--ny-border-strong);
+  background: transparent;
+  color: var(--ny-tag-fg);
+}
+
+.ny-tag--solid {
+  background: var(--ny-tag-solid);
+  color: var(--ny-tag-on-solid);
+}
+
+.ny-tag--sm {
+  height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+}
+
+.ny-tag--md {
+  height: 22px;
+  padding: 0 8px;
+  font-size: var(--ny-font-size-xs);
+}
+
+.ny-tag--lg {
+  height: 28px;
+  padding: 0 10px;
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-tag--round {
+  border-radius: var(--ny-radius-pill);
+}
+
+.ny-tag.is-checkable {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover:not(.is-disabled):not(.is-checked) {
+    border-color: var(--ny-border-strong);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-tag.is-checked {
+  border-color: transparent;
+  background: var(--ny-primary-soft);
+  color: var(--ny-primary-ink);
+}
+
+.ny-tag.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ny-tag__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-tag__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-right: -3px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+    opacity: 1;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

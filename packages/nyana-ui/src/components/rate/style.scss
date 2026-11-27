@@ -1,0 +1,57 @@
+// NyRate
+.ny-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: var(--ny-radius-sm);
+  outline: none;
+  cursor: pointer;
+
+  &:focus-visible {
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-rate__item {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  margin: 2px;
+}
+
+.ny-rate__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  transition: color var(--ny-transition-fast);
+}
+
+.ny-rate__layer--void {
+  width: 100%;
+  color: var(--ny-rate-void-color);
+}
+
+.ny-rate__layer--full {
+  color: var(--ny-rate-color);
+  overflow: hidden;
+}
+
+.ny-rate__text {
+  margin-left: 6px;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ny-rate.is-disabled,
+.ny-rate.is-readonly {
+  cursor: default;
+}
+
+.ny-rate.is-disabled {
+  opacity: 0.4;
+}

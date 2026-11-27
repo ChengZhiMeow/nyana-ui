@@ -1,0 +1,64 @@
+// NyNumberInput
+.ny-number .ny-shell__control {
+  font-variant-numeric: tabular-nums;
+}
+
+// 步进按钮贴住右边框, 撑满整个高度
+.ny-number.has-stepper {
+  padding-right: 0;
+}
+
+.ny-number.has-stepper .ny-addon--suffix {
+  align-self: stretch;
+  gap: 8px;
+}
+
+.ny-number__stepper {
+  display: flex;
+  align-self: stretch;
+  border-left: 1px solid var(--ny-line);
+}
+
+.ny-number__step {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  & + & {
+    border-left: 1px solid var(--ny-line);
+  }
+
+  &:last-child {
+    border-radius: 0 calc(var(--ny-radius-md) - 1px) calc(var(--ny-radius-md) - 1px) 0;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ny-number.ny-shell--sm .ny-number__step {
+  width: 28px;
+}
+
+.ny-number.ny-shell--lg .ny-number__step {
+  width: 36px;
+
+  &:last-child {
+    border-radius: 0 calc(var(--ny-radius-lg) - 1px) calc(var(--ny-radius-lg) - 1px) 0;
+  }
+}

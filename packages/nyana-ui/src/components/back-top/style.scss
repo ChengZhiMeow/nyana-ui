@@ -1,0 +1,39 @@
+// NyBackTop
+// 圆形描边按钮, 平面无阴影
+.ny-back-top {
+  position: fixed;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: 50%;
+  background: var(--ny-bg);
+  color: var(--ny-text-sub);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    border-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    border-color: var(--ny-text-muted);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-back-top--sm {
+  width: 34px;
+  height: 34px;
+}
+
+.ny-back-top--lg {
+  width: 44px;
+  height: 44px;
+}

@@ -1,0 +1,140 @@
+// NyMessageHost
+.ny-message {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: var(--ny-z-message);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+// 墨色胶囊 (文字色作底), 左边是彩色状态图标
+.ny-message__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: min(480px, calc(100vw - 32px));
+  padding: 10px 16px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-text);
+  color: var(--ny-bg);
+  font-size: var(--ny-font-size-md);
+  line-height: 20px;
+  pointer-events: auto;
+
+  > .ny-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.ny-message__text {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.ny-message__item--success > .ny-icon {
+  color: var(--ny-success-ink);
+}
+
+.ny-message__item--error > .ny-icon {
+  color: var(--ny-danger-ink);
+}
+
+.ny-message__item--warning > .ny-icon {
+  color: var(--ny-warning-ink);
+}
+
+.ny-message__item--info > .ny-icon {
+  color: var(--ny-sky);
+}
+
+// 深色主题的胶囊是浅底, 图标改用浅色主题的深一档色
+[data-theme='dark'] .ny-message__item--success > .ny-icon {
+  color: #13805a;
+}
+
+[data-theme='dark'] .ny-message__item--error > .ny-icon {
+  color: #d1344e;
+}
+
+[data-theme='dark'] .ny-message__item--warning > .ny-icon {
+  color: #a86400;
+}
+
+[data-theme='dark'] .ny-message__item--info > .ny-icon {
+  color: #0077c0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .ny-message__item--success > .ny-icon {
+    color: #13805a;
+  }
+
+  :root:not([data-theme='light']) .ny-message__item--error > .ny-icon {
+    color: #d1344e;
+  }
+
+  :root:not([data-theme='light']) .ny-message__item--warning > .ny-icon {
+    color: #a86400;
+  }
+
+  :root:not([data-theme='light']) .ny-message__item--info > .ny-icon {
+    color: #0077c0;
+  }
+}
+
+.ny-message__close {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-right: -6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  transition:
+    opacity var(--ny-transition-fast),
+    background-color var(--ny-transition-fast);
+
+  &:hover {
+    opacity: 1;
+    background: color-mix(in srgb, var(--ny-bg) 15%, transparent);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-message-enter-active,
+.ny-message-leave-active,
+.ny-message-move {
+  transition:
+    opacity 220ms var(--ny-ease),
+    transform 220ms var(--ny-ease);
+}
+
+.ny-message-enter-from {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.ny-message-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.ny-message-leave-active {
+  position: absolute;
+}

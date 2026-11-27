@@ -1,0 +1,13 @@
+// NyRegexInput
+.ny-regex__state {
+  display: inline-flex;
+  align-items: center;
+
+  &.is-valid {
+    color: var(--ny-success);
+  }
+
+  &.is-invalid {
+    color: var(--ny-danger);
+  }
+}

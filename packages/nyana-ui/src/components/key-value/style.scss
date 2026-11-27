@@ -1,0 +1,60 @@
+// NyKeyValue
+.ny-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ny-kv__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 42px;
+  min-width: 0;
+  padding: 0 10px 0 14px;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-md);
+}
+
+.ny-kv__label {
+  flex: none;
+  color: var(--ny-text-sub);
+  white-space: nowrap;
+}
+
+.ny-kv__val {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+
+  > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.ny-kv__val--mono > span {
+  font-family: var(--ny-font-family-mono);
+  font-size: 13px;
+}
+
+.ny-kv__eye {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: transparent;
+  color: var(--ny-text-muted);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+}

@@ -1,0 +1,498 @@
+// NyLayout
+@use '../../styles/variables.scss' as *;
+
+.ny-layout {
+  display: grid;
+  grid-template-columns: var(--ny-layout-side-width) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    'side header'
+    'side main';
+  min-width: 0;
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  font-family: var(--ny-font-family);
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+}
+
+.ny-layout--fill {
+  height: 100%;
+  min-height: 0;
+}
+
+.ny-layout--mix {
+  grid-template-areas:
+    'header header'
+    'side main';
+}
+
+.ny-layout--top {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'main';
+}
+
+// 空白模式 (登录、支付结果): 米白底, 内容自己放白卡片
+.ny-layout--blank {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-areas: 'main';
+  background: var(--ny-bg-soft);
+}
+
+.ny-layout.is-drawer.ny-layout--side,
+.ny-layout.is-drawer.ny-layout--mix {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'main';
+}
+
+// 顶栏: 白底 + 底部细线
+.ny-layout__header {
+  grid-area: header;
+  z-index: $z-header;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: var(--ny-layout-header-height);
+  padding: 0 24px;
+  border-bottom: 1px solid var(--ny-line);
+  background: var(--ny-bg);
+}
+
+.ny-layout__header.is-sticky {
+  position: sticky;
+  top: 0;
+}
+
+.ny-layout__spacer {
+  flex: 1;
+  min-width: 0;
+}
+
+.ny-layout__header-left,
+.ny-layout__header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: none;
+}
+
+.ny-layout__header-left {
+  flex: 0 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ny-layout__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--ny-layout-header-height);
+  padding: 0 18px;
+  flex: none;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.ny-layout__brand-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  min-width: 0;
+  color: var(--ny-text);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+// 侧边栏: 米白底, 和白色内容区靠底色分开
+.ny-layout__side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid transparent;
+  background: var(--ny-bg-soft);
+}
+
+.ny-layout__nav {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 10px 12px;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--ny-radius-pill);
+    background: var(--ny-border-strong);
+  }
+}
+
+.ny-layout__nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ny-layout__group {
+  margin: 0;
+  padding: 0 10px 4px;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 菜单项: 图标 + 文字单行; 选中项浅灰底 + 500 字重, 不用强调色
+.ny-layout__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text);
+  font: inherit;
+  font-weight: 400;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  .ny-icon {
+    flex: none;
+    color: var(--ny-text-sub);
+  }
+
+  &:hover {
+    background: var(--ny-fill);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-active {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+    font-weight: 500;
+
+    .ny-icon {
+      color: var(--ny-text);
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ny-layout__link--parent .ny-layout__caret {
+  margin-left: auto;
+  transition: transform var(--ny-transition-fast);
+}
+
+.ny-layout__link--parent.is-expanded .ny-layout__caret {
+  transform: rotate(180deg);
+}
+
+.ny-layout__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 4px;
+}
+
+.ny-layout__link--child {
+  height: 32px;
+  padding: 0 10px 0 38px;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+
+  &:hover,
+  &.is-active {
+    color: var(--ny-text);
+  }
+}
+
+.ny-layout__dot {
+  position: absolute;
+  left: 18px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+// 图标栏: 只剩图标, 品牌只留第一个元素 (标志)
+.ny-layout.is-collapsed {
+  .ny-layout__link {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .ny-layout__nav {
+    padding: 4px 8px 12px;
+  }
+
+  .ny-layout__brand {
+    justify-content: center;
+    padding: 0;
+
+    > :not(:first-child) {
+      display: none;
+    }
+  }
+
+  .ny-layout__side-foot {
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  .ny-layout__collapse {
+    margin-left: 0;
+  }
+}
+
+.ny-layout__topnav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-left: 16px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    flex: none;
+  }
+}
+
+// 顶部导航: 选中项浅灰胶囊
+.ny-layout__toplink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 200px;
+  padding: 6px 12px;
+  border-radius: var(--ny-radius-pill);
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-md);
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  .ny-icon {
+    flex: none;
+  }
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-active {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ny-layout__badge {
+  flex: none;
+  margin-left: auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-fill-strong);
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 18px;
+  text-align: center;
+}
+
+.ny-layout__toplink .ny-layout__badge {
+  margin-left: 0;
+}
+
+.ny-layout__side-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  min-width: 0;
+  padding: 10px;
+  border-top: 1px solid var(--ny-line);
+}
+
+.ny-layout__collapse {
+  margin-left: auto;
+}
+
+.ny-layout__icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-layout__main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.ny-layout--fill .ny-layout__main {
+  overflow: auto;
+}
+
+.ny-layout__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ny-layout__content.is-padded {
+  padding: 32px 0;
+
+  > .ny-container--pad {
+    padding-inline: 32px;
+  }
+}
+
+.ny-layout__footer {
+  flex: none;
+  padding: 18px 0;
+  border-top: 1px solid var(--ny-line);
+  background: var(--ny-bg-soft);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+}
+
+// 抽屉: 平面, 靠遮罩和内容分开
+.ny-layout.is-drawer .ny-layout__side {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $z-sidebar;
+  width: min(var(--ny-layout-side-width), calc(100vw - 48px));
+  transform: translateX(-100%);
+  transition: transform 240ms var(--ny-ease);
+}
+
+.ny-layout.is-drawer.is-open .ny-layout__side {
+  transform: translateX(0);
+}
+
+.ny-layout__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: $z-header;
+  display: none;
+  background: var(--ny-mask);
+}
+
+.ny-layout__overlay.is-open {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .ny-layout__header {
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  .ny-layout__topnav {
+    margin-left: 4px;
+  }
+
+  .ny-layout__content.is-padded {
+    padding: 20px 0;
+
+    > .ny-container--pad {
+      padding-inline: 16px;
+    }
+  }
+}

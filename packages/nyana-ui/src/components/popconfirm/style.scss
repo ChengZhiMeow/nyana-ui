@@ -1,0 +1,86 @@
+// NyPopconfirm
+.ny-popconfirm__trigger {
+  display: inline-flex;
+  align-items: center;
+}
+
+// 浮层: line-strong 描边代替阴影
+.ny-popconfirm {
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: calc(100vw - 32px);
+  max-height: 70vh;
+  padding: 16px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+  box-shadow: none;
+}
+
+.ny-popconfirm__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ny-popconfirm__icon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--ny-warning-ink);
+}
+
+.ny-popconfirm__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ny-popconfirm__title {
+  margin: 0;
+  color: var(--ny-text);
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.ny-popconfirm__desc {
+  margin: 0;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.ny-popconfirm__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+// 气泡确认里的危险操作用实心红色
+.ny-popconfirm__ok.ny-btn--danger {
+  background: var(--ny-danger);
+  color: var(--ny-on-danger);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-danger-hover);
+    filter: none;
+  }
+}
+
+.ny-popconfirm:focus {
+  outline: none;
+}
+
+.ny-popconfirm:focus-visible {
+  box-shadow: var(--ny-shadow-focus);
+}

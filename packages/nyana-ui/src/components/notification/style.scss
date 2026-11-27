@@ -1,0 +1,196 @@
+// NyNotificationHost
+.ny-notification {
+  position: fixed;
+  z-index: var(--ny-z-message);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: var(--ny-notification-width);
+  max-width: calc(100vw - 32px);
+  pointer-events: none;
+}
+
+.ny-notification--topRight {
+  top: var(--ny-notification-offset);
+  right: 24px;
+}
+
+.ny-notification--topLeft {
+  top: var(--ny-notification-offset);
+  left: 24px;
+}
+
+.ny-notification--bottomRight {
+  bottom: var(--ny-notification-offset);
+  right: 24px;
+}
+
+.ny-notification--bottomLeft {
+  bottom: var(--ny-notification-offset);
+  left: 24px;
+}
+
+// 浮层: 白底 + line-strong 边框, 不用阴影
+.ny-notification__card {
+  --ny-notification-icon-bg: var(--ny-primary-soft);
+  --ny-notification-icon: var(--ny-primary-ink);
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  pointer-events: auto;
+}
+
+.ny-notification__card--success {
+  --ny-notification-icon-bg: var(--ny-success-soft);
+  --ny-notification-icon: var(--ny-success-ink);
+}
+
+.ny-notification__card--warning {
+  --ny-notification-icon-bg: var(--ny-warning-soft);
+  --ny-notification-icon: var(--ny-warning-ink);
+}
+
+.ny-notification__card--error {
+  --ny-notification-icon-bg: var(--ny-danger-soft);
+  --ny-notification-icon: var(--ny-danger-ink);
+}
+
+.ny-notification__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ny-notification-icon-bg);
+  color: var(--ny-notification-icon);
+}
+
+.ny-notification__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 5px;
+}
+
+.ny-notification__title {
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  font-weight: 600;
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-notification__desc {
+  margin: 0;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+.ny-notification__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: none;
+  color: var(--ny-text-muted);
+  cursor: pointer;
+  transition: color var(--ny-transition-fast);
+
+  &:hover {
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+// 底部倒计时细线
+.ny-notification__bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ny-fill-strong);
+  transform-origin: left center;
+  animation-name: ny-notification-countdown;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ny-notification-countdown {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .ny-notification--topRight,
+  .ny-notification--bottomRight {
+    right: 16px;
+  }
+
+  .ny-notification--topLeft,
+  .ny-notification--bottomLeft {
+    left: 16px;
+  }
+}
+
+.ny-notification-enter-active,
+.ny-notification-leave-active,
+.ny-notification-move {
+  transition:
+    opacity 220ms var(--ny-ease),
+    transform 220ms var(--ny-ease);
+}
+
+.ny-notification-enter-from {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+.ny-notification-leave-to {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+.ny-notification-leave-active {
+  position: absolute;
+  width: 100%;
+}
+
+.ny-notification--topLeft .ny-notification-enter-from,
+.ny-notification--topLeft .ny-notification-leave-to,
+.ny-notification--bottomLeft .ny-notification-enter-from,
+.ny-notification--bottomLeft .ny-notification-leave-to {
+  transform: translateX(-16px);
+}

@@ -1,0 +1,12 @@
+// NyWatermark
+.ny-watermark {
+  position: relative;
+}
+
+.ny-watermark__layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  pointer-events: none;
+  user-select: none;
+}

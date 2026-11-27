@@ -1,0 +1,36 @@
+// NyGrid
+.ny-grid {
+  display: grid;
+  grid-template-columns: var(--ny-grid-cols);
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .ny-grid.is-fixed {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .ny-grid {
+    grid-template-columns: var(--ny-grid-cols-sm, var(--ny-grid-cols));
+  }
+}
+
+@media (min-width: 768px) {
+  .ny-grid {
+    grid-template-columns: var(--ny-grid-cols-md, var(--ny-grid-cols-sm, var(--ny-grid-cols)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .ny-grid {
+    grid-template-columns:
+      var(--ny-grid-cols-lg, var(--ny-grid-cols-md, var(--ny-grid-cols-sm, var(--ny-grid-cols))));
+  }
+}
+
+// NyGridItem
+.ny-grid-item {
+  min-width: 0;
+}

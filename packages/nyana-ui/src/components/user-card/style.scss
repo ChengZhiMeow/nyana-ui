@@ -1,0 +1,67 @@
+// NyUserCard
+.ny-user-card {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  min-width: 0;
+  max-width: 100%;
+  padding: 3px 10px 3px 3px;
+  border: 1px solid transparent;
+  border-radius: var(--ny-radius-pill);
+  background: transparent;
+  color: var(--ny-text);
+  cursor: pointer;
+  transition:
+    border-color var(--ny-transition-fast),
+    background-color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+  }
+}
+
+.ny-user-card__dropdown:focus-within .ny-user-card {
+  background: var(--ny-fill);
+}
+
+.ny-user-card--sm {
+  gap: 6px;
+  padding: 2px 8px 2px 2px;
+}
+
+.ny-user-card--lg {
+  gap: 10px;
+  padding: 4px 14px 4px 4px;
+}
+
+.ny-user-card__text {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ny-user-card__name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-user-card__desc {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-user-card--lg .ny-user-card__name {
+  font-size: var(--ny-font-size-md);
+  font-weight: 600;
+  line-height: 20px;
+}

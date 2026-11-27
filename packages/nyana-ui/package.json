@@ -1,7 +1,7 @@
 {
   "name": "@chengzhimeow/nyana-ui",
   "private": false,
-  "version": "1.2.11",
+  "version": "2.0.0",
   "license": "MIT",
   "type": "module",
   "files": [
@@ -33,13 +33,18 @@
       "import": "./dist/index.js"
     },
     "./style.css": "./dist/style.css",
+    "./core.css": "./dist/core.css",
+    "./components/*/style.css": "./dist/components/*/style.css",
     "./styles": "./src/styles/index.scss",
-    "./src/*": "./src/*"
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "vite build --watch",
-    "build": "vue-tsc --noEmit -p tsconfig.json && vite build && vue-tsc -p tsconfig.build.json",
-    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+    "build": "npm run typecheck && vite build && vue-tsc -p tsconfig.build.json && node scripts/build-styles.mjs",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
@@ -47,9 +52,12 @@
   "devDependencies": {
     "@types/node": "^26.5.1",
     "@vitejs/plugin-vue": "^6.0.9",
+    "@vue/test-utils": "^2.6.0",
+    "jsdom": "^26.1.0",
     "sass": "^1.104.1",
     "typescript": "~5.9",
     "vite": "^8.3.0",
+    "vitest": "^3.2.7",
     "vue": "^3.5.42",
     "vue-tsc": "^3.3.11"
   }

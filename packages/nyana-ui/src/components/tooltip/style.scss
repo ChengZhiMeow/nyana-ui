@@ -1,0 +1,87 @@
+// NyTooltip
+.ny-tooltip__trigger {
+  display: inline-block;
+}
+
+// 墨色小气泡, 不加阴影
+.ny-tooltip {
+  --ny-tooltip-bg: var(--ny-text);
+  --ny-tooltip-arrow: 50%;
+
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-tooltip-bg);
+  box-shadow: none;
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  overflow-wrap: anywhere;
+}
+
+.ny-tooltip::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: inherit;
+  transform: rotate(45deg);
+}
+
+.ny-tooltip.is-top::after {
+  bottom: -4px;
+  left: calc(var(--ny-tooltip-arrow) - 4px);
+}
+
+.ny-tooltip.is-bottom::after {
+  top: -4px;
+  left: calc(var(--ny-tooltip-arrow) - 4px);
+}
+
+.ny-tooltip.is-left::after {
+  top: calc(var(--ny-tooltip-arrow) - 4px);
+  right: -4px;
+}
+
+.ny-tooltip.is-right::after {
+  top: calc(var(--ny-tooltip-arrow) - 4px);
+  left: -4px;
+}
+
+.ny-tooltip--dark {
+  color: var(--ny-bg);
+}
+
+// 浅色: 白底 + line-strong 细线, 小三角补上同色边
+.ny-tooltip--light {
+  --ny-tooltip-bg: var(--ny-bg);
+
+  border: 1px solid var(--ny-border-strong);
+  color: var(--ny-text);
+}
+
+.ny-tooltip--light::after {
+  border: 1px solid var(--ny-border-strong);
+}
+
+.ny-tooltip--light.is-top::after {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.ny-tooltip--light.is-bottom::after {
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.ny-tooltip--light.is-left::after {
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.ny-tooltip--light.is-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}

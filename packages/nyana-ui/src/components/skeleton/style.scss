@@ -1,0 +1,77 @@
+// NySkeleton
+.ny-skeleton {
+  display: block;
+  width: 100%;
+}
+
+.ny-skeleton__layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ny-space-3);
+}
+
+.ny-skeleton__paragraph {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ny-skeleton__block,
+.ny-skeleton__avatar {
+  background: var(--ny-fill);
+  border-radius: var(--ny-radius-sm);
+}
+
+.ny-skeleton__title {
+  width: 38%;
+  height: 16px;
+  margin-bottom: 2px;
+}
+
+.ny-skeleton__row {
+  height: 12px;
+}
+
+.ny-skeleton__avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.ny-skeleton__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--ny-space-4);
+}
+
+.ny-skeleton__button {
+  width: 88px;
+  height: var(--ny-control-height-sm);
+  border-radius: var(--ny-radius-md);
+}
+
+// 只做明暗呼吸, 不做扫光
+.ny-skeleton.is-active {
+  .ny-skeleton__block,
+  .ny-skeleton__avatar {
+    animation: ny-skeleton-breathe 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes ny-skeleton-breathe {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-skeleton.is-active {
+    .ny-skeleton__block,
+    .ny-skeleton__avatar {
+      animation: none;
+    }
+  }
+}

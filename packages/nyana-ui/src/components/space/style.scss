@@ -1,0 +1,39 @@
+// NySpace
+.ny-space {
+  display: flex;
+  min-width: 0;
+}
+
+.ny-space--vertical {
+  flex-direction: column;
+}
+
+.ny-space--wrap {
+  flex-wrap: wrap;
+}
+
+.ny-space--block {
+  width: 100%;
+}
+
+.ny-space--inline {
+  display: inline-flex;
+}
+
+.ny-space--split.ny-space--horizontal > :not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: var(--ny-space-2);
+  background: var(--ny-line);
+  vertical-align: middle;
+}
+
+.ny-space--split.ny-space--vertical > :not(:last-child)::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-top: var(--ny-space-2);
+  background: var(--ny-line);
+}

@@ -1,208 +1,263 @@
 @use './variables.scss' as *;
 @use './palette.scss' as *;
 
-@mixin ny-tokens-light {
-  --ny-primary: #{$ny-blue};
-  --ny-primary-light: #c6edfb;
-  --ny-primary-bg: rgba(91, 207, 250, 0.16);
-  --ny-primary-deep: #1a82a8;
-  --ny-primary-text: #12a6dd;
-  --ny-primary-bright: var(--ny-primary-text);
-  --ny-primary-strong: #1a82a8;
-  --ny-primary-soft: var(--ny-primary-bg);
-  --ny-on-primary: #ffffff;
-  --ny-primary-hover: #79d8fb;
-  --ny-primary-active: #3ec0e8;
-  --ny-primary-ring: rgba(91, 207, 250, 0.32);
-  --ny-primary-glow: rgba(91, 207, 250, 0.28);
+// 2.0 平面主题: 白底 / 米白底, 1px 细线分层, 不用阴影.
+// 保留 1.x 的全部变量名 (使用方的样式仍然引用它们), 值换成 2.0 的设计令牌;
+// 新增的 2.0 变量: --ny-fill / --ny-line / --ny-*-ink / --ny-sky / --ny-pink / --ny-term-*.
 
-  --ny-secondary: #{$ny-pink};
-  --ny-secondary-light: #f7cad3;
-  --ny-secondary-bg: rgba(245, 169, 184, 0.16);
-  --ny-secondary-deep: #9d253d;
-  --ny-secondary-text: #cd2244;
-  --ny-secondary-bright: var(--ny-secondary-text);
-  --ny-secondary-strong: #9d253d;
-  --ny-secondary-soft: var(--ny-secondary-bg);
-  --ny-on-secondary: #681d2b;
+@mixin ny-tokens-light {
+  // 强调色: 高饱和喵蓝. 实心底用 --ny-primary, 文字用 --ny-primary-ink (5.2:1)
+  --ny-primary: #0894d8;
+  --ny-primary-hover: #0784c2;
+  --ny-primary-active: #0674ab;
+  --ny-primary-ink: #0070b0;
+  --ny-primary-soft: #e3f5fe;
+  --ny-primary-bg: var(--ny-primary-soft);
+  --ny-primary-light: #c3e9fb;
+  --ny-primary-text: var(--ny-primary-ink);
+  --ny-primary-bright: var(--ny-primary-ink);
+  --ny-primary-strong: var(--ny-primary-ink);
+  --ny-primary-deep: #005a8f;
+  --ny-on-primary: #ffffff;
+  --ny-primary-ring: rgba(8, 148, 216, 0.24);
+  --ny-primary-glow: transparent;
+
+  // 品牌识别色: 只用于标志、图表、装饰面
+  --ny-sky: #5bcffa;
+  --ny-pink: #f5a9b8;
+  --ny-purple: #7c6bf5;
+
+  --ny-secondary: var(--ny-pink);
+  --ny-secondary-soft: #fdeef1;
+  --ny-secondary-bg: var(--ny-secondary-soft);
+  --ny-secondary-light: #f9d3db;
+  --ny-secondary-ink: #b23a5e;
+  --ny-secondary-text: var(--ny-secondary-ink);
+  --ny-secondary-bright: var(--ny-secondary-ink);
+  --ny-secondary-strong: var(--ny-secondary-ink);
+  --ny-secondary-deep: #8f2b49;
+  --ny-on-secondary: #4a1222;
   --ny-secondary-hover: #f8bcc8;
 
-  --ny-accent: #{$ny-purple};
-  --ny-accent-light: #cec8f9;
-  --ny-accent-bg: rgba(124, 107, 245, 0.16);
-  --ny-accent-deep: #2f1fa3;
-  --ny-accent-text: #311ad6;
-  --ny-accent-bright: var(--ny-accent-text);
-  --ny-accent-strong: #2f1fa3;
-  --ny-accent-soft: var(--ny-accent-bg);
+  --ny-accent: var(--ny-purple);
+  --ny-accent-soft: #f0eefe;
+  --ny-accent-bg: var(--ny-accent-soft);
+  --ny-accent-light: #dcd7fd;
+  --ny-accent-ink: #5443c9;
+  --ny-accent-text: var(--ny-accent-ink);
+  --ny-accent-bright: var(--ny-accent-ink);
+  --ny-accent-strong: var(--ny-accent-ink);
+  --ny-accent-deep: #3f30a8;
   --ny-on-accent: #ffffff;
 
-  --ny-info: var(--ny-sky);
-  --ny-info-light: var(--ny-sky-light);
-  --ny-info-bg: var(--ny-sky-bg);
-  --ny-info-deep: var(--ny-sky-deep);
-  --ny-info-text: var(--ny-sky-text);
-  --ny-info-bright: var(--ny-sky-text);
-  --ny-info-strong: var(--ny-sky-deep);
-  --ny-info-soft: var(--ny-sky-bg);
-  --ny-on-info: var(--ny-on-sky);
-  --ny-success: var(--ny-grass);
-  --ny-success-light: var(--ny-grass-light);
-  --ny-success-bg: var(--ny-grass-bg);
-  --ny-success-deep: var(--ny-grass-deep);
-  --ny-success-text: var(--ny-grass-text);
-  --ny-success-bright: var(--ny-grass-text);
-  --ny-success-strong: var(--ny-grass-deep);
-  --ny-success-soft: var(--ny-grass-bg);
-  --ny-on-success: var(--ny-on-grass);
-  --ny-warning: var(--ny-amber);
-  --ny-warning-light: var(--ny-amber-light);
-  --ny-warning-bg: var(--ny-amber-bg);
-  --ny-warning-deep: var(--ny-amber-deep);
-  --ny-warning-text: var(--ny-amber-text);
-  --ny-warning-bright: var(--ny-amber-text);
-  --ny-warning-strong: var(--ny-amber-deep);
-  --ny-warning-soft: var(--ny-amber-bg);
-  --ny-on-warning: var(--ny-on-amber);
-  --ny-danger: var(--ny-red);
-  --ny-danger-light: var(--ny-red-light);
-  --ny-danger-bg: var(--ny-red-bg);
-  --ny-danger-deep: var(--ny-red-deep);
-  --ny-danger-text: var(--ny-red-text);
-  --ny-danger-bright: var(--ny-red-text);
-  --ny-danger-strong: var(--ny-red-deep);
-  --ny-danger-soft: var(--ny-red-bg);
-  --ny-on-danger: var(--ny-on-red);
-  --ny-danger-hover: var(--ny-red-deep);
+  // 状态色: 鲜艳的填充色 + 深一档的文字色 (*-ink / *-text)
+  --ny-info: var(--ny-primary);
+  --ny-info-soft: var(--ny-primary-soft);
+  --ny-info-bg: var(--ny-primary-soft);
+  --ny-info-light: var(--ny-primary-light);
+  --ny-info-ink: var(--ny-primary-ink);
+  --ny-info-text: var(--ny-primary-ink);
+  --ny-info-bright: var(--ny-primary-ink);
+  --ny-info-strong: var(--ny-primary-ink);
+  --ny-info-deep: var(--ny-primary-deep);
+  --ny-on-info: #ffffff;
 
-  --ny-bg: #f4f7fb;
-  --ny-bg-accent: #e9f2fb;
+  --ny-success: #16b26a;
+  --ny-success-soft: #e8f5ef;
+  --ny-success-bg: var(--ny-success-soft);
+  --ny-success-light: #c6ead8;
+  --ny-success-ink: #0b7a4c;
+  --ny-success-text: var(--ny-success-ink);
+  --ny-success-bright: var(--ny-success-ink);
+  --ny-success-strong: var(--ny-success-ink);
+  --ny-success-deep: #08603b;
+  --ny-on-success: #ffffff;
+
+  --ny-warning: #f29a0c;
+  --ny-warning-soft: #fdf4e3;
+  --ny-warning-bg: var(--ny-warning-soft);
+  --ny-warning-light: #fbe2b5;
+  --ny-warning-ink: #9a5800;
+  --ny-warning-text: var(--ny-warning-ink);
+  --ny-warning-bright: var(--ny-warning-ink);
+  --ny-warning-strong: var(--ny-warning-ink);
+  --ny-warning-deep: #7a4600;
+  --ny-on-warning: #3d2300;
+
+  --ny-danger: #e5484d;
+  --ny-danger-hover: #d63c41;
+  --ny-danger-soft: #fdecef;
+  --ny-danger-bg: var(--ny-danger-soft);
+  --ny-danger-light: #f8c9cf;
+  --ny-danger-ink: #c42b3c;
+  --ny-danger-text: var(--ny-danger-ink);
+  --ny-danger-bright: var(--ny-danger-ink);
+  --ny-danger-strong: var(--ny-danger-ink);
+  --ny-danger-deep: #9d1f2e;
+  --ny-on-danger: #ffffff;
+
+  // 底色: 页面纯白, 米白分组, 浅灰填充
+  --ny-bg: #ffffff;
+  --ny-bg-soft: #faf9f6;
+  --ny-bg-accent: var(--ny-bg-soft);
   --ny-surface: #ffffff;
-  --ny-surface-2: #f7f9fc;
-  --ny-surface-3: #eef2f8;
-  --ny-surface-hover: #edf3f9;
-  --ny-surface-active: #e4ecf6;
+  --ny-surface-2: #faf9f6;
+  --ny-surface-3: #f3f2ee;
+  --ny-fill: #f3f2ee;
+  --ny-fill-strong: #e8e6e1;
+  --ny-surface-hover: var(--ny-fill);
+  --ny-surface-active: var(--ny-fill-strong);
 
-  --ny-border: #e2e8f1;
-  --ny-border-strong: #cbd6e4;
-  --ny-border-soft: #eef2f8;
+  --ny-line: #ebe9e4;
+  --ny-border: var(--ny-line);
+  --ny-border-strong: #d3d1cb;
+  --ny-border-soft: #f3f2ee;
 
-  --ny-text: #1b2432;
-  --ny-text-strong: #0f1720;
-  --ny-text-sub: #55617a;
-  --ny-text-muted: #8a95a8;
+  --ny-text: #1d1d1f;
+  --ny-text-strong: #1d1d1f;
+  --ny-text-sub: #5d5c58;
+  --ny-text-muted: #75746e;
   --ny-text-invert: #ffffff;
 
-  --ny-shadow-xs: 0 1px 2px rgba(20, 35, 60, 0.05);
-  --ny-shadow-sm: 0 1px 3px rgba(20, 35, 60, 0.07), 0 1px 2px rgba(20, 35, 60, 0.04);
-  --ny-shadow-md: 0 6px 20px rgba(20, 35, 60, 0.1);
-  --ny-shadow-lg: 0 20px 48px rgba(20, 35, 60, 0.16);
+  // 平面: 没有投影. 浮层用 1px 描边代替投影, 聚焦是 3px 实色描边环
+  --ny-shadow-xs: none;
+  --ny-shadow-sm: none;
+  --ny-shadow-md: 0 0 0 1px var(--ny-border-strong);
+  --ny-shadow-lg: 0 0 0 1px var(--ny-border-strong);
   --ny-shadow-focus: 0 0 0 3px var(--ny-primary-ring);
-  --ny-mask: rgba(15, 22, 33, 0.45);
-  --ny-track: rgba(20, 35, 60, 0.08);
+  --ny-mask: rgba(17, 17, 19, 0.32);
+  --ny-track: var(--ny-fill-strong);
+
+  --ny-star: #f5a623;
+  --ny-term-bg: #141517;
+  --ny-term-text: #e6e6e3;
+  --ny-term-dim: #8d8e8a;
 
   color-scheme: light;
 }
 
 @mixin ny-tokens-dark {
-  --ny-primary: #{$ny-blue};
-  --ny-primary-light: #2a4651;
-  --ny-primary-bg: rgba(91, 207, 250, 0.2);
-  --ny-primary-deep: #76b8d0;
-  --ny-primary-text: #99d4ea;
-  --ny-primary-bright: var(--ny-primary-text);
-  --ny-primary-strong: #76b8d0;
-  --ny-primary-soft: var(--ny-primary-bg);
-  --ny-on-primary: #ffffff;
-  --ny-primary-hover: #7ad8fb;
-  --ny-primary-active: #45c3ea;
-  --ny-primary-ring: rgba(91, 207, 250, 0.3);
-  --ny-primary-glow: rgba(91, 207, 250, 0.26);
+  --ny-primary: #4cc2f5;
+  --ny-primary-hover: #6ccdf7;
+  --ny-primary-active: #8dd8f9;
+  --ny-primary-ink: #86d4f8;
+  --ny-primary-soft: #0e2a37;
+  --ny-primary-bg: var(--ny-primary-soft);
+  --ny-primary-light: #16394a;
+  --ny-primary-text: var(--ny-primary-ink);
+  --ny-primary-bright: var(--ny-primary-ink);
+  --ny-primary-strong: var(--ny-primary-ink);
+  --ny-primary-deep: #b5e6fb;
+  --ny-on-primary: #04202d;
+  --ny-primary-ring: rgba(76, 194, 245, 0.3);
+  --ny-primary-glow: transparent;
 
-  --ny-secondary: #{$ny-pink};
-  --ny-secondary-light: #4e2d33;
-  --ny-secondary-bg: rgba(245, 169, 184, 0.2);
-  --ny-secondary-deep: #c97d8c;
-  --ny-secondary-text: #e4a0ad;
-  --ny-secondary-bright: var(--ny-secondary-text);
-  --ny-secondary-strong: #c97d8c;
-  --ny-secondary-soft: var(--ny-secondary-bg);
-  --ny-on-secondary: #681d2b;
-  --ny-secondary-hover: #f9c2cd;
+  --ny-sky: #5bcffa;
+  --ny-pink: #f5a9b8;
+  --ny-purple: #9d90f8;
 
-  --ny-accent: #9b8dfa;
-  --ny-accent-light: #302b4f;
-  --ny-accent-bg: rgba(124, 107, 245, 0.2);
-  --ny-accent-deep: #847acd;
-  --ny-accent-text: #a69ce7;
-  --ny-accent-bright: var(--ny-accent-text);
-  --ny-accent-strong: #847acd;
-  --ny-accent-soft: var(--ny-accent-bg);
-  --ny-on-accent: #ffffff;
+  --ny-secondary: var(--ny-pink);
+  --ny-secondary-soft: #33181f;
+  --ny-secondary-bg: var(--ny-secondary-soft);
+  --ny-secondary-light: #4a2430;
+  --ny-secondary-ink: #f7b6c3;
+  --ny-secondary-text: var(--ny-secondary-ink);
+  --ny-secondary-bright: var(--ny-secondary-ink);
+  --ny-secondary-strong: var(--ny-secondary-ink);
+  --ny-secondary-deep: #fbd3db;
+  --ny-on-secondary: #4a1222;
+  --ny-secondary-hover: #f8bcc8;
 
-  --ny-info: var(--ny-sky);
-  --ny-info-light: var(--ny-sky-light);
-  --ny-info-bg: var(--ny-sky-bg);
-  --ny-info-deep: var(--ny-sky-deep);
-  --ny-info-text: var(--ny-sky-text);
-  --ny-info-bright: var(--ny-sky-text);
-  --ny-info-strong: var(--ny-sky-deep);
-  --ny-info-soft: var(--ny-sky-bg);
-  --ny-on-info: var(--ny-on-sky);
-  --ny-success: var(--ny-grass);
-  --ny-success-light: var(--ny-grass-light);
-  --ny-success-bg: var(--ny-grass-bg);
-  --ny-success-deep: var(--ny-grass-deep);
-  --ny-success-text: var(--ny-grass-text);
-  --ny-success-bright: var(--ny-grass-text);
-  --ny-success-strong: var(--ny-grass-deep);
-  --ny-success-soft: var(--ny-grass-bg);
-  --ny-on-success: var(--ny-on-grass);
-  --ny-warning: var(--ny-amber);
-  --ny-warning-light: var(--ny-amber-light);
-  --ny-warning-bg: var(--ny-amber-bg);
-  --ny-warning-deep: var(--ny-amber-deep);
-  --ny-warning-text: var(--ny-amber-text);
-  --ny-warning-bright: var(--ny-amber-text);
-  --ny-warning-strong: var(--ny-amber-deep);
-  --ny-warning-soft: var(--ny-amber-bg);
-  --ny-on-warning: var(--ny-on-amber);
-  --ny-danger: var(--ny-red);
-  --ny-danger-light: var(--ny-red-light);
-  --ny-danger-bg: var(--ny-red-bg);
-  --ny-danger-deep: var(--ny-red-deep);
-  --ny-danger-text: var(--ny-red-text);
-  --ny-danger-bright: var(--ny-red-text);
-  --ny-danger-strong: var(--ny-red-deep);
-  --ny-danger-soft: var(--ny-red-bg);
-  --ny-on-danger: var(--ny-on-red);
-  --ny-danger-hover: var(--ny-red-deep);
+  --ny-accent: var(--ny-purple);
+  --ny-accent-soft: #221d3d;
+  --ny-accent-bg: var(--ny-accent-soft);
+  --ny-accent-light: #2f2856;
+  --ny-accent-ink: #bdb4fb;
+  --ny-accent-text: var(--ny-accent-ink);
+  --ny-accent-bright: var(--ny-accent-ink);
+  --ny-accent-strong: var(--ny-accent-ink);
+  --ny-accent-deep: #dcd7fd;
+  --ny-on-accent: #120d2e;
 
-  --ny-bg: #0f1216;
-  --ny-bg-accent: #141821;
-  --ny-surface: #171b22;
-  --ny-surface-2: #1c2129;
-  --ny-surface-3: #232933;
-  --ny-surface-hover: #1f242d;
-  --ny-surface-active: #262d38;
+  --ny-info: var(--ny-primary);
+  --ny-info-soft: var(--ny-primary-soft);
+  --ny-info-bg: var(--ny-primary-soft);
+  --ny-info-light: var(--ny-primary-light);
+  --ny-info-ink: var(--ny-primary-ink);
+  --ny-info-text: var(--ny-primary-ink);
+  --ny-info-bright: var(--ny-primary-ink);
+  --ny-info-strong: var(--ny-primary-ink);
+  --ny-info-deep: var(--ny-primary-deep);
+  --ny-on-info: #04202d;
 
-  --ny-border: #262c36;
-  --ny-border-strong: #39424f;
-  --ny-border-soft: #1f242c;
+  --ny-success: #3cc48d;
+  --ny-success-soft: #0f2a1f;
+  --ny-success-bg: var(--ny-success-soft);
+  --ny-success-light: #163a2b;
+  --ny-success-ink: #5fd3a3;
+  --ny-success-text: var(--ny-success-ink);
+  --ny-success-bright: var(--ny-success-ink);
+  --ny-success-strong: var(--ny-success-ink);
+  --ny-success-deep: #9ae6c4;
+  --ny-on-success: #04251a;
 
-  --ny-text: #e8edf5;
+  --ny-warning: #f0b34a;
+  --ny-warning-soft: #2e2410;
+  --ny-warning-bg: var(--ny-warning-soft);
+  --ny-warning-light: #3f3116;
+  --ny-warning-ink: #f5c56e;
+  --ny-warning-text: var(--ny-warning-ink);
+  --ny-warning-bright: var(--ny-warning-ink);
+  --ny-warning-strong: var(--ny-warning-ink);
+  --ny-warning-deep: #fadb9e;
+  --ny-on-warning: #2e1d00;
+
+  --ny-danger: #ff6b80;
+  --ny-danger-hover: #ff8496;
+  --ny-danger-soft: #34161c;
+  --ny-danger-bg: var(--ny-danger-soft);
+  --ny-danger-light: #4a1d26;
+  --ny-danger-ink: #ff8a9a;
+  --ny-danger-text: var(--ny-danger-ink);
+  --ny-danger-bright: var(--ny-danger-ink);
+  --ny-danger-strong: var(--ny-danger-ink);
+  --ny-danger-deep: #ffb3be;
+  --ny-on-danger: #2e0610;
+
+  --ny-bg: #0f0f10;
+  --ny-bg-soft: #161617;
+  --ny-bg-accent: var(--ny-bg-soft);
+  --ny-surface: #0f0f10;
+  --ny-surface-2: #161617;
+  --ny-surface-3: #202022;
+  --ny-fill: #202022;
+  --ny-fill-strong: #2b2b2e;
+  --ny-surface-hover: var(--ny-fill);
+  --ny-surface-active: var(--ny-fill-strong);
+
+  --ny-line: #262628;
+  --ny-border: var(--ny-line);
+  --ny-border-strong: #3a3a3d;
+  --ny-border-soft: #1c1c1e;
+
+  --ny-text: #f5f5f7;
   --ny-text-strong: #ffffff;
-  --ny-text-sub: #aeb8c8;
-  --ny-text-muted: #7b8698;
-  --ny-text-invert: #0f1216;
+  --ny-text-sub: #a9a9ae;
+  --ny-text-muted: #8b8b91;
+  --ny-text-invert: #0f0f10;
 
-  --ny-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.36);
-  --ny-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.32);
-  --ny-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --ny-shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.6);
+  --ny-shadow-xs: none;
+  --ny-shadow-sm: none;
+  --ny-shadow-md: 0 0 0 1px var(--ny-border-strong);
+  --ny-shadow-lg: 0 0 0 1px var(--ny-border-strong);
   --ny-shadow-focus: 0 0 0 3px var(--ny-primary-ring);
-  --ny-mask: rgba(4, 6, 10, 0.62);
-  --ny-track: rgba(255, 255, 255, 0.1);
+  --ny-mask: rgba(0, 0, 0, 0.56);
+  --ny-track: var(--ny-fill-strong);
+
+  --ny-star: #f5b942;
+  --ny-term-bg: #0b0b0c;
+  --ny-term-text: #e6e6e3;
+  --ny-term-dim: #8d8e8a;
 
   color-scheme: dark;
 }
@@ -254,24 +309,26 @@
   --ny-z-message: #{$z-message};
 
   --ny-font-family: #{$font-family-base};
+  --ny-font-family-display: #{$font-family-display};
   --ny-font-family-mono: #{$font-family-mono};
+  --ny-font-mono: #{$font-family-mono};
 }
 
 :root {
   @include ny-tokens-static;
-  @include ny-tokens-light;
   @include ny-palette-light;
+  @include ny-tokens-light;
 }
 
 [data-theme='dark'] {
   @include ny-tokens-static;
-  @include ny-tokens-dark;
   @include ny-palette-dark;
+  @include ny-tokens-dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    @include ny-tokens-dark;
     @include ny-palette-dark;
+    @include ny-tokens-dark;
   }
 }

@@ -1,0 +1,188 @@
+// NyAlert
+// 软色底 + 同色图标, 没有边框和彩色边线
+.ny-alert {
+  --ny-alert-bg: var(--ny-fill);
+  --ny-alert-icon: var(--ny-text-sub);
+
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-alert-bg);
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+}
+
+.ny-alert--info {
+  --ny-alert-bg: var(--ny-primary-soft);
+  --ny-alert-icon: var(--ny-primary-ink);
+}
+
+.ny-alert--success {
+  --ny-alert-bg: var(--ny-success-soft);
+  --ny-alert-icon: var(--ny-success-ink);
+}
+
+.ny-alert--warning {
+  --ny-alert-bg: var(--ny-warning-soft);
+  --ny-alert-icon: var(--ny-warning-ink);
+}
+
+.ny-alert--danger {
+  --ny-alert-bg: var(--ny-danger-soft);
+  --ny-alert-icon: var(--ny-danger-ink);
+}
+
+.ny-alert--outline {
+  border-color: var(--ny-line);
+  background: var(--ny-bg);
+}
+
+.ny-alert__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  color: var(--ny-alert-icon);
+}
+
+.ny-alert__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ny-alert__title {
+  margin: 0;
+  overflow: hidden;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-alert__desc {
+  margin: 0;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+.ny-alert__title + .ny-alert__desc {
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+}
+
+.ny-alert__foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+}
+
+// 操作按钮: 小号默认按钮
+.ny-alert__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 160px;
+  height: var(--ny-control-height-sm);
+  padding: 0 12px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  font-family: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill-strong);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-alert--outline .ny-alert__action {
+  background: var(--ny-fill);
+}
+
+.ny-alert__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--ny-control-height-sm);
+  height: var(--ny-control-height-sm);
+  margin: -4px -8px -4px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: color-mix(in srgb, var(--ny-text) 8%, transparent);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+// 通栏: 直角, 内容居中
+.ny-alert--banner {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-width: 0;
+  border-radius: 0;
+  font-size: var(--ny-font-size-sm);
+
+  .ny-alert__main {
+    flex: 0 1 auto;
+  }
+}
+
+.ny-alert--banner.ny-alert--outline {
+  border-bottom-width: 1px;
+}
+
+@media (max-width: 640px) {
+  .ny-alert:not(.ny-alert--banner) {
+    flex-wrap: wrap;
+
+    .ny-alert__main {
+      flex-basis: calc(100% - 64px);
+    }
+
+    .ny-alert__foot {
+      order: 3;
+      width: 100%;
+      padding-left: 30px;
+    }
+  }
+}

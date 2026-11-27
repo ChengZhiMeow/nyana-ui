@@ -1,0 +1,48 @@
+// NyPill
+.ny-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-fill);
+  color: var(--ny-text-sub);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex: none;
+  }
+}
+
+.ny-pill--plain::before {
+  display: none;
+}
+
+.ny-pill--primary {
+  background: var(--ny-primary-soft);
+  color: var(--ny-primary-ink);
+}
+
+.ny-pill--success {
+  background: var(--ny-success-soft);
+  color: var(--ny-success-ink);
+}
+
+.ny-pill--warning {
+  background: var(--ny-warning-soft);
+  color: var(--ny-warning-ink);
+}
+
+.ny-pill--danger {
+  background: var(--ny-danger-soft);
+  color: var(--ny-danger-ink);
+}

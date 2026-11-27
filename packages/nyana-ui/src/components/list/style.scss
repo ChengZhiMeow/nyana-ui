@@ -1,0 +1,133 @@
+// NyList
+.ny-list {
+  --ny-list-pad-y: 14px;
+  --ny-list-pad-x: 0px;
+
+  min-width: 0;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+}
+
+// 带框时行两侧留白
+.ny-list--bordered {
+  --ny-list-pad-x: 20px;
+
+  overflow: hidden;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+}
+
+.ny-list--sm {
+  --ny-list-pad-y: 10px;
+
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-list--sm.ny-list--bordered {
+  --ny-list-pad-x: 16px;
+}
+
+.ny-list--lg {
+  --ny-list-pad-y: 18px;
+}
+
+.ny-list--lg.ny-list--bordered {
+  --ny-list-pad-x: 24px;
+}
+
+.ny-list__body {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ny-list__item {
+  min-width: 0;
+  padding: var(--ny-list-pad-y) var(--ny-list-pad-x);
+  transition: background-color var(--ny-transition-fast);
+}
+
+.ny-list--split .ny-list__item + .ny-list__item {
+  border-top: 1px solid var(--ny-line);
+}
+
+.ny-list--hoverable .ny-list__item:not(.ny-list__item--skeleton):hover {
+  background: var(--ny-bg-soft);
+}
+
+.ny-list__header,
+.ny-list__footer {
+  min-width: 0;
+  padding: 12px var(--ny-list-pad-x);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-list__header {
+  overflow: hidden;
+  border-bottom: 1px solid var(--ny-line);
+  color: var(--ny-text);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-list__footer {
+  border-top: 1px solid var(--ny-line);
+}
+
+.ny-list__item--skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ny-space-2);
+}
+
+.ny-list__skeleton {
+  display: block;
+  height: 12px;
+  border-radius: var(--ny-radius-sm);
+  background: var(--ny-fill);
+  animation: ny-list-breath 1.4s ease-in-out infinite;
+}
+
+.ny-list__skeleton--title {
+  width: 40%;
+}
+
+.ny-list__skeleton--desc {
+  width: 72%;
+  animation-delay: 0.15s;
+}
+
+.ny-list__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ny-space-2);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.ny-list__empty-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--ny-space-1);
+  border-radius: 50%;
+  background: var(--ny-fill);
+  color: var(--ny-text-muted);
+}
+
+.ny-list__empty-text {
+  margin: 0;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+}
+
+@keyframes ny-list-breath {
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,95 +1,91 @@
 import type { App, Component, Plugin } from 'vue'
 
-import NyButton from './components/basic/NyButton.vue'
-import NyFloatButton from './components/basic/NyFloatButton.vue'
-import NyIcon from './components/basic/NyIcon.vue'
-import NyParagraph from './components/basic/NyParagraph.vue'
-import NyText from './components/basic/NyText.vue'
-import NyThemeToggle from './components/basic/NyThemeToggle.vue'
-import NyAvatarCropper from './components/display/NyAvatarCropper.vue'
-import NyUserCard from './components/display/NyUserCard.vue'
-import NyTagInput from './components/form/NyTagInput.vue'
-import NyTitle from './components/basic/NyTitle.vue'
+import { NyAffix } from './components/affix'
+import { NyAlert } from './components/alert'
+import { NyAnchor } from './components/anchor'
+import { NyAutoComplete } from './components/auto-complete'
+import { NyAvatar, NyAvatarGroup } from './components/avatar'
+import { NyAvatarCropper } from './components/avatar-cropper'
+import { NyBackTop } from './components/back-top'
+import { NyBadge } from './components/badge'
+import { NyBreadcrumb } from './components/breadcrumb'
+import { NyButton } from './components/button'
+import { NyCalendar } from './components/calendar'
+import { NyCard } from './components/card'
+import { NyCarousel } from './components/carousel'
+import { NyCascader } from './components/cascader'
+import { NyCheckbox, NyCheckboxGroup } from './components/checkbox'
+import { NyChoiceCard, NyChoiceGroup } from './components/choice'
+import { NyCollapse, NyCollapseItem } from './components/collapse'
+import { NyColorPanel, NyColorPicker } from './components/color-picker'
+import { NyCommandBlock } from './components/command-block'
+import { NyContainer } from './components/container'
+import { NyCopyButton, NyCopyField } from './components/copy'
+import { NyDateTimePicker } from './components/date-picker'
+import { NyDescriptions } from './components/descriptions'
+import { NyDivider } from './components/divider'
+import { NyDrawer } from './components/drawer'
+import { NyDropdown } from './components/dropdown'
+import { NyEmpty } from './components/empty'
+import { NyField } from './components/field'
+import { NyFlex } from './components/flex'
+import { NyFloatButton } from './components/float-button'
+import { NyForm, NyFormItem } from './components/form'
+import { NyGrid, NyGridItem } from './components/grid'
+import { NyIcon } from './components/icon'
+import { NyImage } from './components/image'
+import { NyInput, NyInputShell } from './components/input'
+import { NyKeyValue } from './components/key-value'
+import { NyLayout } from './components/layout'
+import { NyList } from './components/list'
+import { NyMasonry } from './components/masonry'
+import { NyMentions } from './components/mentions'
+import { NyMeter } from './components/meter'
+import { NyMetricCard } from './components/metric-card'
+import { NyModal } from './components/modal'
+import { NyNumberInput } from './components/number-input'
+import { NyPageHeader } from './components/page-header'
+import { NyPagination } from './components/pagination'
+import { NyPill } from './components/pill'
+import { NyPlayerHead } from './components/player-head'
+import { NyPopconfirm } from './components/popconfirm'
+import { NyPopover } from './components/popover'
+import { NyProgress } from './components/progress'
+import { NyRadio, NyRadioGroup } from './components/radio'
+import { NyRate } from './components/rate'
+import { NyRegexInput } from './components/regex-input'
+import { NyResult } from './components/result'
+import { NyRow } from './components/row'
+import { NySegmented } from './components/segmented'
+import { NySelect } from './components/select'
+import { NySkeleton } from './components/skeleton'
+import { NySlider } from './components/slider'
+import { NySpace } from './components/space'
+import { NySpin } from './components/spin'
+import { NySplit } from './components/split'
+import { NyStack } from './components/stack'
+import { NyStatistic } from './components/statistic'
+import { NySteps } from './components/steps'
+import { NySwitch } from './components/switch'
+import { NyTable } from './components/table'
+import { NyTabs } from './components/tabs'
+import { NyTag } from './components/tag'
+import { NyTagInput } from './components/tag-input'
+import { NyTaskSteps } from './components/task-steps'
+import { NyTerminal } from './components/terminal'
+import { NyTextarea } from './components/textarea'
+import { NyThemeToggle } from './components/theme-toggle'
+import { NyTimePicker } from './components/time-picker'
+import { NyTimeline } from './components/timeline'
+import { NyTooltip } from './components/tooltip'
+import { NyTransfer } from './components/transfer'
+import { NyTree } from './components/tree'
+import { NyParagraph, NyText, NyTitle } from './components/typography'
+import { NyUpload } from './components/upload'
+import { NyUserCard } from './components/user-card'
+import { NyWatermark } from './components/watermark'
 
-import NyAffix from './components/layout/NyAffix.vue'
-import NyCard from './components/layout/NyCard.vue'
-import NyContainer from './components/layout/NyContainer.vue'
-import NyDivider from './components/layout/NyDivider.vue'
-import NyFlex from './components/layout/NyFlex.vue'
-import NyGrid from './components/layout/NyGrid.vue'
-import NyGridItem from './components/layout/NyGridItem.vue'
-import NyLayout from './components/layout/NyLayout.vue'
-import NyMasonry from './components/layout/NyMasonry.vue'
-import NyPageHeader from './components/layout/NyPageHeader.vue'
-import NyRow from './components/layout/NyRow.vue'
-import NySpace from './components/layout/NySpace.vue'
-import NySplit from './components/layout/NySplit.vue'
-import NyStack from './components/layout/NyStack.vue'
-
-import NyAnchor from './components/nav/NyAnchor.vue'
-import NyBackTop from './components/nav/NyBackTop.vue'
-import NyBreadcrumb from './components/nav/NyBreadcrumb.vue'
-import NyDropdown from './components/nav/NyDropdown.vue'
-import NyPagination from './components/nav/NyPagination.vue'
-import NySegmented from './components/nav/NySegmented.vue'
-import NySteps from './components/nav/NySteps.vue'
-import NyTabs from './components/nav/NyTabs.vue'
-
-import NyAvatar from './components/display/NyAvatar.vue'
-import NyAvatarGroup from './components/display/NyAvatarGroup.vue'
-import NyBadge from './components/display/NyBadge.vue'
-import NyCalendar from './components/display/NyCalendar.vue'
-import NyCarousel from './components/display/NyCarousel.vue'
-import NyCollapse from './components/display/NyCollapse.vue'
-import NyCollapseItem from './components/display/NyCollapseItem.vue'
-import NyDescriptions from './components/display/NyDescriptions.vue'
-import NyEmpty from './components/display/NyEmpty.vue'
-import NyImage from './components/display/NyImage.vue'
-import NyList from './components/display/NyList.vue'
-import NyPopover from './components/display/NyPopover.vue'
-import NySkeleton from './components/display/NySkeleton.vue'
-import NyStatistic from './components/display/NyStatistic.vue'
-import NyTable from './components/display/NyTable.vue'
-import NyTag from './components/display/NyTag.vue'
-import NyTimeline from './components/display/NyTimeline.vue'
-import NyTooltip from './components/display/NyTooltip.vue'
-import NyTree from './components/display/NyTree.vue'
-import NyWatermark from './components/display/NyWatermark.vue'
-
-import NyAutoComplete from './components/form/NyAutoComplete.vue'
-import NyCascader from './components/form/NyCascader.vue'
-import NyCheckbox from './components/form/NyCheckbox.vue'
-import NyCheckboxGroup from './components/form/NyCheckboxGroup.vue'
-import NyColorPanel from './components/form/NyColorPanel.vue'
-import NyColorPicker from './components/form/NyColorPicker.vue'
-import NyDatePicker from './components/form/NyDatePicker.vue'
-import NyDateTimePicker from './components/form/NyDateTimePicker.vue'
-import NyField from './components/form/NyField.vue'
-import NyForm from './components/form/NyForm.vue'
-import NyFormItem from './components/form/NyFormItem.vue'
-import NyInput from './components/form/NyInput.vue'
-import NyInputShell from './components/form/NyInputShell.vue'
-import NyMentions from './components/form/NyMentions.vue'
-import NyNumberInput from './components/form/NyNumberInput.vue'
-import NyRadio from './components/form/NyRadio.vue'
-import NyRadioGroup from './components/form/NyRadioGroup.vue'
-import NyRate from './components/form/NyRate.vue'
-import NyRegexInput from './components/form/NyRegexInput.vue'
-import NySelect from './components/form/NySelect.vue'
-import NySlider from './components/form/NySlider.vue'
-import NySwitch from './components/form/NySwitch.vue'
-import NyTextarea from './components/form/NyTextarea.vue'
-import NyTimePicker from './components/form/NyTimePicker.vue'
-import NyTransfer from './components/form/NyTransfer.vue'
-import NyUpload from './components/form/NyUpload.vue'
-
-import NyAlert from './components/feedback/NyAlert.vue'
-import NyDrawer from './components/feedback/NyDrawer.vue'
-import NyModal from './components/feedback/NyModal.vue'
-import NyPopconfirm from './components/feedback/NyPopconfirm.vue'
-import NyProgress from './components/feedback/NyProgress.vue'
-import NyResult from './components/feedback/NyResult.vue'
-import NySpin from './components/feedback/NySpin.vue'
+import NyDatePicker from './components/date-picker/NyDatePicker.vue'
 
 import './styles/index.scss'
 
@@ -178,6 +174,18 @@ export const components: Record<string, Component> = {
   NyProgress,
   NyResult,
   NySpin,
+  NyPill,
+  NyMeter,
+  NyMetricCard,
+  NyCopyButton,
+  NyCopyField,
+  NyKeyValue,
+  NyPlayerHead,
+  NyChoiceGroup,
+  NyChoiceCard,
+  NyTerminal,
+  NyCommandBlock,
+  NyTaskSteps,
 }
 
 export const NyanaUI: Plugin = {
@@ -274,15 +282,32 @@ export {
   NyUpload,
   NyUserCard,
   NyWatermark,
+  NyPill,
+  NyMeter,
+  NyMetricCard,
+  NyCopyButton,
+  NyCopyField,
+  NyKeyValue,
+  NyPlayerHead,
+  NyChoiceGroup,
+  NyChoiceCard,
+  NyTerminal,
+  NyCommandBlock,
+  NyTaskSteps,
 }
 
-export { nyMessage } from './components/feedback/message'
-export type { NyMessageOptions } from './components/feedback/message'
-export type { NyMessageConfig, NyMessageItem, NyMessageType } from './components/feedback/messageStore'
+export { nyMessage } from './components/message/message'
+export { nyCopy } from './components/copy/copy'
+export type { NyKeyValueItem } from './components/key-value/NyKeyValue.vue'
+export type { NyTerminalLine } from './components/terminal/NyTerminal.vue'
+export type { NyCommandOption } from './components/command-block/NyCommandBlock.vue'
+export type { NyTaskStep } from './components/task-steps/NyTaskSteps.vue'
+export type { NyMessageOptions } from './components/message/message'
+export type { NyMessageConfig, NyMessageItem, NyMessageType } from './components/message/messageStore'
 
-export { nyNotification } from './components/feedback/notification'
-export type { NyNotificationItem, NyNotificationOptions, NyNotificationPlacement } from './components/feedback/notification'
-export type { NyUploadFile } from './components/form/uploadTypes'
+export { nyNotification } from './components/notification/notification'
+export type { NyNotificationItem, NyNotificationOptions, NyNotificationPlacement } from './components/notification/notification'
+export type { NyUploadFile } from './components/upload/uploadTypes'
 
 export { useBelow, useMediaQuery } from './composables/useMediaQuery'
 export { useFocusTrap } from './composables/useFocusTrap'
@@ -374,3 +399,12 @@ export type {
 } from './types'
 
 export default NyanaUI
+export type { NyBreadcrumbItem } from './components/breadcrumb'
+export type { NyCalendarEvent } from './components/calendar'
+export type { NyCascaderOption } from './components/cascader'
+export type { NyDropdownItem } from './components/dropdown'
+export type { NyStepItem } from './components/steps'
+export type { NyTablePagination } from './components/table'
+export type { NyTabItem } from './components/tabs'
+export type { NyTransferItem } from './components/transfer'
+export type { NyUserCardItem } from './components/user-card'

@@ -1,0 +1,141 @@
+// NyAnchor
+// 左边一条细线, 当前项墨色 + 2px 墨色竖线
+.ny-anchor {
+  position: relative;
+  min-width: 0;
+
+  &.is-affix {
+    position: sticky;
+    top: 0;
+    z-index: var(--ny-z-affix);
+    background: var(--ny-bg);
+  }
+}
+
+.ny-anchor--vertical {
+  border-left: 1px solid var(--ny-line);
+}
+
+.ny-anchor__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ny-anchor__ink {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 2px;
+  background: var(--ny-text);
+  pointer-events: none;
+  transition:
+    transform var(--ny-transition-base),
+    height var(--ny-transition-base),
+    width var(--ny-transition-base);
+}
+
+.ny-anchor__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ny-space-2);
+  min-width: 0;
+  padding: 5px 0 5px 14px;
+  border-radius: var(--ny-radius-xs);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--ny-transition-fast);
+
+  &:hover {
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-active {
+    color: var(--ny-text);
+    font-weight: 500;
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      color: var(--ny-text-muted);
+    }
+  }
+}
+
+.ny-anchor__title {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-anchor__note {
+  flex: none;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.ny-anchor--sm .ny-anchor__link {
+  padding: 4px 0 4px 12px;
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+}
+
+.ny-anchor--lg .ny-anchor__link {
+  padding: 6px 0 6px 16px;
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+}
+
+.ny-anchor__link--child {
+  padding-left: 28px;
+}
+
+.ny-anchor--sm .ny-anchor__link--child {
+  padding-left: 24px;
+}
+
+.ny-anchor--lg .ny-anchor__link--child {
+  padding-left: 32px;
+}
+
+// 横向: 底部细线, 当前项 2px 墨色下划线
+.ny-anchor--horizontal {
+  border-bottom: 1px solid var(--ny-line);
+
+  .ny-anchor__list {
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .ny-anchor__link,
+  .ny-anchor__link--child {
+    flex: none;
+    padding: 8px 2px 10px;
+  }
+
+  .ny-anchor__ink {
+    top: auto;
+    bottom: -1px;
+    left: 0;
+    width: auto;
+    height: 2px;
+  }
+}

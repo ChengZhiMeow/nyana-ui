@@ -1,0 +1,158 @@
+// NyTransfer
+.ny-transfer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.ny-transfer__panel {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-width: 0;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  overflow: hidden;
+}
+
+.ny-transfer__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ny-line);
+  background: var(--ny-bg-soft);
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-transfer__head .ny-field {
+  flex: none;
+}
+
+.ny-transfer__title {
+  flex: 1;
+  min-width: 0;
+  color: var(--ny-text);
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-transfer__count {
+  flex: none;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ny-transfer__search {
+  width: auto;
+  margin: 8px 8px 0;
+}
+
+.ny-transfer__list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-height: 80px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+}
+
+.ny-transfer__item {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: var(--ny-radius-sm);
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+
+  &:hover:not(.is-disabled) {
+    background: var(--ny-fill);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-disabled {
+    color: var(--ny-text-muted);
+    cursor: not-allowed;
+  }
+}
+
+.ny-transfer__check {
+  flex: none;
+}
+
+.ny-transfer__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ny-transfer__label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-transfer__desc {
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  overflow-wrap: anywhere;
+}
+
+.ny-transfer__empty {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 16px;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  text-align: center;
+}
+
+.ny-transfer__operations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ny-transfer--oneway .ny-transfer__operations .ny-btn:last-child {
+  opacity: 0.5;
+}
+
+// 手机上两个列表上下排列, 移动按钮横排并转向
+@media (max-width: 640px) {
+  .ny-transfer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ny-transfer__operations {
+    flex-direction: row;
+
+    .ny-icon {
+      transform: rotate(90deg);
+    }
+  }
+}

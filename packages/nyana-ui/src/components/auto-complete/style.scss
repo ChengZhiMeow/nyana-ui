@@ -1,0 +1,94 @@
+// NyAutoComplete
+.ny-autocomplete {
+  display: block;
+  width: 100%;
+}
+
+.ny-autocomplete.is-disabled {
+  cursor: not-allowed;
+}
+
+.ny-autocomplete__arrow {
+  color: var(--ny-text-muted);
+  transition: transform var(--ny-transition-fast);
+}
+
+.ny-autocomplete__arrow.is-open {
+  transform: rotate(180deg);
+}
+
+.ny-autocomplete__panel {
+  position: fixed;
+  z-index: var(--ny-z-popup);
+  min-width: 120px;
+  padding: 6px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.ny-autocomplete__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ny-autocomplete__option {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border-radius: var(--ny-radius-sm);
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &.is-active {
+    background: var(--ny-fill);
+  }
+
+  &.is-disabled {
+    background: transparent;
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ny-autocomplete__option-icon {
+  flex: none;
+  color: var(--ny-text-sub);
+}
+
+.ny-autocomplete__option-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 匹配部分用粉色高亮
+.ny-autocomplete__mark {
+  padding: 0 1px;
+  border-radius: 3px;
+  background: var(--ny-secondary-soft);
+  color: var(--ny-secondary-ink);
+  font-weight: 600;
+}
+
+.ny-autocomplete__empty {
+  padding: 18px 12px;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  text-align: center;
+}

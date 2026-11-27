@@ -1,0 +1,151 @@
+// NyTree
+.ny-tree {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+}
+
+.ny-tree__empty {
+  padding: var(--ny-space-6) var(--ny-space-3);
+  list-style: none;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  text-align: center;
+}
+
+// NyTreeNode
+.ny-tree__node {
+  position: relative;
+  list-style: none;
+}
+
+// 每行 32px, 每级缩进 20px
+.ny-tree__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 32px;
+  margin-bottom: 1px;
+  padding: 0 8px 0 4px;
+  border-radius: var(--ny-radius-sm);
+  color: var(--ny-text);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(.is-disabled) {
+    background: var(--ny-fill);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-selected {
+    background: var(--ny-primary-soft);
+    color: var(--ny-primary-ink);
+    font-weight: 500;
+  }
+
+  &.is-selected .ny-tree__icon {
+    color: var(--ny-primary-ink);
+  }
+
+  &.is-disabled {
+    color: var(--ny-text-muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.ny-tree__switcher {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  border-radius: var(--ny-radius-xs);
+  background: transparent;
+  color: var(--ny-text-muted);
+  cursor: pointer;
+  transition: color var(--ny-transition-fast);
+
+  &:hover {
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-tree__switcher--empty {
+  visibility: hidden;
+  cursor: default;
+}
+
+.ny-tree__arrow {
+  transition: transform var(--ny-transition-fast);
+}
+
+.ny-tree__node.is-expanded > .ny-tree__row > .ny-tree__switcher .ny-tree__arrow {
+  transform: rotate(90deg);
+}
+
+.ny-tree__check {
+  flex: none;
+}
+
+.ny-tree__icon {
+  flex: none;
+  color: var(--ny-text-sub);
+}
+
+.ny-tree__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-tree__children {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+// 连接线对齐上一级箭头的中心 (4px 内边距 + 9px)
+.ny-tree--line .ny-tree__node:not(.ny-tree__node--root) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -7px;
+    border-left: 1px solid var(--ny-line);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: -7px;
+    width: 9px;
+    border-top: 1px solid var(--ny-line);
+  }
+
+  &.is-last::before {
+    bottom: auto;
+    height: 16px;
+  }
+}

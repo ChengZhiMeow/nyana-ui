@@ -1,0 +1,86 @@
+// NyTaskSteps
+.ny-task-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ny-task-steps__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: var(--ny-text-muted);
+}
+
+.ny-task-steps__mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--ny-border-strong);
+  border-radius: 50%;
+}
+
+.ny-task-steps__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-task-steps__time {
+  margin-left: auto;
+  flex: none;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ny-text-muted);
+}
+
+.ny-task-steps__item.is-done {
+  color: var(--ny-text);
+
+  .ny-task-steps__mark {
+    border-color: var(--ny-success);
+    background: var(--ny-success);
+    color: #ffffff;
+  }
+}
+
+.ny-task-steps__item.is-current {
+  color: var(--ny-text);
+  font-weight: 500;
+
+  .ny-task-steps__mark {
+    border-color: var(--ny-primary);
+  }
+}
+
+.ny-task-steps__item.is-error {
+  color: var(--ny-danger-ink);
+
+  .ny-task-steps__mark {
+    border-color: var(--ny-danger);
+    background: var(--ny-danger);
+    color: #ffffff;
+  }
+}
+
+.ny-task-steps__spin {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--ny-primary);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ny-task-spin 0.8s linear infinite;
+}
+
+@keyframes ny-task-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

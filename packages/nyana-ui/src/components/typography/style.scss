@@ -1,0 +1,272 @@
+// NyTitle
+.ny-title {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.ny-title--h1 {
+  font-size: 34px;
+  line-height: 42px;
+  letter-spacing: -0.022em;
+}
+
+.ny-title--h2 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.015em;
+}
+
+// 卡片级标题 (3 级及以下) 是界面元素, 单行省略
+.ny-title--h3 {
+  font-size: 19px;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+}
+
+.ny-title--h4 {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.ny-title--h5 {
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-sm);
+  line-height: 18px;
+}
+
+.ny-title--h3,
+.ny-title--h4,
+.ny-title--h5,
+.ny-title--ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 标题是块级以便省略号生效, 标题前的图标改用外边距隔开
+.ny-title .ny-icon {
+  margin-right: 8px;
+  color: var(--ny-text-sub);
+}
+
+.ny-title--align-center {
+  text-align: center;
+}
+
+.ny-title--align-end {
+  text-align: right;
+}
+
+.ny-title--mark::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  margin-right: 10px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-primary);
+  vertical-align: -0.08em;
+}
+
+@media (max-width: 640px) {
+  .ny-title--h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .ny-title--h2 {
+    font-size: 21px;
+    line-height: 28px;
+  }
+}
+
+// NyText
+.ny-text {
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+  overflow-wrap: break-word;
+}
+
+.ny-text--xs {
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+}
+
+.ny-text--sm {
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+}
+
+.ny-text--lg {
+  font-size: var(--ny-font-size-lg);
+  line-height: 26px;
+}
+
+.ny-text--xl {
+  font-size: var(--ny-font-size-xl);
+  line-height: 28px;
+}
+
+.ny-text--medium {
+  font-weight: 500;
+}
+
+.ny-text--semibold {
+  font-weight: 600;
+}
+
+.ny-text--bold {
+  font-weight: 700;
+}
+
+.ny-text--secondary {
+  color: var(--ny-text-sub);
+}
+
+.ny-text--muted {
+  color: var(--ny-text-muted);
+}
+
+.ny-text--primary {
+  color: var(--ny-primary-ink);
+}
+
+.ny-text--success {
+  color: var(--ny-success-ink);
+}
+
+.ny-text--warning {
+  color: var(--ny-warning-ink);
+}
+
+.ny-text--danger {
+  color: var(--ny-danger-ink);
+}
+
+.ny-text--strong {
+  font-weight: 600;
+}
+
+.ny-text--italic {
+  font-style: italic;
+}
+
+.ny-text--underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ny-text--strike {
+  text-decoration: line-through;
+}
+
+.ny-text--code {
+  padding: 1px 6px;
+  border-radius: var(--ny-radius-sm);
+  background: var(--ny-fill);
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+}
+
+.ny-text--mark {
+  padding: 0;
+  border-radius: 2px;
+  background: var(--ny-secondary-soft);
+  color: var(--ny-secondary-ink);
+}
+
+.ny-text--align-center {
+  display: block;
+  text-align: center;
+}
+
+.ny-text--align-end {
+  display: block;
+  text-align: right;
+}
+
+.ny-text--truncate {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-text--clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ny-text.is-disabled {
+  color: var(--ny-text-muted);
+  cursor: not-allowed;
+  user-select: none;
+}
+
+// NyParagraph
+.ny-paragraph {
+  min-width: 0;
+}
+
+.ny-paragraph__body {
+  margin: 0;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+.ny-paragraph__body.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ny-paragraph--sm .ny-paragraph__body {
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+}
+
+.ny-paragraph--lg .ny-paragraph__body {
+  font-size: var(--ny-font-size-lg);
+  line-height: 26px;
+}
+
+.ny-paragraph--secondary .ny-paragraph__body {
+  color: var(--ny-text-sub);
+}
+
+.ny-paragraph--muted .ny-paragraph__body {
+  color: var(--ny-text-muted);
+}
+
+.ny-paragraph--align-center .ny-paragraph__body {
+  text-align: center;
+}
+
+.ny-paragraph--align-end .ny-paragraph__body {
+  text-align: right;
+}
+
+.ny-paragraph--align-center {
+  text-align: center;
+}
+
+.ny-paragraph--align-end {
+  text-align: right;
+}
+
+.ny-paragraph__toggle {
+  margin-top: 2px;
+}

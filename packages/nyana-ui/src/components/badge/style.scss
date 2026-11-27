@@ -1,0 +1,118 @@
+// NyBadge
+.ny-badge {
+  --ny-badge-color: var(--ny-danger);
+  --ny-badge-fg: var(--ny-on-danger);
+  --ny-badge-size: 18px;
+  --ny-badge-font: 11px;
+  --ny-badge-dot: 8px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.ny-badge--sm {
+  --ny-badge-size: 16px;
+  --ny-badge-font: 10px;
+  --ny-badge-dot: 6px;
+}
+
+.ny-badge--lg {
+  --ny-badge-size: 20px;
+  --ny-badge-font: var(--ny-font-size-xs);
+  --ny-badge-dot: 10px;
+}
+
+.ny-badge--default {
+  --ny-badge-color: var(--ny-text-muted);
+  --ny-badge-fg: var(--ny-bg);
+}
+
+.ny-badge--primary,
+.ny-badge--info {
+  --ny-badge-color: var(--ny-primary);
+  --ny-badge-fg: var(--ny-on-primary);
+}
+
+.ny-badge--success {
+  --ny-badge-color: var(--ny-success);
+  --ny-badge-fg: var(--ny-on-success);
+}
+
+.ny-badge--warning {
+  --ny-badge-color: var(--ny-warning);
+  --ny-badge-fg: var(--ny-on-warning);
+}
+
+.ny-badge--danger {
+  --ny-badge-color: var(--ny-danger);
+  --ny-badge-fg: var(--ny-on-danger);
+}
+
+.ny-badge__sup {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: var(--ny-badge-size);
+  height: var(--ny-badge-size);
+  padding: 0 5px;
+  border-radius: var(--ny-radius-pill);
+  background: var(--ny-badge-color);
+  color: var(--ny-badge-fg);
+  font-size: var(--ny-badge-font);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+// 角标挂在内容右上角, 用 2px 底色边和下面的元素分开
+.ny-badge--host .ny-badge__sup:not(.is-status) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: content-box;
+  border: 2px solid var(--ny-bg);
+  transform: translate(50%, -50%);
+}
+
+.ny-badge__sup.is-dot {
+  min-width: 0;
+  width: var(--ny-badge-dot);
+  height: var(--ny-badge-dot);
+  padding: 0;
+}
+
+.ny-badge--host .ny-badge__sup.is-dot {
+  transform: translate(35%, -35%);
+}
+
+.ny-badge__sup.is-status {
+  gap: 6px;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  background: transparent;
+  color: var(--ny-text);
+}
+
+.ny-badge__status {
+  flex: none;
+  width: var(--ny-badge-dot);
+  height: var(--ny-badge-dot);
+  border-radius: 50%;
+  background: var(--ny-badge-color);
+}
+
+.ny-badge__label {
+  overflow: hidden;
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-sm);
+  font-weight: 400;
+  text-overflow: ellipsis;
+}

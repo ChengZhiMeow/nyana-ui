@@ -1,0 +1,142 @@
+// NyPageHeader
+// 列表页: 34px 标题 + 说明; 带返回按钮时是详情页: 22px 名称 + 单行副标题
+.ny-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ny-space-3);
+  min-width: 0;
+  padding: 0 0 var(--ny-space-6);
+}
+
+.ny-page-header--bordered {
+  padding: var(--ny-space-5);
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+}
+
+.ny-page-header__crumb {
+  min-width: 0;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-page-header__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--ny-space-3) var(--ny-space-4);
+  min-width: 0;
+}
+
+.ny-page-header__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--ny-primary-soft);
+  color: var(--ny-primary-ink);
+}
+
+.ny-page-header__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.ny-page-header__title {
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: -0.022em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-page-header__desc {
+  margin: 0;
+  max-width: 65ch;
+  color: var(--ny-text-sub);
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+}
+
+.ny-page-header__tags {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  flex: none;
+  flex-wrap: wrap;
+}
+
+.ny-page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.ny-page-header__footer {
+  min-width: 0;
+}
+
+.ny-page-header.is-detail {
+  .ny-page-header__main {
+    align-items: center;
+    gap: var(--ny-space-3);
+  }
+
+  .ny-page-header__titles {
+    gap: 2px;
+    flex: 1 1 200px;
+  }
+
+  .ny-page-header__title {
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: -0.015em;
+  }
+
+  // 副标题是元信息行 (ID、版本、节点), 单行省略
+  .ny-page-header__desc {
+    max-width: none;
+    overflow: hidden;
+    color: var(--ny-text-muted);
+    font-size: var(--ny-font-size-sm);
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .ny-page-header__actions {
+    gap: var(--ny-space-2);
+  }
+}
+
+@media (max-width: 1100px) {
+  .ny-page-header.is-detail .ny-page-header__actions {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 52px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ny-page-header__title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .ny-page-header.is-detail .ny-page-header__actions {
+    padding-left: 0;
+  }
+}

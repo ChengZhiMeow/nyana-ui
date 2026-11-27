@@ -1,0 +1,158 @@
+// NyCard
+// 平面卡片: 白底 + 1px 细线 + 12px 圆角, 不加阴影
+.ny-card {
+  --ny-card-pad: var(--ny-space-5);
+
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--ny-card-pad);
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  transition: border-color var(--ny-transition-fast);
+}
+
+// 更轻的分组: 米白底、无边框
+.ny-card--raised {
+  border-color: transparent;
+  background: var(--ny-bg-soft);
+}
+
+.ny-card--plain {
+  border-color: transparent;
+  background: transparent;
+}
+
+.ny-card.is-hoverable:hover {
+  border-color: var(--ny-border-strong);
+}
+
+.ny-card--raised.is-hoverable:hover {
+  border-color: var(--ny-line);
+}
+
+.ny-card--pad-sm {
+  --ny-card-pad: var(--ny-space-4);
+}
+
+.ny-card--pad-none {
+  --ny-card-pad: 0px;
+}
+
+.ny-card--flush {
+  overflow: hidden;
+}
+
+.ny-card__cover {
+  overflow: hidden;
+  border-bottom: 1px solid var(--ny-line);
+
+  img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.ny-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ny-space-3);
+  min-width: 0;
+  min-height: 30px;
+  margin-bottom: 14px;
+}
+
+.ny-card.is-divided .ny-card__head {
+  margin: 0 calc(-1 * var(--ny-card-pad)) var(--ny-space-4);
+  padding: 0 var(--ny-card-pad) 14px;
+  border-bottom: 1px solid var(--ny-line);
+}
+
+.ny-card--pad-none .ny-card__head {
+  margin-bottom: 0;
+  padding: 18px 20px 14px;
+}
+
+.ny-card--pad-none.is-divided .ny-card__head {
+  margin: 0;
+  padding: 18px 20px 14px;
+}
+
+.ny-card__titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+// 标题与副标题单行, 标题前可以放 17px 线性图标
+.ny-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ny-text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  .ny-icon {
+    flex: none;
+    color: var(--ny-text-sub);
+  }
+}
+
+.ny-card__desc {
+  margin: 2px 0 0;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ny-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  flex-wrap: wrap;
+  flex: none;
+}
+
+.ny-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+// 底部操作区: 细线贯通整张卡片
+.ny-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: var(--ny-card-pad) calc(-1 * var(--ny-card-pad)) calc(-1 * var(--ny-card-pad));
+  padding: 12px max(var(--ny-card-pad), 16px);
+  border-top: 1px solid var(--ny-line);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-card--pad-none .ny-card__foot {
+  margin: 0;
+  padding: 12px 20px;
+}
+
+.ny-card__cover + .ny-card__head {
+  margin-top: var(--ny-space-4);
+}
+
+.ny-card--pad-none .ny-card__cover + .ny-card__head {
+  margin-top: 0;
+}

@@ -1,0 +1,62 @@
+// NyDivider
+// 1px 细线; 中间可以放 12px 灰字
+.ny-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-3);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 18px;
+}
+
+.ny-divider--horizontal {
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 0;
+    border-top: 1px solid var(--ny-line);
+  }
+
+  &.ny-divider--dashed::before,
+  &.ny-divider--dashed::after {
+    border-top-style: dashed;
+  }
+}
+
+.ny-divider--align-start::before {
+  flex: none;
+  width: 0;
+}
+
+.ny-divider--align-end::after {
+  flex: none;
+  width: 0;
+}
+
+.ny-divider--horizontal:not(:has(.ny-divider__text))::after {
+  display: none;
+}
+
+.ny-divider--vertical {
+  display: inline-block;
+  flex: none;
+  align-self: center;
+  width: 1px;
+  height: 16px;
+  margin: 0 var(--ny-space-2);
+  border-left: 1px solid var(--ny-line);
+  vertical-align: middle;
+
+  &.ny-divider--dashed {
+    border-left-style: dashed;
+  }
+}
+
+.ny-divider__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

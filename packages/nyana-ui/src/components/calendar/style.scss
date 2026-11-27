@@ -1,0 +1,488 @@
+// NyCalendar
+.ny-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ny-space-3);
+  width: 100%;
+  min-width: 0;
+  user-select: none;
+}
+
+// 紧凑模式是日期面板: 细线外框, 圆形日期
+.ny-calendar--compact {
+  gap: var(--ny-space-2);
+  max-width: 304px;
+  padding: var(--ny-space-3);
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+}
+
+.ny-calendar__head {
+  display: flex;
+  align-items: center;
+  gap: var(--ny-space-2);
+  min-width: 0;
+}
+
+.ny-calendar__titles {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ny-calendar__year,
+.ny-calendar__month {
+  color: var(--ny-text);
+  font-family: var(--ny-font-family-display);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-calendar__year {
+  padding: 0 4px;
+  margin-left: -4px;
+  border: none;
+  border-radius: var(--ny-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-calendar--compact .ny-calendar__year,
+.ny-calendar--compact .ny-calendar__month {
+  font-family: inherit;
+  font-size: var(--ny-font-size-md);
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.ny-calendar__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+
+// 翻页: 小号 ghost 图标按钮
+.ny-calendar__nav {
+  display: inline-grid;
+  place-items: center;
+  width: var(--ny-control-height-sm);
+  height: var(--ny-control-height-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-calendar__today {
+  height: var(--ny-control-height-sm);
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+  color: var(--ny-text);
+  font-family: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+
+  &:hover {
+    background: var(--ny-fill-strong);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-calendar--compact .ny-calendar__today {
+  height: 26px;
+  padding: 0 10px;
+  font-size: var(--ny-font-size-xs);
+}
+
+// 整月: 细线网格, 外框 16px 圆角
+.ny-calendar__grid {
+  overflow: hidden;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-xl);
+  background: var(--ny-bg);
+}
+
+.ny-calendar__grid[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--ny-shadow-focus);
+}
+
+.ny-calendar__row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.ny-calendar__week {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 8px 10px;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.ny-calendar__day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  min-width: 0;
+  min-height: 62px;
+  padding: 6px 8px;
+  border-top: 1px solid var(--ny-line);
+  color: var(--ny-text);
+  font-size: var(--ny-font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+
+  & + & {
+    border-left: 1px solid var(--ny-line);
+  }
+
+  &:hover {
+    background: var(--ny-bg-soft);
+  }
+
+  &.is-outside {
+    background: var(--ny-bg-soft);
+    color: var(--ny-text-muted);
+  }
+
+  &.is-cursor {
+    outline: 2px solid var(--ny-primary);
+    outline-offset: -2px;
+  }
+
+  &.is-selected {
+    background: var(--ny-primary-soft);
+  }
+
+  &.is-disabled {
+    color: var(--ny-text-muted);
+    cursor: not-allowed;
+
+    .ny-calendar__num {
+      opacity: 0.45;
+      text-decoration: line-through;
+    }
+  }
+}
+
+// 日期在右上角的 24px 圆里, 今天用墨色圆圈
+.ny-calendar__num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  align-self: flex-end;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: var(--ny-font-size-sm);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-calendar__day.is-today .ny-calendar__num {
+  background: var(--ny-text);
+  color: var(--ny-bg);
+  font-weight: 600;
+}
+
+.ny-calendar__day.is-selected .ny-calendar__num {
+  background: var(--ny-primary);
+  color: var(--ny-on-primary);
+  font-weight: 600;
+}
+
+.ny-calendar__events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  min-width: 0;
+}
+
+// 事件条是软色标签
+.ny-calendar__event {
+  --ny-calendar-event-bg: var(--ny-fill);
+  --ny-calendar-event-fg: var(--ny-text-sub);
+
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--ny-radius-sm);
+  background: var(--ny-calendar-event-bg);
+  color: var(--ny-calendar-event-fg);
+  font-size: var(--ny-font-size-xs);
+  font-weight: 500;
+
+  &.is-primary,
+  &.is-info {
+    --ny-calendar-event-bg: var(--ny-primary-soft);
+    --ny-calendar-event-fg: var(--ny-primary-ink);
+  }
+
+  &.is-success {
+    --ny-calendar-event-bg: var(--ny-success-soft);
+    --ny-calendar-event-fg: var(--ny-success-ink);
+  }
+
+  &.is-warning {
+    --ny-calendar-event-bg: var(--ny-warning-soft);
+    --ny-calendar-event-fg: var(--ny-warning-ink);
+  }
+
+  &.is-danger {
+    --ny-calendar-event-bg: var(--ny-danger-soft);
+    --ny-calendar-event-fg: var(--ny-danger-ink);
+  }
+}
+
+.ny-calendar__dot {
+  display: none;
+}
+
+.ny-calendar__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-calendar__more {
+  padding: 0 2px;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+// 紧凑面板: 7 列圆形日期
+.ny-calendar--compact {
+  .ny-calendar__grid {
+    overflow: visible;
+    border: 0;
+    border-radius: var(--ny-radius-md);
+    background: transparent;
+  }
+
+  .ny-calendar__row {
+    gap: 2px;
+  }
+
+  .ny-calendar__row + .ny-calendar__row {
+    margin-top: 2px;
+  }
+
+  .ny-calendar__week {
+    justify-content: center;
+    height: 28px;
+    padding: 0;
+  }
+
+  .ny-calendar__day {
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    width: 34px;
+    min-height: 0;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+
+    &:hover {
+      background: var(--ny-fill);
+    }
+
+    &.is-outside {
+      background: transparent;
+      opacity: 0.55;
+    }
+
+    &.is-today {
+      color: var(--ny-primary-ink);
+      font-weight: 600;
+    }
+
+    &.is-selected {
+      background: var(--ny-primary);
+      color: var(--ny-on-primary);
+      font-weight: 600;
+    }
+
+    &.is-disabled {
+      opacity: 0.35;
+    }
+  }
+
+  .ny-calendar__num,
+  .ny-calendar__day.is-today .ny-calendar__num,
+  .ny-calendar__day.is-selected .ny-calendar__num {
+    align-self: center;
+    width: auto;
+    height: auto;
+    background: transparent;
+    color: inherit;
+    font-weight: inherit;
+  }
+
+  .ny-calendar__events {
+    display: none;
+  }
+
+  .ny-calendar__day.is-has-events::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    border-radius: 50%;
+    background: var(--ny-primary);
+  }
+
+  .ny-calendar__day.is-selected.is-has-events::after {
+    background: var(--ny-on-primary);
+  }
+}
+
+.ny-calendar__months {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--ny-space-2);
+}
+
+.ny-calendar--compact .ny-calendar__months {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ny-calendar__month-block {
+  height: 64px;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  font-family: inherit;
+  font-size: var(--ny-font-size-md);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    border-color var(--ny-transition-fast);
+
+  &:hover {
+    border-color: var(--ny-border-strong);
+    background: var(--ny-bg-soft);
+  }
+
+  &.is-current {
+    border-color: transparent;
+    background: var(--ny-primary);
+    color: var(--ny-on-primary);
+    font-weight: 600;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-calendar--compact .ny-calendar__month-block {
+  height: 44px;
+  border-color: transparent;
+  font-size: var(--ny-font-size-sm);
+
+  &:hover {
+    border-color: transparent;
+    background: var(--ny-fill);
+  }
+
+  &.is-current {
+    background: var(--ny-primary);
+  }
+}
+
+// 手机上整月日历的格子变矮, 事件只留色条
+@media (max-width: 640px) {
+  .ny-calendar:not(.ny-calendar--compact) {
+    .ny-calendar__week {
+      justify-content: center;
+      padding: 8px 2px;
+    }
+
+    .ny-calendar__day {
+      min-height: 52px;
+      padding: 4px;
+    }
+
+    .ny-calendar__num {
+      align-self: center;
+    }
+
+    .ny-calendar__event {
+      height: 6px;
+      padding: 0;
+      border-radius: 3px;
+      background: var(--ny-calendar-event-fg);
+      opacity: 0.6;
+    }
+
+    .ny-calendar__text {
+      display: none;
+    }
+  }
+}

@@ -186,33 +186,3 @@ defineExpose({ validate, validateField, resetFields, clearValidate, scrollToFiel
     </div>
   </form>
 </template>
-
-<style scoped lang="scss">
-.ny-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--ny-form-gap);
-  width: 100%;
-}
-
-.ny-form--inline {
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-
-  :deep(.ny-form-item) {
-    flex: 0 1 auto;
-    max-width: 100%;
-  }
-
-  .ny-form__actions {
-    flex: none;
-  }
-}
-
-.ny-form__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--ny-space-2);
-}
-</style>

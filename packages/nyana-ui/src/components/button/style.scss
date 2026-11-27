@@ -1,0 +1,181 @@
+// NyButton
+.ny-btn {
+  --ny-btn-height: var(--ny-control-height-md);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  min-width: 0;
+  height: var(--ny-btn-height);
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-fill);
+  color: var(--ny-text);
+  font-family: inherit;
+  font-size: var(--ny-font-size-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--ny-transition-fast),
+    border-color var(--ny-transition-fast),
+    color var(--ny-transition-fast),
+    transform var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill-strong);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.is-loading {
+    opacity: 0.8;
+    cursor: progress;
+  }
+
+  .ny-icon {
+    flex: none;
+  }
+}
+
+.ny-btn__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-btn__spinner {
+  display: inline-block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ny-btn-spin 0.7s linear infinite;
+}
+
+.ny-btn--sm .ny-btn__spinner {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes ny-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// primary 与 solid 都是实心喵蓝主按钮
+.ny-btn--primary,
+.ny-btn--solid {
+  background: var(--ny-primary);
+  color: var(--ny-on-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-primary-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--ny-primary-active);
+  }
+}
+
+// secondary 对应 2.0 的描边按钮
+.ny-btn--secondary {
+  border-color: var(--ny-border-strong);
+  background: transparent;
+
+  &:hover:not(:disabled) {
+    border-color: var(--ny-text-muted);
+    background: var(--ny-bg-soft);
+  }
+}
+
+.ny-btn--ghost {
+  background: transparent;
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill);
+  }
+}
+
+// text 对应 2.0 的链接按钮
+.ny-btn--text {
+  padding: 0 4px;
+  background: transparent;
+  color: var(--ny-primary-ink);
+
+  &:hover:not(:disabled) {
+    background: transparent;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+// 列表里的危险操作用软色; 确认对话框和气泡确认里换成实心
+.ny-btn--danger {
+  background: var(--ny-danger-soft);
+  color: var(--ny-danger-ink);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-danger-soft);
+    filter: brightness(0.97);
+  }
+}
+
+.ny-btn--sm {
+  --ny-btn-height: var(--ny-control-height-sm);
+
+  gap: 4px;
+  padding: 0 12px;
+
+  &.ny-btn--text {
+    padding: 0 4px;
+  }
+}
+
+.ny-btn--lg {
+  --ny-btn-height: var(--ny-control-height-lg);
+
+  padding: 0 22px;
+  font-size: var(--ny-font-size-lg);
+}
+
+.ny-btn--shape-round {
+  border-radius: var(--ny-radius-pill);
+}
+
+.ny-btn--shape-circle {
+  width: var(--ny-btn-height);
+  padding: 0;
+  border-radius: 50%;
+}
+
+.ny-btn--block {
+  display: flex;
+  width: 100%;
+}
+
+.ny-btn--icon {
+  width: var(--ny-btn-height);
+  padding: 0;
+}

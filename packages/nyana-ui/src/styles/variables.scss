@@ -1,5 +1,5 @@
 
-$ny-blue: #5bcffa;
+$ny-blue: #0894d8;
 $ny-pink: #f5a9b8;
 $ny-white: #ffffff;
 
@@ -13,11 +13,11 @@ $ny-success: #2eb88a;
 $ny-warning: #e59b3d;
 $ny-danger: #e15a6f;
 
-$radius-xs: 2px;
-$radius-sm: 4px;
-$radius-md: 6px;
-$radius-lg: 8px;
-$radius-xl: 11px;
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
 $radius-pill: 999px;
 
 $space-1: 4px;
@@ -53,24 +53,25 @@ $z-modal: 1100;
 $z-drawer: 1110;
 $z-message: 1200;
 
-$transition-fast: 0.15s ease;
-$transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-$ease-base: cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: 0.16s cubic-bezier(0.2, 0, 0, 1);
+$transition-base: 0.22s cubic-bezier(0.2, 0, 0, 1);
+$ease-base: cubic-bezier(0.2, 0, 0, 1);
 
 $font-family-base:
-  -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'HarmonyOS Sans SC', 'PingFang SC',
-  'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei',
-  sans-serif;
-$font-family-mono:
-  'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  "SF Pro Text", -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Segoe UI",
+  system-ui, "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+$font-family-display:
+  "SF Pro Display", -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Segoe UI",
+  system-ui, "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+$font-family-mono: "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas, Menlo, monospace;
 
-$sidebar-width: 248px;
+$sidebar-width: 240px;
 $sidebar-collapsed-width: 64px;
-$header-height: 62px;
+$header-height: 56px;
 
 $control-height-sm: 30px;
-$control-height-md: 38px;
-$control-height-lg: 46px;
+$control-height-md: 34px;
+$control-height-lg: 42px;
 
 $layout-modes: side, top, mix, blank;
 

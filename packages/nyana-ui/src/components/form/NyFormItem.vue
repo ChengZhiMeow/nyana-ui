@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, useId, useSlots, watch } from 'vue'
 
-import NyIcon from '../basic/NyIcon.vue'
+import NyIcon from '../icon/NyIcon.vue'
 
 import { nyFormKey } from './formContext'
 import { useValidation } from '../../composables/useValidation'
@@ -103,7 +103,9 @@ const labelStyle = computed<CSSProperties | undefined>(() => {
     return undefined
   }
 
-  return { textAlign: (props.labelAlign ?? form?.labelAlign ?? 'start') === 'end' ? 'end' : 'start' }
+  const end = (props.labelAlign ?? form?.labelAlign ?? 'start') === 'end'
+
+  return { textAlign: end ? 'end' : 'start', justifyContent: end ? 'flex-end' : 'flex-start' }
 })
 
 const itemStyle = computed<CSSProperties | undefined>(() => {
@@ -281,7 +283,7 @@ defineExpose({ validate, reset, clear })
     @compositionend="onCompositionEnd"
   >
     <label v-if="hasLabel" class="ny-form-item__label" :style="labelStyle" :for="controlId">
-      <slot name="label">{{ label }}</slot>
+      <span class="ny-form-item__text"><slot name="label">{{ label }}</slot></span>
       <span v-if="required" class="ny-form-item__star" aria-hidden="true">*</span>
       <span v-if="noteText" class="ny-form-item__note">({{ noteText }})</span>
       <NyIcon v-if="validating" class="ny-form-item__spin" name="refresh" :size="12" spin />
@@ -309,100 +311,3 @@ defineExpose({ validate, reset, clear })
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.ny-form-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-
-  &.is-disabled .ny-form-item__label {
-    color: var(--ny-text-muted);
-  }
-
-  &.is-invalid .ny-form-item__label {
-    color: var(--ny-danger-text);
-  }
-}
-
-.ny-form-item--horizontal.is-labeled {
-  display: grid;
-  grid-template-columns: var(--ny-label-width, auto) minmax(0, 1fr);
-  column-gap: var(--ny-space-3);
-  align-items: start;
-
-  .ny-form-item__label {
-    grid-column: 1;
-    grid-row: 1;
-    line-height: 20px;
-  }
-
-  .ny-form-item__control,
-  .ny-form-item__msg,
-  .ny-form-item__extra {
-    grid-column: 2;
-  }
-}
-
-.ny-form-item--sm.is-labeled .ny-form-item__label {
-  padding-top: 5px;
-}
-
-.ny-form-item--md.is-labeled .ny-form-item__label {
-  padding-top: 9px;
-}
-
-.ny-form-item--lg.is-labeled .ny-form-item__label {
-  padding-top: 13px;
-}
-
-.ny-form-item__label {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding-left: 2px;
-  font-size: var(--ny-font-size-sm);
-  color: var(--ny-text-sub);
-  transition: color var(--ny-transition-fast);
-}
-
-.ny-form-item__star {
-  color: var(--ny-danger);
-  font-weight: 700;
-}
-
-.ny-form-item__note {
-  color: var(--ny-text-muted);
-}
-
-.ny-form-item__spin {
-  color: var(--ny-text-muted);
-}
-
-.ny-form-item__control {
-  min-width: 0;
-}
-
-.ny-form-item__msg {
-  margin: 0;
-  font-size: var(--ny-font-size-xs);
-  color: var(--ny-text-muted);
-  line-height: 1.5;
-  word-break: break-word;
-  text-align: left;
-
-  &[role='alert'] {
-    color: var(--ny-danger-text);
-  }
-}
-
-.ny-form-item__extra {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--ny-space-1);
-  font-size: var(--ny-font-size-xs);
-  color: var(--ny-text-muted);
-}
-</style>

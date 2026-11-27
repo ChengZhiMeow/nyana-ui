@@ -1,0 +1,65 @@
+// NyMeter
+.ny-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ny-meter__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.ny-meter__label {
+  color: var(--ny-text);
+}
+
+.ny-meter__value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+
+  span {
+    color: var(--ny-text-muted);
+    font-weight: 400;
+  }
+}
+
+.ny-meter--stack .ny-meter__head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+
+  .ny-meter__label {
+    font-size: 12px;
+    color: var(--ny-text-muted);
+  }
+}
+
+.ny-meter__track {
+  display: block;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--ny-fill-strong);
+  overflow: hidden;
+}
+
+.ny-meter__bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ny-primary);
+  transition: width var(--ny-transition-base);
+}
+
+.ny-meter__bar--warning {
+  background: var(--ny-warning);
+}
+
+.ny-meter__bar--danger {
+  background: var(--ny-danger);
+}

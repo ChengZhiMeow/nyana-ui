@@ -1,0 +1,113 @@
+// NyPagination
+.ny-pagination {
+  --ny-pagination-size: 32px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--ny-font-size-sm);
+
+  &.is-disabled {
+    opacity: 0.6;
+  }
+}
+
+.ny-pagination__total {
+  margin-right: var(--ny-space-2);
+  color: var(--ny-text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+// 方块按钮, 当前页墨色实心
+.ny-pagination__item,
+.ny-pagination__btn {
+  display: grid;
+  place-items: center;
+  min-width: var(--ny-pagination-size);
+  height: var(--ny-pagination-size);
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: transparent;
+  color: var(--ny-text-sub);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover:not(:disabled, .is-active) {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.ny-pagination__item.is-active {
+  background: var(--ny-text);
+  color: var(--ny-bg);
+  font-weight: 600;
+}
+
+.ny-pagination__ellipsis {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: var(--ny-pagination-size);
+  color: var(--ny-text-muted);
+  user-select: none;
+}
+
+.ny-pagination__simple {
+  padding: 0 var(--ny-space-2);
+  color: var(--ny-text-sub);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ny-pagination__size {
+  height: var(--ny-pagination-size);
+  margin-left: var(--ny-space-2);
+  padding: 0 var(--ny-space-2);
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    border-color: var(--ny-text-muted);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--ny-primary-ink);
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-pagination--sm {
+  --ny-pagination-size: 28px;
+
+  font-size: var(--ny-font-size-xs);
+}
+
+.ny-pagination--lg {
+  --ny-pagination-size: 36px;
+
+  font-size: var(--ny-font-size-md);
+}

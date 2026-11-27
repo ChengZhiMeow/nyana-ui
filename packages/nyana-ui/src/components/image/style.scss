@@ -1,0 +1,214 @@
+// NyImage
+.ny-image {
+  --ny-image-radius: var(--ny-radius-lg);
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ny-space-2);
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+}
+
+.ny-image__frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--ny-image-radius);
+  background: var(--ny-fill);
+}
+
+.ny-image--radius-none {
+  --ny-image-radius: 0;
+}
+
+.ny-image--radius-sm {
+  --ny-image-radius: var(--ny-radius-md);
+}
+
+.ny-image--radius-md {
+  --ny-image-radius: var(--ny-radius-lg);
+}
+
+.ny-image--radius-lg {
+  --ny-image-radius: var(--ny-radius-xl);
+}
+
+.ny-image__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ny-image--fit-cover .ny-image__img {
+  object-fit: cover;
+}
+
+.ny-image--fit-contain .ny-image__img {
+  object-fit: contain;
+}
+
+.ny-image--fit-fill .ny-image__img {
+  object-fit: fill;
+}
+
+// 加载中: fill 色块缓慢呼吸
+.ny-image__placeholder {
+  position: absolute;
+  inset: 0;
+  background: var(--ny-fill);
+  animation: ny-image-breath 1.4s ease-in-out infinite;
+}
+
+.ny-image__fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ny-space-1);
+  min-height: 80px;
+  height: 100%;
+  padding: var(--ny-space-3);
+  color: var(--ny-text-muted);
+}
+
+.ny-image__fallback-text {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: var(--ny-font-size-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-image__preview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: inherit;
+  background: var(--ny-mask);
+  color: #ffffff;
+  opacity: 0;
+  cursor: zoom-in;
+  transition: opacity var(--ny-transition-fast);
+}
+
+.ny-image:hover .ny-image__preview,
+.ny-image__preview:focus-visible {
+  opacity: 1;
+}
+
+.ny-image__preview:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--ny-primary-ring);
+}
+
+.ny-image__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.ny-image__caption {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 预览层: 深色遮罩 + 原图 + 底部工具栏
+.ny-image-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ny-z-modal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ny-space-4);
+  padding: var(--ny-space-6) var(--ny-space-4);
+  background: color-mix(in srgb, var(--ny-term-bg) 88%, transparent);
+  cursor: zoom-out;
+}
+
+.ny-image-viewer__img {
+  min-height: 0;
+  max-width: 100%;
+  max-height: calc(100% - 64px);
+  border-radius: var(--ny-radius-md);
+  cursor: default;
+}
+
+.ny-image-viewer__bar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--ny-space-2);
+  max-width: 100%;
+  height: 42px;
+  padding: 0 4px 0 4px;
+  border-radius: var(--ny-radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--ny-term-text);
+  cursor: default;
+}
+
+.ny-image-viewer__name {
+  min-width: 0;
+  padding-left: 12px;
+  overflow: hidden;
+  font-size: var(--ny-font-size-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-image-viewer__close {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ny-term-text);
+  cursor: pointer;
+  transition: background-color var(--ny-transition-fast);
+}
+
+.ny-image-viewer__close:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.ny-image-viewer__close:focus-visible {
+  outline: none;
+  box-shadow: var(--ny-shadow-focus);
+}
+
+.ny-image-viewer-enter-active,
+.ny-image-viewer-leave-active {
+  transition: opacity var(--ny-transition-fast);
+}
+
+.ny-image-viewer-enter-from,
+.ny-image-viewer-leave-to {
+  opacity: 0;
+}
+
+@keyframes ny-image-breath {
+  50% {
+    opacity: 0.5;
+  }
+}

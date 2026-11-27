@@ -1,0 +1,317 @@
+// NyTable
+// 外框: 12px 圆角细线框, 内部横向滚动
+.ny-table {
+  --ny-table-pad-y: 12px;
+  --ny-table-pad-x: 16px;
+
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-bg);
+  color: var(--ny-text);
+}
+
+.ny-table--sm {
+  --ny-table-pad-y: 8px;
+}
+
+.ny-table--lg {
+  --ny-table-pad-y: 16px;
+}
+
+.ny-table__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ny-space-2);
+  padding: 12px var(--ny-table-pad-x);
+  border-bottom: 1px solid var(--ny-line);
+}
+
+.ny-table__scroll {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ny-table__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--ny-font-size-md);
+}
+
+.ny-table__col-select {
+  width: 48px;
+}
+
+// 单元格一律单行, 放不下时整表横向滚动
+.ny-table__cell {
+  padding: var(--ny-table-pad-y) var(--ny-table-pad-x);
+  border-bottom: 1px solid var(--ny-line);
+  line-height: 22px;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.ny-table__head .ny-table__cell {
+  padding-block: 12px;
+  background: var(--ny-bg);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-xs);
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.ny-table--fixed-head .ny-table__head .ny-table__cell {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.ny-table__cell--center {
+  text-align: center;
+}
+
+.ny-table__cell--end {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-table__cell--select {
+  width: 48px;
+  padding-right: 0;
+  text-align: center;
+}
+
+.ny-table__cell--empty {
+  padding: 40px var(--ny-table-pad-x);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  text-align: center;
+  white-space: normal;
+}
+
+.ny-table--bordered .ny-table__cell {
+  border-right: 1px solid var(--ny-line);
+}
+
+.ny-table--bordered .ny-table__cell:last-child {
+  border-right: 0;
+}
+
+.ny-table__body tr:last-child .ny-table__cell {
+  border-bottom: 0;
+}
+
+.ny-table__row {
+  transition: background-color var(--ny-transition-fast);
+
+  &:focus-visible {
+    outline: 2px solid var(--ny-primary);
+    outline-offset: -2px;
+  }
+}
+
+.ny-table--striped .ny-table__body .ny-table__row:nth-child(even) {
+  background: var(--ny-bg-soft);
+}
+
+.ny-table--hoverable .ny-table__body .ny-table__row:hover {
+  background: var(--ny-bg-soft);
+}
+
+.ny-table__body .ny-table__row.is-selected {
+  background: var(--ny-primary-soft);
+}
+
+.ny-table__body .ny-table__row.is-disabled {
+  color: var(--ny-text-muted);
+  cursor: not-allowed;
+}
+
+.ny-table__sorter {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-xs);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover,
+  &.is-active {
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-table__sorter-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ny-table__sorter-idle {
+  color: var(--ny-text-muted);
+  opacity: 0.6;
+}
+
+.ny-table__text {
+  min-width: 0;
+}
+
+.ny-table__text--ellipsis {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-table__cell--end .ny-table__text--ellipsis {
+  margin-inline-start: auto;
+}
+
+.ny-table__cell--center .ny-table__text--ellipsis {
+  margin-inline: auto;
+}
+
+// 勾选框: 18px 方框, 选中为强调色底 + 对勾
+.ny-table__checkbox {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid var(--ny-border-strong);
+  border-radius: 5px;
+  background: var(--ny-bg);
+  vertical-align: middle;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition:
+    background-color var(--ny-transition-fast),
+    border-color var(--ny-transition-fast);
+
+  &::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--ny-on-primary);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    transform: scale(0);
+    transition: transform var(--ny-transition-fast);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--ny-text-muted);
+  }
+
+  &:checked,
+  &:indeterminate {
+    border-color: var(--ny-primary-ink);
+    background: var(--ny-primary);
+  }
+
+  &:checked::after {
+    transform: scale(1);
+  }
+
+  &:indeterminate::after {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 12h12'/%3E%3C/svg%3E");
+    transform: scale(1);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-table__skeleton {
+  display: block;
+  height: 12px;
+  border-radius: var(--ny-radius-sm);
+  background: var(--ny-fill);
+  animation: ny-table-breath 1.4s ease-in-out infinite;
+}
+
+.ny-table__cell--center .ny-table__skeleton {
+  margin-inline: auto;
+}
+
+.ny-table__cell--end .ny-table__skeleton {
+  margin-inline-start: auto;
+}
+
+// 底栏: 条数 + 分页
+.ny-table__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ny-space-3);
+  padding: 12px var(--ny-table-pad-x);
+  border-top: 1px solid var(--ny-line);
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-table__footer--start {
+  justify-content: flex-start;
+}
+
+.ny-table__footer--center {
+  justify-content: center;
+}
+
+.ny-table__footer-extra {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ny-text-muted);
+  font-size: var(--ny-font-size-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-table--sm .ny-table__cell {
+  font-size: var(--ny-font-size-sm);
+}
+
+.ny-table--sm .ny-table__head .ny-table__cell {
+  padding-block: 10px;
+  font-size: var(--ny-font-size-xs);
+}
+
+@media (max-width: 640px) {
+  .ny-table {
+    --ny-table-pad-x: 12px;
+  }
+}
+
+@keyframes ny-table-breath {
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,177 @@
+// NyCarousel
+.ny-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--ny-radius-xl);
+  background: var(--ny-fill);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-carousel__viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ny-carousel__track {
+  display: flex;
+  height: 100%;
+  transition: transform 320ms var(--ny-ease);
+}
+
+.ny-carousel__slide {
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ny-carousel.is-draggable .ny-carousel__slide {
+  cursor: grab;
+}
+
+.ny-carousel.is-dragging .ny-carousel__slide {
+  cursor: grabbing;
+}
+
+.ny-carousel.is-dragging .ny-carousel__track {
+  transition: none;
+}
+
+.ny-carousel--slide .ny-carousel__slide {
+  flex: 0 0 100%;
+}
+
+.ny-carousel--fade .ny-carousel__track {
+  display: block;
+  transition: none;
+}
+
+.ny-carousel--fade .ny-carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms var(--ny-ease);
+}
+
+.ny-carousel--fade .ny-carousel__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+// 左右箭头只在悬停或聚焦时出现
+.ny-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: 50%;
+  background: var(--ny-bg);
+  color: var(--ny-text);
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity var(--ny-transition-fast),
+    background-color var(--ny-transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--ny-bg-soft);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
+
+.ny-carousel:hover .ny-carousel__arrow,
+.ny-carousel:focus-within .ny-carousel__arrow {
+  opacity: 1;
+}
+
+.ny-carousel:hover .ny-carousel__arrow:disabled,
+.ny-carousel:focus-within .ny-carousel__arrow:disabled {
+  opacity: 0.4;
+}
+
+@media (hover: none) {
+  .ny-carousel__arrow {
+    opacity: 1;
+  }
+
+  .ny-carousel__arrow:disabled {
+    opacity: 0.4;
+  }
+}
+
+.ny-carousel__arrow--prev {
+  left: var(--ny-space-3);
+}
+
+.ny-carousel__arrow--next {
+  right: var(--ny-space-3);
+}
+
+.ny-carousel__dots {
+  position: absolute;
+  right: 0;
+  bottom: var(--ny-space-3);
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+// 指示器是小胶囊, 当前页拉长成 20px
+.ny-carousel__dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: var(--ny-bg);
+  opacity: 0.4;
+  cursor: pointer;
+  transition:
+    width var(--ny-transition-fast),
+    opacity var(--ny-transition-fast);
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-active {
+    width: 20px;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-carousel__track,
+  .ny-carousel--fade .ny-carousel__slide {
+    transition: none;
+  }
+}

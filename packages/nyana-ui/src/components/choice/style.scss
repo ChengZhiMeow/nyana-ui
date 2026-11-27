@@ -1,0 +1,133 @@
+// NyChoiceGroup
+.ny-choice-group {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .ny-choice-group {
+    grid-template-columns: repeat(var(--cols-md), minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ny-choice-group {
+    grid-template-columns: repeat(var(--cols-sm), minmax(0, 1fr));
+  }
+}
+
+// NyChoiceCard
+.ny-choice {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--ny-border-strong);
+  border-radius: var(--ny-radius-lg);
+  background: var(--ny-surface);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    border-color var(--ny-transition-fast),
+    background-color var(--ny-transition-fast);
+
+  &:hover {
+    border-color: var(--ny-text-muted);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &.is-active {
+    border-color: var(--ny-primary);
+    background: var(--ny-primary-soft);
+    box-shadow: inset 0 0 0 1px var(--ny-primary);
+  }
+
+  &.is-disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.ny-choice__corner {
+  position: absolute;
+  top: -9px;
+  right: 12px;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--ny-radius-sm);
+  background: var(--ny-text);
+  color: var(--ny-bg);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.ny-choice__mark {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1.5px solid var(--ny-border-strong);
+  border-radius: 50%;
+  background: var(--ny-surface);
+
+  &.is-check {
+    border-radius: 5px;
+  }
+
+  .ny-choice.is-active > & {
+    border: 5px solid var(--ny-primary);
+    background: var(--ny-on-primary);
+  }
+
+  .ny-choice.is-active > &.is-check {
+    border-width: 1.5px;
+    border-color: var(--ny-primary);
+    background: var(--ny-primary);
+  }
+}
+
+.ny-choice__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: var(--ny-text-sub);
+
+  .ny-choice.is-active > & {
+    color: var(--ny-primary-ink);
+  }
+}
+
+.ny-choice__main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ny-choice__title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ny-choice__desc {
+  color: var(--ny-text-muted);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.ny-choice__extra {
+  flex: none;
+  align-self: center;
+}

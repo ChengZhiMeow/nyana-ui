@@ -1,0 +1,121 @@
+// NySplit
+.ny-split {
+  position: relative;
+  min-width: 0;
+}
+
+.ny-split--fill {
+  height: 100%;
+  min-height: 0;
+}
+
+.ny-split--end .ny-split__side {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.ny-split--end .ny-split__main {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.ny-split__side,
+.ny-split__main {
+  min-width: 0;
+}
+
+.ny-split__main {
+  position: relative;
+}
+
+.ny-split--fill .ny-split__side,
+.ny-split--fill .ny-split__main {
+  min-height: 0;
+  overflow: auto;
+}
+
+// 拖动把手: 两栏中间 1px 细线 + 竖向小把手
+.ny-split__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 10px;
+  cursor: col-resize;
+  touch-action: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+    background: var(--ny-line);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 28px;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    background: var(--ny-border-strong);
+    transition: background-color var(--ny-transition-fast);
+  }
+
+  &:hover::after {
+    background: var(--ny-text-muted);
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      background: var(--ny-text-muted);
+      box-shadow: var(--ny-shadow-focus);
+    }
+  }
+}
+
+.ny-split.is-dragging .ny-split__handle::after {
+  background: var(--ny-text);
+}
+
+.ny-split.is-dragging {
+  user-select: none;
+}
+
+.ny-split__toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--ny-line);
+  border-radius: var(--ny-radius-md);
+  background: var(--ny-bg);
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    border-color var(--ny-transition-fast),
+    color var(--ny-transition-fast);
+
+  &:hover {
+    border-color: var(--ny-border-strong);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+}
