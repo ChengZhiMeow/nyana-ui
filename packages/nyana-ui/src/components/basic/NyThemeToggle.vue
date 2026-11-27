@@ -59,8 +59,18 @@ const classes = computed(() => [
 
 const iconSize = computed(() => (props.size === 'sm' ? 14 : props.size === 'lg' ? 18 : 16))
 
+const THEME_SWITCH_CLASS = 'ny-theme-switching'
+
 function applyTheme(next: 'light' | 'dark') {
-  document.documentElement.setAttribute('data-theme', next)
+  const root = document.documentElement
+
+  // 切换的一瞬间挂上过渡类, 让整页元素一起做颜色过渡而不是瞬间反色
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add(THEME_SWITCH_CLASS)
+    window.setTimeout(() => root.classList.remove(THEME_SWITCH_CLASS), 260)
+  }
+
+  root.setAttribute('data-theme', next)
 
   if (props.storageKey) {
     localStorage.setItem(props.storageKey, next)
