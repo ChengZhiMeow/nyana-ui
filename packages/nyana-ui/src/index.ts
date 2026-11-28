@@ -315,8 +315,10 @@ export { useValidation } from './composables/useValidation'
 export type { NyValidationOptions } from './composables/useValidation'
 
 export {
+  isBrandIcon,
   isFilledIcon,
   nyBrandIcons,
+  nyBrandPrefix,
   nyBrandViewBoxes,
   nyExtraIcons,
   nyIconFallback,

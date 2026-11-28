@@ -20,7 +20,7 @@ const codeBasic = `<NyChoiceGroup v-model="server" :cols="3">
 
 const codePay = `<NyChoiceGroup v-model="pay" :cols="1" indicator>
   <NyChoiceCard value="alipay" title="支付宝">
-    <template #icon><NyIcon name="alipay" :size="24" style="color: #1677ff" /></template>
+    <template #icon><NyIcon name="brand-alipay" :size="24" style="color: #1677ff" /></template>
   </NyChoiceCard>
   ...
 </NyChoiceGroup>`
@@ -49,8 +49,8 @@ const codePay = `<NyChoiceGroup v-model="pay" :cols="1" indicator>
     <DemoBlock title="支付方式" desc="indicator 在左侧显示单选圈; 平台图标用官方品牌色。" :code="codePay">
       <div style="max-width: 420px">
         <NyChoiceGroup v-model="pay" :cols="1" indicator>
-          <NyChoiceCard value="alipay" title="支付宝"><template #icon><NyIcon name="alipay" :size="24" style="color: #1677ff" /></template></NyChoiceCard>
-          <NyChoiceCard value="wechat" title="微信支付"><template #icon><NyIcon name="wechat" :size="24" style="color: #07c160" /></template></NyChoiceCard>
+          <NyChoiceCard value="alipay" title="支付宝"><template #icon><NyIcon name="brand-alipay" :size="24" style="color: #1677ff" /></template></NyChoiceCard>
+          <NyChoiceCard value="wechat" title="微信支付"><template #icon><NyIcon name="brand-wechat" :size="24" style="color: #07c160" /></template></NyChoiceCard>
           <NyChoiceCard value="wallet" icon="wallet" title="余额" description="剩余 ¥86.50, 不足" disabled />
         </NyChoiceGroup>
       </div>

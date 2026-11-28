@@ -66,8 +66,10 @@ const codeSize = `<div class="ex-group">
   <NyIcon name="star" :size="48" />
 </div>`
 
-const codeBrand = `<!-- 品牌图标是实心图形, 不能用 strokeWidth 调粗细, 颜色跟文字一样 -->
-<span style="color: var(--ny-success)"><NyIcon name="spotify" :size="24" /> Spotify</span>`
+const codeBrand = `<!-- 品牌图标的名字都以 brand- 开头, 是实心图形, 不能用 strokeWidth 调粗细, 颜色跟文字一样 -->
+<span style="color: var(--ny-success)"><NyIcon name="brand-spotify" :size="24" /> Spotify</span>
+<!-- brand-x 是 X (推特) 的 logo; 关闭用 close -->
+<NyIcon name="brand-x" :size="24" /> <NyIcon name="close" :size="24" />`
 
 const codeStroke = `<div class="ex-group">
   <NyIcon v-for="w in [1, 1.4, 1.8, 2.4]" :key="w" name="heart" :size="30" :stroke-width="w" />
@@ -103,8 +105,10 @@ const apiExport = [
   { name: 'nyIcons', desc: '全部图标的 path 清单(描边 + 品牌), 键就是 name', type: 'Record<string, string[]>' },
   { name: 'nyIconPaths(name)', desc: '取某个图标的 path, 未命中时返回兜底图标', type: 'string[]' },
   { name: 'nyIconFallback', desc: '兜底图标名', type: 'string' },
-  { name: 'isFilledIcon(name)', desc: '是否是实心品牌图标, 自己画图标时用它决定 fill 还是 stroke', type: '(name: string) => boolean' },
-  { name: 'nyBrandIcons', desc: '只含品牌图标的那张表, 做图标选择器时可以单独取', type: 'Record<string, string[]>' },
+  { name: 'isBrandIcon(name)', desc: '是否是品牌图标 (brand- 开头)', type: '(name: string) => boolean' },
+  { name: 'isFilledIcon(name)', desc: '是否是实心图标 (即品牌图标), 自己画图标时用它决定 fill 还是 stroke', type: '(name: string) => boolean' },
+  { name: 'nyBrandIcons', desc: '只含品牌图标的那张表, 键都带 brand- 前缀, 做图标选择器时可以单独取', type: 'Record<string, string[]>' },
+  { name: 'nyBrandPrefix', desc: '品牌图标名的前缀', type: "'brand-'" },
   { name: 'nyIconViewBox(name)', desc: '图标画布, 品牌图标里少数不是 24x24', type: '(name: string) => string' },
   { name: 'NyIconName', desc: '图标名的联合类型', type: 'keyof typeof nyIcons' },
 ]
@@ -140,7 +144,7 @@ const apiExport = [
 
     <DemoBlock
       title="品牌图标"
-      desc="各平台官方标志, 照原图画成实心路径, 24x24 网格, 颜色同样跟随 currentColor, 所以深浅色主题都不用换图。"
+      desc="各平台官方标志, 名字统一以 brand- 开头 (例如 brand-alipay、brand-x), 和通用图标区分开。照原图画成实心路径, 24x24 网格, 颜色跟随 currentColor, 深浅色主题都不用换图; 渲染出的 svg 带 ny-icon--brand 类和 data-brand 属性。"
       :code="codeBrand"
       :value="`共 ${brandNames.length} 个`"
     >

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { isFilledIcon, nyIconPaths, nyIconViewBox, nyIcons } from '../../icons'
+import { isBrandIcon, nyIconPaths, nyIconViewBox, nyIcons } from '../../icons'
 
 const props = withDefaults(
   defineProps<{
@@ -19,7 +19,8 @@ const props = withDefaults(
 
 const paths = computed(() => nyIconPaths(props.name))
 
-const filled = computed(() => isFilledIcon(props.name))
+// 品牌图标 (brand- 开头) 是实心的 logo, 加上 ny-icon--brand 和 data-brand 标记.
+const filled = computed(() => isBrandIcon(props.name))
 
 const viewBox = computed(() => nyIconViewBox(props.name))
 
@@ -36,7 +37,8 @@ if (import.meta.env.DEV && !(props.name in nyIcons)) {
 <template>
   <svg
     class="ny-icon"
-    :class="{ 'ny-icon--spin': spin }"
+    :class="{ 'ny-icon--spin': spin, 'ny-icon--brand': filled }"
+    :data-brand="filled ? '' : undefined"
     :style="style"
     :viewBox="viewBox"
     :fill="filled ? 'currentColor' : 'none'"

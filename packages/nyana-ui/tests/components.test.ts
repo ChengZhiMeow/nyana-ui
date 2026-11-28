@@ -7,13 +7,33 @@ import {
   NyChoiceCard,
   NyChoiceGroup,
   NyCopyButton,
+  NyIcon,
   NyKeyValue,
   NyMeter,
   NyMetricCard,
   NyPill,
   NySwitch,
   NyTerminal,
+  nyBrandIcons,
+  nyIcons,
 } from '../src'
+
+describe('NyIcon 品牌图标', () => {
+  it('品牌图标都带 brand- 前缀, 渲染时带标记; 通用图标没有', () => {
+    const brand = Object.keys(nyBrandIcons)
+    expect(brand.length).toBeGreaterThan(0)
+    expect(brand.every((name) => name.startsWith('brand-'))).toBe(true)
+    expect('x' in nyIcons).toBe(false)
+    expect('alipay' in nyIcons).toBe(false)
+    const logo = mount(NyIcon, { props: { name: 'brand-x' } })
+    expect(logo.classes()).toContain('ny-icon--brand')
+    expect(logo.attributes('data-brand')).toBe('')
+    expect(logo.attributes('fill')).toBe('currentColor')
+    const close = mount(NyIcon, { props: { name: 'close' } })
+    expect(close.classes()).not.toContain('ny-icon--brand')
+    expect(close.attributes('data-brand')).toBeUndefined()
+  })
+})
 
 describe('NyButton', () => {
   it('点击触发 click, 禁用时不触发', async () => {
