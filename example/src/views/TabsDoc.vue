@@ -195,6 +195,7 @@ const apiProps = [
   { name: 'size', desc: '尺寸档位', type: "'sm' | 'md' | 'lg'", default: "'md'" },
   { name: 'align', desc: '页签在头部里的对齐方式', type: "'start' | 'center' | 'end'", default: "'start'" },
   { name: 'closable', desc: '每个页签右侧显示关闭按钮', type: 'boolean', default: 'false' },
+  { name: 'arrows', desc: '页签放不下时两侧显示翻页按钮并淡出边缘, 切换时自动滚到选中项', type: 'boolean', default: 'true' },
   { name: 'v-model:activeKey', desc: '当前选中的 key, 双向绑定', type: 'string', default: "''" },
 ]
 

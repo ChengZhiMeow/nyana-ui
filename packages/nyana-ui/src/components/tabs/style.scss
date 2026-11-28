@@ -29,6 +29,62 @@
   }
 }
 
+// 放不下时两侧淡出, 提示还有页签
+.ny-tabs__head.is-scroll-left .ny-tabs__list {
+  mask-image: linear-gradient(to right, transparent, #000 32px);
+}
+
+.ny-tabs__head.is-scroll-right .ny-tabs__list {
+  mask-image: linear-gradient(to left, transparent, #000 32px);
+}
+
+.ny-tabs__head.is-scroll-left.is-scroll-right .ny-tabs__list {
+  mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+}
+
+.ny-tabs__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  align-self: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ny-radius-md);
+  background: none;
+  color: var(--ny-text-sub);
+  cursor: pointer;
+  transition:
+    background-color var(--ny-transition-fast),
+    color var(--ny-transition-fast),
+    opacity var(--ny-transition-fast);
+
+  &:first-child {
+    margin-inline-end: calc(4px - var(--ny-space-4));
+  }
+
+  &:not(:first-child) {
+    margin-inline-start: calc(4px - var(--ny-space-4));
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--ny-fill);
+    color: var(--ny-text);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--ny-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
 .ny-tabs--align-center .ny-tabs__list {
   justify-content: center;
 }

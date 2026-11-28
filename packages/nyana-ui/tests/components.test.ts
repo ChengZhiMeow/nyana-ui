@@ -13,6 +13,7 @@ import {
   NyMetricCard,
   NyPill,
   NySwitch,
+  NyTabs,
   NyTerminal,
   nyBrandIcons,
   nyIcons,
@@ -143,5 +144,36 @@ describe('NyTerminal', () => {
     const wrapper = mount(NyTerminal, { props: { mode: 'pseudo' } })
     await wrapper.findAll('.ny-term__modes button')[0]!.trigger('click')
     expect(wrapper.emitted('update:mode')?.[0]).toEqual(['real'])
+  })
+})
+
+describe('NyTabs 翻页', () => {
+  const items = ['a', 'b', 'c', 'd'].map((key) => ({ key, label: key }))
+
+  it('放得下时没有翻页按钮, 放不下时出现并可点击翻页', async () => {
+    const wrapper = mount(NyTabs, { props: { items, activeKey: 'a' } })
+    await nextTick()
+    expect(wrapper.find('.ny-tabs__arrow').exists()).toBe(false)
+    const list = wrapper.find('.ny-tabs__list').element as HTMLElement
+    Object.defineProperty(list, 'clientWidth', { configurable: true, value: 100 })
+    Object.defineProperty(list, 'scrollWidth', { configurable: true, value: 300 })
+    const scrollBy = vi.fn()
+    list.scrollBy = scrollBy as unknown as typeof list.scrollBy
+    await wrapper.find('.ny-tabs__list').trigger('scroll')
+    const arrows = wrapper.findAll('.ny-tabs__arrow')
+    expect(arrows).toHaveLength(2)
+    expect(arrows[0]!.attributes('disabled')).toBeDefined()
+    expect(arrows[1]!.attributes('disabled')).toBeUndefined()
+    await arrows[1]!.trigger('click')
+    expect(scrollBy).toHaveBeenCalledWith({ left: 70, behavior: 'smooth' })
+  })
+
+  it('关闭 arrows 后不显示', async () => {
+    const wrapper = mount(NyTabs, { props: { items, activeKey: 'a', arrows: false } })
+    const list = wrapper.find('.ny-tabs__list').element as HTMLElement
+    Object.defineProperty(list, 'clientWidth', { configurable: true, value: 100 })
+    Object.defineProperty(list, 'scrollWidth', { configurable: true, value: 300 })
+    await wrapper.find('.ny-tabs__list').trigger('scroll')
+    expect(wrapper.find('.ny-tabs__arrow').exists()).toBe(false)
   })
 })

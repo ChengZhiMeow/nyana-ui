@@ -20,6 +20,8 @@ const props = withDefaults(
     size?: NySize
     align?: 'start' | 'center' | 'end'
     closable?: boolean
+    /** 页签放不下时在两侧显示翻页按钮 */
+    arrows?: boolean
   }>(),
   {
     items: () => [],
@@ -27,6 +29,7 @@ const props = withDefaults(
     size: 'md',
     align: 'start',
     closable: false,
+    arrows: true,
   },
 )
 
@@ -42,6 +45,10 @@ const tabRefs = ref<HTMLElement[]>([])
 
 const inkLeft = ref(0)
 const inkWidth = ref(0)
+
+const canLeft = ref(false)
+const canRight = ref(false)
+const overflow = computed(() => props.arrows && (canLeft.value || canRight.value))
 
 let observer: ResizeObserver | null = null
 
@@ -152,7 +159,46 @@ function onClose(item: NyTabItem, event: MouseEvent) {
   emit('close', item.key)
 }
 
+function updateScroll() {
+  const list = listRef.value
+
+  if (!list) {
+    return
+  }
+
+  canLeft.value = list.scrollLeft > 1
+  canRight.value = list.scrollLeft + list.clientWidth < list.scrollWidth - 1
+}
+
+function scrollPage(step: 1 | -1) {
+  const list = listRef.value
+
+  list?.scrollBy({ left: step * list.clientWidth * 0.7, behavior: 'smooth' })
+}
+
+// 选中项不在可见区域时滚过去, 两边各留一点余量
+function revealActive() {
+  const list = listRef.value
+  const index = props.items.findIndex((item) => item.key === resolvedKey.value)
+  const node = index < 0 ? null : tabRefs.value[index]
+
+  if (!list || !node || list.scrollWidth <= list.clientWidth) {
+    return
+  }
+
+  const left = node.offsetLeft - 24
+  const right = node.offsetLeft + node.offsetWidth + 24 - list.clientWidth
+
+  if (left < list.scrollLeft) {
+    list.scrollTo({ left, behavior: 'smooth' })
+  } else if (right > list.scrollLeft) {
+    list.scrollTo({ left: right, behavior: 'smooth' })
+  }
+}
+
 function measure() {
+  updateScroll()
+
   const index = props.items.findIndex((item) => item.key === resolvedKey.value)
   const node = index < 0 ? null : tabRefs.value[index]
 
@@ -168,6 +214,7 @@ function measure() {
 
 onMounted(() => {
   measure()
+  revealActive()
 
   if (typeof ResizeObserver !== 'undefined' && listRef.value) {
     observer = new ResizeObserver(measure)
@@ -180,13 +227,33 @@ onBeforeUnmount(() => {
   observer = null
 })
 
-watch(() => [resolvedKey.value, props.items], () => nextTick(measure), { deep: true, flush: 'post' })
+watch(
+  () => [resolvedKey.value, props.items],
+  () =>
+    nextTick(() => {
+      measure()
+      revealActive()
+    }),
+  { deep: true, flush: 'post' },
+)
 </script>
 
 <template>
   <div class="ny-tabs" :class="classes">
-    <div class="ny-tabs__head">
-      <div ref="listRef" class="ny-tabs__list" role="tablist" @keydown="onKeydown">
+    <div class="ny-tabs__head" :class="{ 'is-scroll-left': canLeft, 'is-scroll-right': canRight }">
+      <button
+        v-if="overflow"
+        class="ny-tabs__arrow"
+        type="button"
+        aria-label="向左翻页"
+        tabindex="-1"
+        :disabled="!canLeft"
+        @click="scrollPage(-1)"
+      >
+        <NyIcon name="chevron-left" :size="iconSize" />
+      </button>
+
+      <div ref="listRef" class="ny-tabs__list" role="tablist" @keydown="onKeydown" @scroll.passive="updateScroll">
         <button
           v-for="(item, index) in items"
           :key="item.key"
@@ -226,6 +293,18 @@ watch(() => [resolvedKey.value, props.items], () => nextTick(measure), { deep: t
           :style="{ width: `${inkWidth}px`, transform: `translateX(${inkLeft}px)` }"
         />
       </div>
+
+      <button
+        v-if="overflow"
+        class="ny-tabs__arrow"
+        type="button"
+        aria-label="向右翻页"
+        tabindex="-1"
+        :disabled="!canRight"
+        @click="scrollPage(1)"
+      >
+        <NyIcon name="chevron-right" :size="iconSize" />
+      </button>
 
       <div v-if="$slots.extra" class="ny-tabs__extra">
         <slot name="extra" />
